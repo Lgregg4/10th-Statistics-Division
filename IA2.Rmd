@@ -1,5 +1,5 @@
 ---
-title: "IA2_Ryan"
+title: "IA2"
 author: "Ryan Marizza"
 date: "January 22, 2018"
 output: html_document
