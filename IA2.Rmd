@@ -5,6 +5,10 @@ date: "January 22, 2018"
 output: html_document
 ---
 
+## Team Info
+Team Name: 10th Statistics Division
+Team's Main Goal: ----
+
 #Member: Ryan Marizza  
 
 ##Here is a Photo of Me:
@@ -40,3 +44,8 @@ When the bombers got back to their base, the steel cylinders were taken from the
 
 - Vonnegut, Kurt. Slaughterhouse Five. Dell Pub., 1969.
 
+
+
+##Member: Lauren Gregg
+
+![I'm from central Illinois so the coolest thing near me is Lake Springfield - which isn't that cool.](https://scontent-ort2-2.xx.fbcdn.net/v/t1.0-9/26992576_2001907949826279_5829056724738314483_n.jpg?oh=e9b28330bfb08b1a73faa370aad5795e&oe=5AEA8465)
