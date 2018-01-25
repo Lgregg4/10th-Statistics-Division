@@ -5,6 +5,10 @@ date: "January 22, 2018"
 output: html_document
 ---
 
+## Team Info
+Team Name: 10th Statistics Division
+Team's Main Goal: ----
+
 #Member: Ryan Marizza  
 
 ##Here is a Photo of Me:
@@ -40,3 +44,62 @@ When the bombers got back to their base, the steel cylinders were taken from the
 
 - Vonnegut, Kurt. Slaughterhouse Five. Dell Pub., 1969.
 
+##Feedback from Katie:
+  I really like your greatest accomplishment in the future. You want to explore more truth in statistic field, I think that¡¯s super cool. Also in your last part, I can tell that you love reading, although the book you mentioned I haven¡¯t read before, I feel it¡¯s interesting. 
+For the future plan part, maybe you can give more details like where would you like to go. I feel like you love travel, because you mentioned twice in your future plan.
+
+##Member: Lauren Gregg
+
+##Here is a photo fo me: 
+![I'm from central Illinois so the coolest thing near me is Lake Springfield - which isn't that cool.](https://scontent-ort2-2.xx.fbcdn.net/v/t1.0-9/26992576_2001907949826279_5829056724738314483_n.jpg?oh=e9b28330bfb08b1a73faa370aad5795e&oe=5AEA8465)
+
+## A Question: 
+Why has there been no snow this year!? Yes, climate change is definitely occuring, but places around us have been getting snow that we need.
+
+##What do I Want to be When I Grow Up?
+### 6 Months after Graduation:
+I want to be working in a data intensive environment and I want to be in Colorado. I really would love to be working with any type of data probably as part of a data science or statistical analysis team. 
+
+### Five Years after That:
+I hope I am in a career that I enjoy in a leadership role. I would expect this to be in a data analysis role. However, if I find a certain topic I really love, I might be in graduate school during this time studying either statistics, computer science, or data science. 
+
+##What Do I Hope My Greatest Career Accomplishment Will Be?
+I hope to one day be in direct contact with a CEO or CFO of a large company and they will be relying on me to present them necessary pieces of data. 
+
+##Hopes For the Course (given my hopes and goals):
+* To become more confident conducting data anlysis in R
+* To reduce the number of Google searches I have to do while coding
+* To practice writing efficient code
+
+##My Favorite Food:
+My favorite food is carbs and cheese. There is a dish in central Illinois called a horseshoe: it is a slice of Texas toast topped with a burger patty covered in french fries and smothered in a cheese sauce that cannot be reproduced. I haven't found anything like it anywhere else and I try to get one everytime I'm home, which is only once or twice a year. 
+
+##Feedback from Katie:
+  I like your future plan, and the leaning goals. They are specific and I feel you have leadership, so you can make it! 
+And for the improvement, maybe you can just give more your hobbies in the future part.
+
+##Member: Katie Jiang
+
+##Here is a photo of me:
+![I went to Wisconsin Madsion last semester, it was super cold ](/APPM2720/10th-Statistics-Division/katie.jpg)
+##A Question:
+  Because both of my parents are working in an cancer hospital, there are lots of patients have different cancer problems and some of them are cured not only just by drugs. I want to ask what other important elements that could really help patients get cured?
+
+##What do I Want to be When I Grow Up?
+###6 Months After Graduation:
+  After graduation, I want to find a job which deals with big data. Maybe in some companies that analyze human genes, because my emphasize field in applied math is biology and data science. And probably working for one or two years, I want to pursue my Master degree in management(perhaps).
+
+###Five Years After That:
+  I think I will go back to my own country and work for an analyzing company. And I hope I can travel with my parents to the other countries that we haven??t been to, and I want to see the world with my family.
+
+##What Do I Hope My Greatest Career Accomplishment Will Be?
+  I hope I can be an important part in an analyzing company and be a good manager after working with data several years. And I don??t know, maybe have a happy family.
+
+##Hopes For the Course (given my hopes and goals):
+*Learn the R language better.
+*Learn to manipulate code with team members and cooperation.
+*Learn to analyzing data
+
+##My hobbies:
+Except traveling that I mentioned above, I also like cooking. I live off the campus and I have three roommates and we are from the same country. I cook dinners and sometimes I make cakes and dumplings, which is the most interesting thing in my spare time.
+Also I like dramas, but I have few time to watch. In the semester that I took theater class, I watched several ones . Although I cannot remember each one??s name, I enjoyed them, I like the feelings that I watch dramas. Moreover, I played one classic Chinese drama when I was in high school, which was really fun.
