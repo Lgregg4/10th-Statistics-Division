@@ -7,7 +7,11 @@ output: html_document
 
 # Team Info
 Team Name: 10th Statistics Division
+
 Team's Main Goal: Our biggest goal is to be able to efficiently and effectively work together. Then, of course, we hope to become confident in data analysis using R.
+
+Team Picture: ![](https://scontent.fapa1-1.fna.fbcdn.net/v/t31.0-8/27164396_2004122946271446_3420591800905994454_o.jpg?oh=d391650d110dda3d07b3fe231999537b&oe=5AEA14BB)
+
 
 #Member: Ryan Marizza  
 
