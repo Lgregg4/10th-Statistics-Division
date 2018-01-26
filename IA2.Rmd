@@ -13,33 +13,33 @@ Team's Main Goal: Our biggest goal is to be able to efficiently and effectively 
 Team Picture: ![](https://scontent.fapa1-1.fna.fbcdn.net/v/t31.0-8/27164396_2004122946271446_3420591800905994454_o.jpg?oh=d391650d110dda3d07b3fe231999537b&oe=5AEA14BB)
 
 
-#Member: Ryan Marizza  
+# Member: Ryan Marizza  
 
-##Here is a Photo of Me:
+## Here is a Photo of Me:
 ![That's a picture of my friends and I in Banff National Park. I am third from the left.](https://scontent-ort2-2.xx.fbcdn.net/v/t31.0-8/11707707_10207358605190076_4488943470225841164_o.jpg?oh=fa6437f2261ce832b5ac4f555690a2c0&oe=5AEEE1EE)
 
-##A Question:
+## A Question:
 The Gross National Product (GNP) is a way of representing how much money people in a country have. In a similar vein, the Gross National Happiness (GNH) of a country can represent how happy the people in a country are. 
 
 My question is: What conditions (government, culture, climate, etc...) make for the highest GNH of a country?
 
-##What do I Want to be When I Grow Up?
-###6 Months After Graduation:
+## What do I Want to be When I Grow Up?
+### 6 Months After Graduation:
   Just after I graduate I would love to travel around for a bit and find out where I want to live when I start my career. This likley won't last for 6 months, so 6 months after I graduate, I would love to be living in a place that I like. Hopefully I'd be settling into my new home, and working as an entry level data scientest. I would especially love it if I thought the work I was doing was meaningful and challenging. 
   
-###Five Years After That:
+### Five Years After That:
   Five years after settling into my new home, I would love it if I had found a job that allowed me to travel. By this point it would be crucial that my job be meaningful. I want to feel like I am making the world a better place through what I am doing.
 
-##What Do I Hope My Greatest Career Accomplishment Will Be?
+## What Do I Hope My Greatest Career Accomplishment Will Be?
 I've recently started to think of staticians and data-scientests as sort of 'uncoverers of truth'. In the realm of consulting, a statician would look at the data from another scientest and let him know if there is any truth in his hypothesis. This is what I love. In this light, my greatest career accomplishment would be to help uncover some great (meaningful) truth.
 
-##Hopes For the Course (given my hopes and goals):
+## Hopes For the Course (given my hopes and goals):
 * To learn the basics of programming in R
 * To learn how to display data elequently 
 * To further my collaboration skills
 * To practice data analysis
 
-##My Favorite Book Passage:
+## My Favorite Book Passage:
 "It was a movie about American bombers in World War II and the gallant men who flew them. Seen backwards by Billy, the story went like this: American planes, full of holes and wounded men and corpses took off backwards from an airfield in England. Over France, a few German fighter planes flew at them backwards, sucked bullets and shell fragments from some of the planes and crewmen. They did the same for wrecked American bombers on the ground, and those planes flew up backwards to join the formation.
 
 The formation flew backwards over a German city that was in flames. The bombers opened their bomb bay doors, exerted a miraculous magnetism which shrunk the fires, gathered them into cylindrical steel containers , and lifted the containers into the bellies of the planes. The containers were stored neatly in racks. The Germans below had miraculous devices of their own, which were long steel tubes. They used them to suck more fragments from the crewmen and planes. But there were still a few wounded Americans though and some of the bombers were in bad repair. Over France though, German fighters came up again, made everything and everybody as good as new.
@@ -48,15 +48,17 @@ When the bombers got back to their base, the steel cylinders were taken from the
 
 - Vonnegut, Kurt. Slaughterhouse Five. Dell Pub., 1969.
 
-##Feedback from Katie:
+## Feedback from Katie:
   I really like your greatest accomplishment in the future. You want to explore more truth in statistic field, I think that??s super cool. Also in your last part, I can tell that you love reading, although the book you mentioned I haven??t read before, I feel it??s interesting. 
 For the future plan part, maybe you can give more details like where would you like to go. I feel like you love travel, because you mentioned twice in your future plan.
 
-##Feedback from Lauren:
+## Feedback from Lauren:
 You lay out your passion for data science and analytics very clearly, which makes me excited to work with you this semester! I agree with Katie, I am also interested on where you would like to travel. It seems like LISA 2020 might be something you should look into. 
 
+## Feedback from Chris: 
+The book u introduce seems so interesting. If I have a chance, I will try to read that book. BTW, I love ur goal in five years after graduate, u said u want to make the world a better place! Sounds great and crazy! I love that goal! try!
 
-#Member: Lauren Gregg
+# Member: Lauren Gregg
 
 ##Here is a photo fo me: 
 ![I'm from central Illinois so the coolest thing near me is Lake Springfield - which isn't that cool.](https://scontent-ort2-2.xx.fbcdn.net/v/t1.0-9/26992576_2001907949826279_5829056724738314483_n.jpg?oh=e9b28330bfb08b1a73faa370aad5795e&oe=5AEA8465)
@@ -64,99 +66,98 @@ You lay out your passion for data science and analytics very clearly, which make
 ## A Question: 
 Why has there been no snow this year!? Yes, climate change is definitely occuring, but places around us have been getting snow that we need.
 
-##What do I Want to be When I Grow Up?
+## What do I Want to be When I Grow Up?
 ### 6 Months after Graduation:
 I want to be working in a data intensive environment and I want to be in Colorado. I really would love to be working with any type of data probably as part of a data science or statistical analysis team. 
 
 ### Five Years after That:
 I hope I am in a career that I enjoy in a leadership role. I would expect this to be in a data analysis role. However, if I find a certain topic I really love, I might be in graduate school during this time studying either statistics, computer science, or data science. 
 
-##What Do I Hope My Greatest Career Accomplishment Will Be?
+## What Do I Hope My Greatest Career Accomplishment Will Be?
 I hope to one day be in direct contact with a CEO or CFO of a large company and they will be relying on me to present them necessary pieces of data. 
 
-##Hopes For the Course (given my hopes and goals):
+## Hopes For the Course (given my hopes and goals):
 * To become more confident conducting data anlysis in R
 * To reduce the number of Google searches I have to do while coding
 * To practice writing efficient code
 
-##My Favorite Food:
+## My Favorite Food:
 My favorite food is carbs and cheese. There is a dish in central Illinois called a horseshoe: it is a slice of Texas toast topped with a burger patty covered in french fries and smothered in a cheese sauce that cannot be reproduced. I haven't found anything like it anywhere else and I try to get one everytime I'm home, which is only once or twice a year. 
 
-##Feedback from Katie:
+## Feedback from Katie:
   I like your future plan, and the leaning goals. They are specific and I feel you have leadership, so you can make it! 
 And for the improvement, maybe you can just give more your hobbies in the future part.
 
-#Member: Katie Jiang
+## Feedback from Chris:
+Hmmm.. the photo u posed catched my eyes! pretty fun! the thing is that maybe u could write more about ur future plan? or career accomplishment? That's my opinions, casue there are only several sentences. 
 
-##Here is a photo of me:
+# Member: Katie Jiang
+
+## Here is a photo of me:
 ![I went to Wisconsin Madsion last semester, it was super cold ](https://scontent.fapa1-1.fna.fbcdn.net/v/t1.0-9/26992762_746869552150126_3893714848883606462_n.jpg?oh=237042c7eb92b6975b6c53970b1e1607&oe=5AD910B8)
-##A Question:
+## A Question:
   Because both of my parents are working in an cancer hospital, there are lots of patients have different cancer problems and some of them are cured not only just by drugs. I want to ask what other important elements that could really help patients get cured?
 
-##What do I Want to be When I Grow Up?
-###6 Months After Graduation:
+## What do I Want to be When I Grow Up?
+### 6 Months After Graduation:
   After graduation, I want to find a job which deals with big data. Maybe in some companies that analyze human genes, because my emphasize field in applied math is biology and data science. And probably working for one or two years, I want to pursue my Master degree in management(perhaps).
 
-###Five Years After That:
+### Five Years After That:
   I think I will go back to my own country and work for an analyzing company. And I hope I can travel with my parents to the other countries that we haven??t been to, and I want to see the world with my family.
 
-##What Do I Hope My Greatest Career Accomplishment Will Be?
+## What Do I Hope My Greatest Career Accomplishment Will Be?
   I hope I can be an important part in an analyzing company and be a good manager after working with data several years. And I don??t know, maybe have a happy family.
 
-##Hopes For the Course (given my hopes and goals):
+## Hopes For the Course (given my hopes and goals):
 *Learn the R language better.
 *Learn to manipulate code with team members and cooperation.
 *Learn to analyzing data
 
-##My hobbies:
+## My hobbies:
 Except traveling that I mentioned above, I also like cooking. I live off the campus and I have three roommates and we are from the same country. I cook dinners and sometimes I make cakes and dumplings, which is the most interesting thing in my spare time.
 Also I like dramas, but I have few time to watch. In the semester that I took theater class, I watched several ones . Although I cannot remember each one??s name, I enjoyed them, I like the feelings that I watch dramas. Moreover, I played one classic Chinese drama when I was in high school, which was really fun.
 
-##Feedback from Lauren:
+## Feedback from Lauren:
 I am very impressed with your ability to study applied mathematics, data science, AND biology. That obvious academic determination makes me eager to be on your team this semester. I might recommend mentioning what your home country is, because you reference it a few times, but never directly say.
 
+## Feedback from Chris:
+I thought ur question about "cancer hospital" is a great question and I hope u could try ur best to solve it. And I am interested about ur classic drama in ur high school cause I never met before.
 
-#member: Chris He
 
-##here is a photo of me:
+# member: Chris He
+
+## here is a photo of me:
 ![that's a photo of me while last year I was in aspen](https://scontent.fapa1-1.fna.fbcdn.net/v/t1.0-9/26994101_565152280506668_564530606701557683_n.jpg?oh=f2d1fc98f3271ff504cdbc8a6f663bce&oe=5AE466E1)
 
 
-##the question I am interesed:
+## the question I am interesed:
 the question about "boulder transport", every people in boulder have their own way to transport. Some people prefer public transport, some people prefer their own vechicle or bicyle. I wander know which way is the easiest way here. 
 
 
-##what I want to do and my career goal
+## what I want to do and my career goal
 
-###six months after I graduated:
+### six months after I graduated:
 I hope I could have some time go travel to other cities or even other countries. I want to find a satisfied job or maybe it is the first job that I found. 
 
-###five years after I graduate:
+### five years after I graduate:
 I like to find the dream job in a city that I loved. The dream job would be a job used my data analysis background or other math methods. And I hope I could find a interesting city I could live in the rest of my life. 
 
-###my personal career goal:
+### my personal career goal:
 my career goal is simple, I want to find a fantasty job used what I learned and I have my own team, maybe a small data analysis group with several people. It is pretty funny. 
 
-##for this course:
+## for this course:
 *Learn some basic R language for my future work
 *first time know the meaning of TBL and hope our four could be a good team
 *prepare for some basic data analysis question
 
-##my spare time:
+## my spare time:
 everyday after class, I will go to rec center about one and half hour. Play some sports, basketball, trainging myself. Also, I love watch NBA live if I have time,  I am a Lakers!
 
-##chris feedback
-###to ryan: 
-The book u introduce seems so interesting. If I have a chance, I will try to read that book. BTW, I love ur goal in five years after graduate, u said u want to make the world a better place! Sounds great and crazy! I love that goal! try!
 
-###to Lauren:
-Hmmm.. the photo u posed catched my eyes! pretty fun! the thing is that maybe u could write more about ur future plan? or career accomplishment? That's my opinions, casue there are only several sentences. 
 
-###to katie:
-I thought ur question about "cancer hospital" is a great question and I hope u could try ur best to solve it. And I am interested about ur classic drama in ur high school cause I never met before.
 
-##Feedback from Katie:
+## Feedback from Katie:
   I see several times you mentioned your future job, which is so nice and I like that. But I think if you can put more details about your hobbies that would be better for us to know you.
   
-##Feedback from Lauren:
+## Feedback from Lauren:
 I really like your question about Boulder transport. I had considered using traffic data in a project last semester. I am excited to work with someone who has similar interests in the application of data analysis. I am interested in hearing more about what countries you want to travel to and what "interesting city" you want to ultimately work. 
