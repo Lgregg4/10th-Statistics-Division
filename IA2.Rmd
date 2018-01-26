@@ -1,6 +1,6 @@
 ---
 title: "IA2"
-author: "Ryan Marizza"
+author: "Ryan Marizza, Katie Jiang, Chris He"
 date: "January 22, 2018"
 output: html_document
 ---
@@ -13,7 +13,7 @@ Team's Main Goal: Our biggest goal is to be able to efficiently and effectively 
 Team Picture: ![](https://scontent.fapa1-1.fna.fbcdn.net/v/t31.0-8/27164396_2004122946271446_3420591800905994454_o.jpg?oh=d391650d110dda3d07b3fe231999537b&oe=5AEA14BB)
 
 
-# Member: Ryan Marizza  
+# Member: Ryan Marizza
 
 ## Here is a Photo of Me:
 ![That's a picture of my friends and I in Banff National Park. I am third from the left.](https://scontent-ort2-2.xx.fbcdn.net/v/t31.0-8/11707707_10207358605190076_4488943470225841164_o.jpg?oh=fa6437f2261ce832b5ac4f555690a2c0&oe=5AEEE1EE)
@@ -53,7 +53,8 @@ When the bombers got back to their base, the steel cylinders were taken from the
 For the future plan part, maybe you can give more details like where would you like to go. I feel like you love travel, because you mentioned twice in your future plan.
 
 ## Feedback from Lauren:
-You lay out your passion for data science and analytics very clearly, which makes me excited to work with you this semester! I agree with Katie, I am also interested on where you would like to travel. It seems like LISA 2020 might be something you should look into. 
+You use of bullet points is effective in getting the information across. You met the marks or the assignment and gave enough detail with your answers. In "Five Years After That" you could expand on what "meaningful work" means to you. 
+
 
 ## Feedback from Chris: 
 The book u introduce seems so interesting. If I have a chance, I will try to read that book. BTW, I love ur goal in five years after graduate, u said u want to make the world a better place! Sounds great and crazy! I love that goal! try!
