@@ -94,9 +94,6 @@ And for the improvement, maybe you can just give more your hobbies in the future
   Carbs and cheese are pretty unbeatable. I thought your question was creative, and relevant (the lack of snow is all anybody's been talking about!). A followup thought I had is to ask the question: "Is the lack of snow this year a sign of permanent climate change, or is it an anomaly?" Your ideas for your future sound grand, best of luck!
 =======
 
->>>>>>> Stashed changes
-
-##Member: Katie Jiang
 
 # Member: Katie Jiang
 
@@ -110,7 +107,6 @@ And for the improvement, maybe you can just give more your hobbies in the future
   After graduation, I want to find a job which deals with big data. Maybe in some companies that analyze human genes, because my emphasize field in applied math is biology and data science. And probably working for one or two years, I want to pursue my Master degree in management(perhaps).
 
 ###Five Years After That:
-<<<<<<< Updated upstream
   I think I will go back to my own country and work for an analyzing company. And I hope I can travel with my parents to the other countries that we haven??t been to, and I want to see the world with my family.
 
 ## What Do I Hope My Greatest Career Accomplishment Will Be?
@@ -120,7 +116,6 @@ And for the improvement, maybe you can just give more your hobbies in the future
 
 ##What Do I Hope My Greatest Career Accomplishment Will Be?
   I hope I can be an important part in an analyzing company and be a good manager after working with data several years. And I don��t know, maybe have a happy family.
->>>>>>> Stashed changes
 
 ##Hopes For the Course (given my hopes and goals):
 *Learn the R language better.
@@ -129,15 +124,16 @@ And for the improvement, maybe you can just give more your hobbies in the future
 
 ## My hobbies:
 Except traveling that I mentioned above, I also like cooking. I live off the campus and I have three roommates and we are from the same country. I cook dinners and sometimes I make cakes and dumplings, which is the most interesting thing in my spare time.
-<<<<<<< Updated upstream
 Also I like dramas, but I have few time to watch. In the semester that I took theater class, I watched several ones . Although I cannot remember each one??s name, I enjoyed them, I like the feelings that I watch dramas. Moreover, I played one classic Chinese drama when I was in high school, which was really fun.
 
 ##Feedback from Ryan:
 I bet you have cooked some really tasty dishes! Your question (and the rest of your responses too) make it clear that you care deeply about other people. That is such a valuable trait! Your aspirations are admirable to say the least. It seems like you have the potential to do lots of good for the world.
 
+##Feedback from Lauren: 
+You answered each question completely and with detail which was necessary for this assignment. I recommend you look into your use of punctuation - specifically, when you use apostrophe's (').
+
 #member: Chris He
 
-# member: Chris He
 
 ## here is a photo of me:
 ![that's a photo of me while last year I was in aspen](https://scontent.fapa1-1.fna.fbcdn.net/v/t1.0-9/26994101_565152280506668_564530606701557683_n.jpg?oh=f2d1fc98f3271ff504cdbc8a6f663bce&oe=5AE466E1)
