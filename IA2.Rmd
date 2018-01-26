@@ -134,7 +134,6 @@ You answered each question completely and with detail which was necessary for th
 
 #member: Chris He
 
-
 ## here is a photo of me:
 ![that's a photo of me while last year I was in aspen](https://scontent.fapa1-1.fna.fbcdn.net/v/t1.0-9/26994101_565152280506668_564530606701557683_n.jpg?oh=f2d1fc98f3271ff504cdbc8a6f663bce&oe=5AE466E1)
 
@@ -162,17 +161,12 @@ my career goal is simple, I want to find a fantasty job used what I learned and 
 ## my spare time:
 everyday after class, I will go to rec center about one and half hour. Play some sports, basketball, trainging myself. Also, I love watch NBA live if I have time,  I am a Lakers!
 
-=======
-Also I like dramas, but I have few time to watch. In the semester that I took theater class, I watched several ones . Although I cannot remember each one��s name, I enjoyed them, I like the feelings that I watch dramas. Moreover, I played one classic Chinese drama when I was in high school, which was really fun.
->>>>>>> Stashed changes
-
-
 
 ## Feedback from Katie:
   I see several times you mentioned your future job, which is so nice and I like that. But I think if you can put more details about your hobbies that would be better for us to know you.
   
 ## Feedback from Lauren:
-I really like your question about Boulder transport. I had considered using traffic data in a project last semester. I am excited to work with someone who has similar interests in the application of data analysis. I am interested in hearing more about what countries you want to travel to and what "interesting city" you want to ultimately work. 
+Your question regarding Boulder transport is interesting a relevant. 
 
 ##Feedback from Ryan:
 I thought your question was creative, a huge part of each of our days goes to transportation, how wonderful would it be if we knew what each person preferred? Good for you for getting into the gym for some excercise, it shows! I hope that you get to use your math skills in industry some day.
