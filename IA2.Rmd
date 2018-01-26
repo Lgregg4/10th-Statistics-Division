@@ -44,7 +44,9 @@ When the bombers got back to their base, the steel cylinders were taken from the
 
 - Vonnegut, Kurt. Slaughterhouse Five. Dell Pub., 1969.
 
-
+##Feedback from Katie:
+  I really like your greatest accomplishment in the future. You want to explore more truth in statistic field, I think that??s super cool. Also in your last part, I can tell that you love reading, although the book you mentioned I haven??t read before, I feel it??s interesting. 
+For the future plan part, maybe you can give more details like where would you like to go. I feel like you love travel, because you mentioned twice in your future plan.
 
 ##Member: Lauren Gregg
 
@@ -72,6 +74,9 @@ I hope to one day be in direct contact with a CEO or CFO of a large company and 
 ##My Favorite Food:
 My favorite food is carbs and cheese. There is a dish in central Illinois called a horseshoe: it is a slice of Texas toast topped with a burger patty covered in french fries and smothered in a cheese sauce that cannot be reproduced. I haven't found anything like it anywhere else and I try to get one everytime I'm home, which is only once or twice a year. 
 
+##Feedback from Katie:
+  I like your future plan, and the leaning goals. They are specific and I feel you have leadership, so you can make it! 
+And for the improvement, maybe you can just give more your hobbies in the future part.
 
 ##Member: Katie Jiang
 
@@ -98,3 +103,35 @@ My favorite food is carbs and cheese. There is a dish in central Illinois called
 ##My hobbies:
 Except traveling that I mentioned above, I also like cooking. I live off the campus and I have three roommates and we are from the same country. I cook dinners and sometimes I make cakes and dumplings, which is the most interesting thing in my spare time.
 Also I like dramas, but I have few time to watch. In the semester that I took theater class, I watched several ones . Although I cannot remember each one??s name, I enjoyed them, I like the feelings that I watch dramas. Moreover, I played one classic Chinese drama when I was in high school, which was really fun.
+
+
+
+#member: Chris He
+
+##here is a photo of me:
+![that's a photo of me while last year I was in aspen](https://scontent.fapa1-1.fna.fbcdn.net/v/t1.0-9/26994101_565152280506668_564530606701557683_n.jpg?oh=f2d1fc98f3271ff504cdbc8a6f663bce&oe=5AE466E1)
+
+
+##the question I am interesed:
+the question about "boulder transport", every people in boulder have their own way to transport. Some people prefer public transport, some people prefer their own vechicle or bicyle. I wander know which way is the easiest way here. 
+
+
+##what I want to do and my career goal
+
+###six months after I graduated:
+I hope I could have some time go travel to other cities or even other countries. I want to find a satisfied job or maybe it is the first job that I found. 
+
+###five years after I graduate:
+I like to find the dream job in a city that I loved. The dream job would be a job used my data analysis background or other math methods. And I hope I could find a interesting city I could live in the rest of my life. 
+
+###my personal career goal:
+my career goal is simple, I want to find a fantasty job used what I learned and I have my own team, maybe a small data analysis group with several people. It is pretty funny. 
+
+##for this course:
+*Learn some basic R language for my future work
+*first time know the meaning of TBL and hope our four could be a good team
+*prepare for some basic data analysis question
+
+##my spare time:
+everyday after class, I will go to rec center about one and half hour. Play some sports, basketball, trainging myself. Also, I love watch NBA live if I have time,  I am a Lakers!
+
