@@ -1,5 +1,5 @@
 ---
-title: "IA2_Ryan"
+title: "IA2"
 author: "Ryan Marizza"
 date: "January 22, 2018"
 output: html_document
@@ -81,7 +81,7 @@ And for the improvement, maybe you can just give more your hobbies in the future
 ##Member: Katie Jiang
 
 ##Here is a photo of me:
-![I went to Wisconsin Madsion last semester, it was super cold ](/APPM2720/10th-Statistics-Division/katie.jpg)
+![I went to Wisconsin Madsion last semester, it was super cold ](https://scontent.fapa1-1.fna.fbcdn.net/v/t1.0-9/26992762_746869552150126_3893714848883606462_n.jpg?oh=237042c7eb92b6975b6c53970b1e1607&oe=5AD910B8)
 ##A Question:
   Because both of my parents are working in an cancer hospital, there are lots of patients have different cancer problems and some of them are cured not only just by drugs. I want to ask what other important elements that could really help patients get cured?
 
@@ -135,3 +135,5 @@ my career goal is simple, I want to find a fantasty job used what I learned and 
 ##my spare time:
 everyday after class, I will go to rec center about one and half hour. Play some sports, basketball, trainging myself. Also, I love watch NBA live if I have time,  I am a Lakers!
 
+##Feedback from Katie:
+  I see several times you mentioned your future job, which is so nice and I like that. But I think if you can put more details about your hobbies that would be better for us to know you.
