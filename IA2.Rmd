@@ -53,6 +53,7 @@ For the future plan part, maybe you can give more details like where would you l
 ##Here is a photo fo me: 
 ![I'm from central Illinois so the coolest thing near me is Lake Springfield - which isn't that cool.](https://scontent-ort2-2.xx.fbcdn.net/v/t1.0-9/26992576_2001907949826279_5829056724738314483_n.jpg?oh=e9b28330bfb08b1a73faa370aad5795e&oe=5AEA8465)
 
+<<<<<<< Updated upstream
 ## A Question: 
 Why has there been no snow this year!? Yes, climate change is definitely occuring, but places around us have been getting snow that we need.
 
@@ -78,6 +79,12 @@ My favorite food is carbs and cheese. There is a dish in central Illinois called
   I like your future plan, and the leaning goals. They are specific and I feel you have leadership, so you can make it! 
 And for the improvement, maybe you can just give more your hobbies in the future part.
 
+##Feedback from Ryan:
+  Carbs and cheese are pretty unbeatable. I thought your question was creative, and relevant (the lack of snow is all anybody's been talking about!). A followup thought I had is to ask the question: "Is the lack of snow this year a sign of permanent climate change, or is it an anomaly?" Your ideas for your future sound grand, best of luck!
+=======
+
+>>>>>>> Stashed changes
+
 ##Member: Katie Jiang
 
 ##Here is a photo of me:
@@ -90,10 +97,17 @@ And for the improvement, maybe you can just give more your hobbies in the future
   After graduation, I want to find a job which deals with big data. Maybe in some companies that analyze human genes, because my emphasize field in applied math is biology and data science. And probably working for one or two years, I want to pursue my Master degree in management(perhaps).
 
 ###Five Years After That:
+<<<<<<< Updated upstream
   I think I will go back to my own country and work for an analyzing company. And I hope I can travel with my parents to the other countries that we haven??t been to, and I want to see the world with my family.
 
 ##What Do I Hope My Greatest Career Accomplishment Will Be?
   I hope I can be an important part in an analyzing company and be a good manager after working with data several years. And I don??t know, maybe have a happy family.
+=======
+  I think I will go back to my own country and work for an analyzing company. And I hope I can travel with my parents to the other countries that we haven��t been to, and I want to see the world with my family.
+
+##What Do I Hope My Greatest Career Accomplishment Will Be?
+  I hope I can be an important part in an analyzing company and be a good manager after working with data several years. And I don��t know, maybe have a happy family.
+>>>>>>> Stashed changes
 
 ##Hopes For the Course (given my hopes and goals):
 *Learn the R language better.
@@ -102,9 +116,11 @@ And for the improvement, maybe you can just give more your hobbies in the future
 
 ##My hobbies:
 Except traveling that I mentioned above, I also like cooking. I live off the campus and I have three roommates and we are from the same country. I cook dinners and sometimes I make cakes and dumplings, which is the most interesting thing in my spare time.
+<<<<<<< Updated upstream
 Also I like dramas, but I have few time to watch. In the semester that I took theater class, I watched several ones . Although I cannot remember each one??s name, I enjoyed them, I like the feelings that I watch dramas. Moreover, I played one classic Chinese drama when I was in high school, which was really fun.
 
-
+##Feedback from Ryan:
+I bet you have cooked some really tasty dishes! Your question (and the rest of your responses too) make it clear that you care deeply about other people. That is such a valuable trait! Your aspirations are admirable to say the least. It seems like you have the potential to do lots of good for the world.
 
 #member: Chris He
 
@@ -135,3 +151,6 @@ my career goal is simple, I want to find a fantasty job used what I learned and 
 ##my spare time:
 everyday after class, I will go to rec center about one and half hour. Play some sports, basketball, trainging myself. Also, I love watch NBA live if I have time,  I am a Lakers!
 
+=======
+Also I like dramas, but I have few time to watch. In the semester that I took theater class, I watched several ones . Although I cannot remember each one��s name, I enjoyed them, I like the feelings that I watch dramas. Moreover, I played one classic Chinese drama when I was in high school, which was really fun.
+>>>>>>> Stashed changes
