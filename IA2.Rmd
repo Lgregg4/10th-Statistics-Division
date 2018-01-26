@@ -5,9 +5,9 @@ date: "January 22, 2018"
 output: html_document
 ---
 
-## Team Info
+# Team Info
 Team Name: 10th Statistics Division
-Team's Main Goal: ----
+Team's Main Goal: Our biggest goal is to be able to efficiently and effectively work together. Then, of course, we hope to become confident in data analysis using R.
 
 #Member: Ryan Marizza  
 
@@ -48,7 +48,11 @@ When the bombers got back to their base, the steel cylinders were taken from the
   I really like your greatest accomplishment in the future. You want to explore more truth in statistic field, I think that??s super cool. Also in your last part, I can tell that you love reading, although the book you mentioned I haven??t read before, I feel it??s interesting. 
 For the future plan part, maybe you can give more details like where would you like to go. I feel like you love travel, because you mentioned twice in your future plan.
 
-##Member: Lauren Gregg
+##Feedback from Lauren:
+You lay out your passion for data science and analytics very clearly, which makes me excited to work with you this semester! I agree with Katie, I am also interested on where you would like to travel. It seems like LISA 2020 might be something you should look into. 
+
+
+#Member: Lauren Gregg
 
 ##Here is a photo fo me: 
 ![I'm from central Illinois so the coolest thing near me is Lake Springfield - which isn't that cool.](https://scontent-ort2-2.xx.fbcdn.net/v/t1.0-9/26992576_2001907949826279_5829056724738314483_n.jpg?oh=e9b28330bfb08b1a73faa370aad5795e&oe=5AEA8465)
@@ -78,7 +82,7 @@ My favorite food is carbs and cheese. There is a dish in central Illinois called
   I like your future plan, and the leaning goals. They are specific and I feel you have leadership, so you can make it! 
 And for the improvement, maybe you can just give more your hobbies in the future part.
 
-##Member: Katie Jiang
+#Member: Katie Jiang
 
 ##Here is a photo of me:
 ![I went to Wisconsin Madsion last semester, it was super cold ](https://scontent.fapa1-1.fna.fbcdn.net/v/t1.0-9/26992762_746869552150126_3893714848883606462_n.jpg?oh=237042c7eb92b6975b6c53970b1e1607&oe=5AD910B8)
@@ -104,6 +108,8 @@ And for the improvement, maybe you can just give more your hobbies in the future
 Except traveling that I mentioned above, I also like cooking. I live off the campus and I have three roommates and we are from the same country. I cook dinners and sometimes I make cakes and dumplings, which is the most interesting thing in my spare time.
 Also I like dramas, but I have few time to watch. In the semester that I took theater class, I watched several ones . Although I cannot remember each one??s name, I enjoyed them, I like the feelings that I watch dramas. Moreover, I played one classic Chinese drama when I was in high school, which was really fun.
 
+##Feedback from Lauren:
+I am very impressed with your ability to study applied mathematics, data science, AND biology. That obvious academic determination makes me eager to be on your team this semester. I might recommend mentioning what your home country is, because you reference it a few times, but never directly say.
 
 
 #member: Chris He
@@ -147,3 +153,6 @@ I thought ur question about "cancer hospital" is a great question and I hope u c
 
 ##Feedback from Katie:
   I see several times you mentioned your future job, which is so nice and I like that. But I think if you can put more details about your hobbies that would be better for us to know you.
+  
+##Feedback from Lauren:
+I really like your question about Boulder transport. I had considered using traffic data in a project last semester. I am excited to work with someone who has similar interests in the application of data analysis. I am interested in hearing more about what countries you want to travel to and what "interesting city" you want to ultimately work. 
