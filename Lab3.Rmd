@@ -1,7 +1,7 @@
 
 ---
 title: "Lab3"
-author: "Lauren Gregg, Kaite Jiang, Ryan Marizza, Chris He"
+author: "Lauren Gregg, Katie Jiang, Ryan Marizza, Chris He"
 date: "1/31/2018"
 output: html_document
 ---
@@ -9,6 +9,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
 library(tidyverse)
 source("http://www.openintro.org/stat/data/cdc.R")
 cdc <- as_tibble(cdc)
@@ -60,4 +61,41 @@ ggplot(data = cdc,mapping = aes(x = age, y = exerany, color = gender))+
   labs(x = "age",y = "exerany",title="The linear relationship between age, gender and exerany")
 
 ```
+
+# Team Work
+
+## Overall Question:
+-- Why is this important? 
+
+## Plot to answer the Question
+
+## Conclusion
+
+## Recommendation for Action
+
+# Individual Work
+
+## Lauren
+
+## Kaite
+
+## Ryan
+
+## Chris
+
+
+# Summary of Who did What
+
+## Lauren
+
+## Kaite
+
+## Ryan
+
+## Chris
+
+
+
+# Individual Work
+
 
