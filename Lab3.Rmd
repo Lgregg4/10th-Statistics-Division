@@ -5,7 +5,41 @@ date: "1/31/2018"
 output: html_document
 ---
 
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+library(tidyverse)
+source("http://www.openintro.org/stat/data/cdc.R")
+cdc <- as_tibble(cdc)
 
+#this is comparing weight and age and to see whether their in good health.
+ggplot(data = cdc)+
+  geom_col(mapping = aes(x = age,y = weight))+
+  facet_grid(exerany~genhlth)
+#age and height with genhlth
+ggplot(data = cdc)+
+  geom_bar(mapping = aes(x = age, y = height),stat = "identity")+
+  facet_wrap(~genhlth)+
+  theme_classic()
+
+#age with weight, comparing with gender and genhlth
+ggplot(data = cdc,mapping = aes(x = age, y = weight, color = gender))+
+  facet_wrap(~genhlth)+
+  geom_smooth(method = "lm",se = FALSE)
+
+#smoke and genhlth, including age height and gender
+ggplot(data = cdc,mapping = aes(x = age,y = height,color = gender))+
+  geom_smooth(method = "loess",se = FALSE)+
+  facet_grid(smoke100~genhlth)
+
+#summary the max and the min value in age and height graph
+ggplot(data = cdc,mapping = aes(x=age,y = height,color = gender))+
+  stat_summary(fun.y = median,fun.ymax = max,fun.ymin = min)+
+  facet_grid(genhlth~hlthplan)
+
+#The linear relationship between age, gender and exerany
+ggplot(data = cdc,mapping = aes(x = age, y = exerany, color = gender))+
+  geom_smooth(method = "lm")+
+  facet_wrap(~smoke100)+
+  labs(x = "age",y = "exerany",title="The linear relationship between age, gender and exerany")
