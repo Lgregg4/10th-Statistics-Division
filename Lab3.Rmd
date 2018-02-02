@@ -35,10 +35,7 @@ It is commonly thought an individual in good health exercises frequently and has
 
 ## Kaite
 ```{r}
-library(tidyverse)
-install.packages("tidyverse")
-source("http://www.openintro.org/stat/data/cdc.R")
-cdc <- as_tibble(cdc)
+
 ggplot(data = cdc,mapping = aes(x = weight, y = exerany, color = gender))+
   geom_smooth(method = "lm")+
   facet_wrap(~genhlth)+
@@ -58,7 +55,7 @@ ggplot(data = cdc,mapping = aes(x = weight, y = exerany, color = gender))+
 
 
 ## Kaite
-  Due to that our main question is about exercise and the I plot the relationship between weight, gender and exerany
+  Due to that our main question is about exercise and the I plot the relationship between weight, gender and exerany.The data showed for different gender the tendency of exercise is different, when the weight increases. We can visualize from each plot that female always decrease exercise even they have good health, when the weight increases. However, for male, they tend to exercise more, except for good health and fair health. I used the geom-smooth function and set the method to lm, in order to see the direct relationship between weight and exercise and compare with the general health. The reason that I didn¡¯t avoid standard deviation is the line only shows the tendency between weight and exercise and the standard deviation could help readers to analyse. In addition I used facet-wrap function to separate them into different health conditions and label each axis. It can make the plot more clear and easy to read.  
 ## Ryan
 
 ## Chris
