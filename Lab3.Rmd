@@ -27,6 +27,14 @@ This question is important because it may give insight on best practices for opt
 
 The insight on best practices for optimal health is an important insight because this information can be distributed to the general public, who (hopefully), will use it to improve their own health. 
 ## Plot to answer the Question
+```{r}
+#gen health vs. exercise
+d <- ggplot(cdc,aes(genhlth));
+d+geom_bar(aes(y=..prop..,group=1,fill=..x..))+facet_wrap(~exerany)+scale_fill_gradient(low="green",high="red")+
+  labs(x = "Health",y="Proportion",title = "Relationship Between Exercise and General Health") #this looks at health and exercise
+
+```
+
 
 ## Conclusion
 
@@ -37,6 +45,15 @@ The insight on best practices for optimal health is an important insight because
 # Individual Work
 
 ## Lauren
+```{r}
+ggplot(data = cdc, mapping = aes(y=weight, x=wtdesire)) +
+  geom_point() +
+  facet_wrap(~exerany) + 
+  geom_jitter() + 
+  coord_fixed() +
+  geom_smooth(aes(color=gender), method = "lm") +
+  geom_abline()
+```
 
 ## Kaite
 ```{r}
@@ -73,8 +90,8 @@ g+geom_jitter()+facet_grid(~gender)+labs(x = "Current Weight",y="Desired Weight 
 
 ## Chris
 ```{r}
-ggplot(data = cdc, mapping = aes(y=weight,x=genhlth,color=gender)) + geom_point() +
-  facet_wrap(~exerany)
+ggplot(data = cdc, mapping = aes(y=weight,x=genhlth,color=gender)) + geom_boxplot() +
+  facet_grid(~exerany)
 ```
 
 
@@ -83,15 +100,6 @@ ggplot(data = cdc, mapping = aes(y=weight,x=genhlth,color=gender)) + geom_point(
 
 ## Lauren
 
-```{r}
-ggplot(data = cdc, mapping = aes(y=weight, x=wtdesire)) +
-  geom_point() +
-  facet_wrap(~exerany) + 
-  geom_jitter() + 
-  coord_fixed() +
-  geom_smooth(aes(color=gender), method = "lm") +
-  geom_abline()
-```
 
 The data has been divided into two groups: 1 indicates that the individuals have exercised in the past month and 0 indicates otherwise. Additionally, a linear fit has been assigned to males (m) and females (f) comparing individuals actual weight versus desired weight. I have also included a black line; this line indicates an individual whose desired weight is his actual weight.
 With this understanding of the plot, we can make some interesting observations. In both the exercise and non-exercise groups, the linear fit for males is closest to the control line. This gives the impression that males have less of a difference between their desired and actual weight, compared to females. Additionally, it appears the linear fit for males is closer to the control line for the non-excerise group. This implies that men who have exercised in the past month have a larger desire to change their weight.
@@ -109,6 +117,10 @@ What I did on the lab:
 
 ## Chris
 
-due to the data that we got, I try to find the relationship between "exercise","weight","gender". I know the team question is about "exercise" and "weight". I was concern more about "gender", and I know the graph is weird but I thought we could find some relation between this two graph wether they do exercise or not. And we could see the different color to discuss different gender in this case. but I thought there are only small variation between two graph and not enough to support our conclusion.  
+due to the data that we got, I try to find the relationship between "exercise","weight","gender". I know the team question is about "exercise" and "weight". I was concern more about "gender", and I know the graph is weird but I thought we could find some relation between this two graph wether they do exercise or not. And we could see the different color to discuss different gender in this case. but I thought there are only small variation between two graph.
+the only result that I could conclude is if u do some exercise in past months, u could get relatively low weight 
+than those people who never do exercise. and also u could get a more stabilization weight in a small range when compare to the people do not do exercise. cause when we see the graph. the boxplot a in a lower position.
 
+what I did for lab3: role as a scientist and find a recommendation for action
+ 
 
