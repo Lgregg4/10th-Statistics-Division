@@ -12,7 +12,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
-install.packages("tidyverse")
+
 source("http://www.openintro.org/stat/data/cdc.R")
 cdc <- as_tibble(cdc)
 ```
@@ -43,7 +43,7 @@ In order to provide a solid answer to this main question, we plot the bar diagra
   Therefore, the regular exercise not only helps us to keep good health, but improve our life quality. And the best way to keep health is to do more exercise.
 
 ## Recommendation for Action
-
+as we can see from the team plot we made and conclusion we made. regular exercise could improve our strength and keepn us in good health. The people who have a nice exercise plan will have a relatively low weight and good health.  So what I suggested is every people have a good exercise plan for themselves. If we could insist our plan we could easily keep good health.
 
 # Individual Work
 
@@ -58,6 +58,9 @@ ggplot(data = cdc, mapping = aes(y=weight, x=wtdesire)) +
   geom_abline()
 ```
 
+The data has been divided into two groups: 1 indicates that the individuals have exercised in the past month and 0 indicates otherwise. Additionally, a linear fit has been assigned to males (m) and females (f) comparing individuals actual weight versus desired weight. I have also included a black line; this line indicates an individual whose desired weight is his actual weight.
+With this understanding of the plot, we can make some interesting observations. In both the exercise and non-exercise groups, the linear fit for males is closest to the control line. This gives the impression that males have less of a difference between their desired and actual weight, compared to females. Additionally, it appears the linear fit for males is closer to the control line for the non-excerise group. This implies that men who have exercised in the past month have a larger desire to change their weight.
+
 ## Kaite
 ```{r}
 
@@ -67,7 +70,8 @@ ggplot(data = cdc,mapping = aes(x = weight, y = exerany, color = gender))+
   labs(x = "weight",y = "exerany",title="The linear relationship between weight, gender and exerany")
 
 ```
-
+Due to that our main question is about exercise and the I plot the relationship between weight, gender and exerany.The data showed for different gender the tendency of exercise is different, when the weight increases. We can visualize from each plot that female always decrease exercise even they have good health, when the weight increases. However, for male, they tend to exercise more, except for good health and fair health. I used the geom-smooth function and set the method to lm, in order to see the direct relationship between weight and exercise and compare with the general health. The reason that I didn??t avoid standard deviation is the line only shows the tendency between weight and exercise and the standard deviation could help readers to analyse. In addition I used facet-wrap function to separate them into different health conditions and label each axis. It can make the plot more clear and easy to read. 
+  
 
 ## Ryan
 ```{r}
@@ -76,7 +80,9 @@ d <- ggplot(cdc,aes(genhlth));
 d+geom_bar(aes(y=..prop..,group=1,fill=..x..))+facet_wrap(~exerany)+scale_fill_gradient(low="green",high="red")+
   labs(x = "Health",y="Proportion") #this looks at health and exercise
 ```
+My individual exploration sought to explore two concepts in health. The first concept was the relationship between general health and exercise, and the second (somewhat more abstract) sought to explore the relationship between a person's current weight, and their desired weight loss. The first plot I created aimed to visualize the distribution of health for the set of people who DO exercise, and for the set of people who DO NOT exercise at all. The findings from this exploration fit my hypothesis exactly! The majority of exercisers report having "very good" health, while the majority of non-exercisers report only having "good" health. The way the plot is set up, higher general health is toward represented to the left, while lower general health is represented toward the right. The general heatlth reports from the set of people who do exercise is quite obviously shifted left (toward health) when compared to the health reports from the set of people who do not exercise. This has direct and obvious relation to the team's question.
 
+The exploration of the data presented in the second plot was motivated mainly by a desire to observe the extent to which people wish their weight was different, and how this changes based on their current weight. One would expect to see a linear increase in desired weight loss as weight increases (I speculate this because "optimal weight" is likley a constant which is set by health/beauty standards in a society, a person's family/upbringing, and many other factors). The plot shows that in general, this is true. Most of the heavier people want to lose more weight than most of the lighter people. The correlation is significantly stronger for females than for males. Possibly, and tragically, this is due to the higher pressure on females (compared to males) to meet cultural beauty standards. This relates to the team's question because it shows that many people already have a good understanding of what weight they should be for optimal health, however, the distributions not very tight, so informing the public about these findings may still prove to be beneficial.
 ```{r}
 #Makes a plot of how much people weigh vs. how much people want to weigh
 weight <- cdc[6]
@@ -97,170 +103,25 @@ ggplot(data = cdc, mapping = aes(y=weight,x=genhlth,color=gender)) + geom_boxplo
   facet_grid(~exerany)
 ```
 
+due to the data that we got, I try to find the relationship between "exercise","weight","gender". I know the team question is about "exercise" and "weight". I was concern more about "gender", and I know the graph is weird but I thought we could find some relation between this two graph wether they do exercise or not. And we could see the different color to discuss different gender in this case. but I thought there are only small variation between two graph.
+the only result that I could conclude is if u do some exercise in past months, u could get relatively low weight 
+than those people who never do exercise. and also u could get a more stabilization weight in a small range when compare to the people do not do exercise. cause when we see the graph. the boxplot a in a lower position.
 
 
 # Summary of Who did What
 
 ## Lauren
+come up with different type of questions,different type of plot and decided our team question. 
 
-
-The data has been divided into two groups: 1 indicates that the individuals have exercised in the past month and 0 indicates otherwise. Additionally, a linear fit has been assigned to males (m) and females (f) comparing individuals actual weight versus desired weight. I have also included a black line; this line indicates an individual whose desired weight is his actual weight.
-With this understanding of the plot, we can make some interesting observations. In both the exercise and non-exercise groups, the linear fit for males is closest to the control line. This gives the impression that males have less of a difference between their desired and actual weight, compared to females. Additionally, it appears the linear fit for males is closer to the control line for the non-excerise group. This implies that men who have exercised in the past month have a larger desire to change their weight.
 
 
 ## Kaite
-  Due to that our main question is about exercise and the I plot the relationship between weight, gender and exerany.The data showed for different gender the tendency of exercise is different, when the weight increases. We can visualize from each plot that female always decrease exercise even they have good health, when the weight increases. However, for male, they tend to exercise more, except for good health and fair health. I used the geom-smooth function and set the method to lm, in order to see the direct relationship between weight and exercise and compare with the general health. The reason that I didn??t avoid standard deviation is the line only shows the tendency between weight and exercise and the standard deviation could help readers to analyse. In addition I used facet-wrap function to separate them into different health conditions and label each axis. It can make the plot more clear and easy to read. 
-  
-What I did in lab:
-  I wrote the conclusion.
+wrote the team conclusion.
+
 ## Ryan
-My individual exploration sought to explore two concepts in health. The first concept was the relationship between general health and exercise, and the second (somewhat more abstract) sought to explore the relationship between a person's current weight, and their desired weight loss. The first plot I created aimed to visualize the distribution of health for the set of people who DO exercise, and for the set of people who DO NOT exercise at all. The findings from this exploration fit my hypothesis exactly! The majority of exercisers report having "very good" health, while the majority of non-exercisers report only having "good" health. The way the plot is set up, higher general health is toward represented to the left, while lower general health is represented toward the right. The general heatlth reports from the set of people who do exercise is quite obviously shifted left (toward health) when compared to the health reports from the set of people who do not exercise. This has direct and obvious relation to the team's question.
 
-The exploration of the data presented in the second plot was motivated mainly by a desire to observe the extent to which people wish their weight was different, and how this changes based on their current weight. One would expect to see a linear increase in desired weight loss as weight increases (I speculate this because "optimal weight" is likley a constant which is set by health/beauty standards in a society, a person's family/upbringing, and many other factors). The plot shows that in general, this is true. Most of the heavier people want to lose more weight than most of the lighter people. The correlation is significantly stronger for females than for males. Possibly, and tragically, this is due to the higher pressure on females (compared to males) to meet cultural beauty standards. This relates to the team's question because it shows that many people already have a good understanding of what weight they should be for optimal health, however, the distributions not very tight, so informing the public about these findings may still prove to be beneficial.
-
-What I did on the lab:
 -gave the explanation on why the question was important or interesting, and a deeper explanation on why that reason is important or interesting.
 
 ## Chris
 
-due to the data that we got, I try to find the relationship between "exercise","weight","gender". I know the team question is about "exercise" and "weight". I was concern more about "gender", and I know the graph is weird but I thought we could find some relation between this two graph wether they do exercise or not. And we could see the different color to discuss different gender in this case. but I thought there are only small variation between two graph.
-the only result that I could conclude is if u do some exercise in past months, u could get relatively low weight 
-than those people who never do exercise. and also u could get a more stabilization weight in a small range when compare to the people do not do exercise. cause when we see the graph. the boxplot a in a lower position.
-
-what I did for lab3: role as a scientist and find a recommendation for action
- 
-
-=======
-
----
-title: "Lab3"
-author: "Lauren Gregg, Katie Jiang, Ryan Marizza, Chris He"
-date: "1/31/2018"
-output:
-  html_document: default
-  pdf_document: default
----
-
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-
-library(tidyverse)
-source("http://www.openintro.org/stat/data/cdc.R")
-cdc <- as_tibble(cdc)
-```
-
-# Team Work
-
-## Overall Question:
-How is general health related to weight and exercise?
-
-It is commonly thought that an individual in good health exercises frequently and has a lower weight. However, this is not always the case. It is important to compare general health with weight and exercise in order to determine if there is a correlation between the two and if any outliers exist.
-
-This question is important because it may give insight on best practices for optimal health (at least in terms of weight and exercise). That is to say, if the data gives a solid answer to this question, then light is shed on the best way to become more healthy. 
-
-The insight on best practices for optimal health is an important insight because this information can be distributed to the general public, who (hopefully), will use it to improve their own health. 
-## Plot to answer the Question
-```{r}
-#gen health vs. exercise
-d <- ggplot(cdc,aes(genhlth));
-d+geom_bar(aes(y=..prop..,group=1,fill=..x..))+facet_wrap(~exerany)+scale_fill_gradient(low="green",high="red")+
-  labs(x = "Health",y="Proportion",title = "Relationship Between Exercise and General Health") #this looks at health and exercise
-
-```
-
-
-## Conclusion
-We focus on the relationship between exercise and the general health, and how the exercise affects our health. And most people often thought the more exercise, the healthier they are, but why this holds?
-
-In order to provide a solid answer to this main question, we plot the bar diagram to visualize their relationship and the general health distribution. In this bar chart, it shows that when people do exercise more, the proportion of their excellent health quality is high, and majority persons lie on very good health. Only a few people are in poor health. However, comparing left side which fewer exercise with right side, the proportion indicates that the people in excellent health are less than right, and the majority people are in good health. The number of persons who are in poor health rises a lot.
-
-Therefore, the regular exercise not only helps us to keep good health, but improve our life quality. And the best way to keep health is to do more exercise.
-
-## Recommendation for Action
-as we can see from the team plot we made and conclusion we made. regular exercise could improve our strength and keepn us in g
-
-# Individual Work
-
-## Lauren
-```{r}
-ggplot(data = cdc, mapping = aes(y=weight, x=wtdesire)) +
-  geom_point() +
-  facet_wrap(~exerany) + 
-  geom_jitter() + 
-  coord_fixed() +
-  geom_smooth(aes(color=gender), method = "lm") +
-  geom_abline()
-```
-
-## Kaite
-```{r}
-
-ggplot(data = cdc,mapping = aes(x = weight, y = exerany, color = gender))+
-  geom_smooth(method = "lm")+
-  facet_wrap(~genhlth)+
-  labs(x = "weight",y = "exerany",title="The linear relationship between weight, gender and exerany")
-
-```
-
-
-## Ryan
-```{r}
-#gen health vs. exercise
-d <- ggplot(cdc,aes(genhlth));
-d+geom_bar(aes(y=..prop..,group=1,fill=..x..))+facet_wrap(~exerany)+scale_fill_gradient(low="green",high="red")+
-  labs(x = "Health",y="Proportion") #this looks at health and exercise
-```
-
-```{r}
-#Makes a plot of how much people weigh vs. how much people want to weigh
-weight <- cdc[6]
-wtdesire <- cdc[7]
-loss <- -wtdesire+weight
-cdc[10]<-loss
-colnames(cdc)[10] = "desLoss"
-g<-ggplot(cdc,aes(x=weight,y=desLoss))
-g+geom_jitter()+facet_grid(~gender)+labs(x = "Current Weight",y="Desired Weight Loss")
-#this one looks at how heavy people ARE versus how much weight they want to lose.
-##it adds a 10th data column onto the CDC dataset which is just a difference between the 6th and 7th columns (col6-col7)
-```
-
-
-## Chris
-```{r}
-ggplot(data = cdc, mapping = aes(y=weight,x=genhlth,color=gender)) + geom_boxplot() +
-  facet_grid(~exerany)
-```
-
-
-
-# Summary of Who did What
-
-## Lauren
-
-
-The data has been divided into two groups: 1 indicates that the individuals have exercised in the past month and 0 indicates otherwise. Additionally, a linear fit has been assigned to males (m) and females (f) comparing individuals actual weight versus desired weight. I have also included a black line; this line indicates an individual whose desired weight is his actual weight.
-With this understanding of the plot, we can make some interesting observations. In both the exercise and non-exercise groups, the linear fit for males is closest to the control line. This gives the impression that males have less of a difference between their desired and actual weight, compared to females. Additionally, it appears the linear fit for males is closer to the control line for the non-excerise group. This implies that men who have exercised in the past month have a larger desire to change their weight.
-
-
-## Kaite
-  Due to that our main question is about exercise and the I plot the relationship between weight, gender and exerany.The data showed for different gender the tendency of exercise is different, when the weight increases. We can visualize from each plot that female always decrease exercise even they have good health, when the weight increases. However, for male, they tend to exercise more, except for good health and fair health. I used the geom-smooth function and set the method to lm, in order to see the direct relationship between weight and exercise and compare with the general health. The reason that I didn??t avoid standard deviation is the line only shows the tendency between weight and exercise and the standard deviation could help readers to analyse. In addition I used facet-wrap function to separate them into different health conditions and label each axis. It can make the plot more clear and easy to read.  
-  
-## Ryan
-My individual exploration sought to explore two concepts in health. The first concept was the relationship between general health and exercise, and the second (somewhat more abstract) sought to explore the relationship between a person's current weight, and their desired weight loss. The first plot I created aimed to visualize the distribution of health for the set of people who DO exercise, and for the set of people who DO NOT exercise at all. The findings from this exploration fit my hypothesis exactly! The majority of exercisers report having "very good" health, while the majority of non-exercisers report only having "good" health. The way the plot is set up, higher general health is toward represented to the left, while lower general health is represented toward the right. The general heatlth reports from the set of people who do exercise is quite obviously shifted left (toward health) when compared to the health reports from the set of people who do not exercise. This has direct and obvious relation to the team's question.
-
-The exploration of the data presented in the second plot was motivated mainly by a desire to observe the extent to which people wish their weight was different, and how this changes based on their current weight. One would expect to see a linear increase in desired weight loss as weight increases (I speculate this because "optimal weight" is likley a constant which is set by health/beauty standards in a society, a person's family/upbringing, and many other factors). The plot shows that in general, this is true. Most of the heavier people want to lose more weight than most of the lighter people. The correlation is significantly stronger for females than for males. Possibly, and tragically, this is due to the higher pressure on females (compared to males) to meet cultural beauty standards. This relates to the team's question because it shows that many people already have a good understanding of what weight they should be for optimal health, however, the distributions not very tight, so informing the public about these findings may still prove to be beneficial.
-
-What I did on the lab:
--gave the explanation on why the question was important or interesting, and a deeper explanation on why that reason is important or interesting.
-
-## Chris
-
-due to the data that we got, I try to find the relationship between "exercise","weight","gender". I know the team question is about "exercise" and "weight". I was concern more about "gender", and I know the graph is weird but I thought we could find some relation between this two graph wether they do exercise or not. And we could see the different color to discuss different gender in this case. but I thought there are only small variation between two graph.
-the only result that I could conclude is if u do some exercise in past months, u could get relatively low weight 
-than those people who never do exercise. and also u could get a more stabilization weight in a small range when compare to the people do not do exercise. cause when we see the graph. the boxplot a in a lower position.
-
-what I did for lab3: role as a scientist and find a recommendation for action
- 
-
->>>>>>> Stashed changes
+role as a scientist and find a recommendation relatively to our team question
