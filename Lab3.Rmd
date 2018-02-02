@@ -27,6 +27,13 @@ This question is important because it may give insight on best practices for opt
 
 The insight on best practices for optimal health is an important insight because this information can be distributed to the general public, who (hopefully), will use it to improve their own health. 
 ## Plot to answer the Question
+```{r}
+#gen health vs. exercise
+d <- ggplot(cdc,aes(genhlth));
+d+geom_bar(aes(y=..prop..,group=1,fill=..x..))+facet_wrap(~exerany)+scale_fill_gradient(low="green",high="red")+
+  labs(x = "Health",y="Proportion",title = "Relationship Between Exercise and General Health") #this looks at health and exercise
+
+```
 
 ## Conclusion
 
@@ -113,3 +120,4 @@ due to the data that we got, I try to find the relationship between "exercise","
 the only result that I could conclude is if u do some exercise in past months, u could get relatively low weight 
 than those people who never do exercise. and also u could get a more stabilization weight in a small range when compare to the people do not do exercise. cause when we see the graph. the boxplot a in a lower position.
 
+what I did for this lab: role as data scientist and provide the recommendation for action.
