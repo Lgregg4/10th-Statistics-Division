@@ -58,6 +58,19 @@ ggplot(data = cdc, mapping = aes(y=weight,x=genhlth,color=gender)) + geom_point(
 
 ## Lauren
 
+```{r}
+ggplot(data = cdc, mapping = aes(y=weight, x=wtdesire)) +
+  geom_point() +
+  facet_wrap(~exerany) + 
+  geom_jitter() + 
+  coord_fixed() +
+  geom_smooth(aes(color=gender), method = "lm") +
+  geom_abline()
+```
+
+The data has been divided into two groups: 1 indicates that the individuals have exercised in the past month and 0 indicates otherwise. Additionally, a linear fit has been assigned to males (m) and females (f) comparing individuals actual weight versus desired weight. I have also included a black line; this line indicates an individual whose desired weight is his actual weight.
+With this understanding of the plot, we can make some interesting observations. In both the exercise and non-exercise groups, the linear fit for males is closest to the control line. This gives the impression that males have less of a difference between their desired and actual weight, compared to females. Additionally, it appears the linear fit for males is closer to the control line for the non-excerise group. This implies that men who have exercised in the past month have a larger desire to change their weight.
+
 
 ## Kaite
   Due to that our main question is about exercise and the I plot the relationship between weight, gender and exerany.The data showed for different gender the tendency of exercise is different, when the weight increases. We can visualize from each plot that female always decrease exercise even they have good health, when the weight increases. However, for male, they tend to exercise more, except for good health and fair health. I used the geom-smooth function and set the method to lm, in order to see the direct relationship between weight and exercise and compare with the general health. The reason that I didn??t avoid standard deviation is the line only shows the tendency between weight and exercise and the standard deviation could help readers to analyse. In addition I used facet-wrap function to separate them into different health conditions and label each axis. It can make the plot more clear and easy to read.  
