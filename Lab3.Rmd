@@ -15,57 +15,12 @@ source("http://www.openintro.org/stat/data/cdc.R")
 cdc <- as_tibble(cdc)
 ```
 
-#this is comparing weight and age and to see whether their in good health.
-```{r}
-ggplot(data = cdc)+
-  geom_col(mapping = aes(x = age,y = weight))+
-  facet_grid(exerany~genhlth)
-```
-
-#age and height with genhlth
-```{r}
-ggplot(data = cdc)+
-  geom_bar(mapping = aes(x = age, y = height),stat = "identity")+
-  facet_wrap(~genhlth)+
-  theme_classic()
-```
-
-
-#age with weight, comparing with gender and genhlth
-```{r}
-ggplot(data = cdc,mapping = aes(x = age, y = weight, color = gender))+
-  facet_wrap(~genhlth)
-```
-
-
-
-#smoke and genhlth, including age height and gender
-```{r}
-ggplot(data = cdc,mapping = aes(x = age,y = height,color = gender))+
-  geom_smooth(method = "loess",se = FALSE)+
-  facet_grid(smoke100~genhlth)
-```
-
-#summary the max and the min value in age and height graph
-```{r}
-ggplot(data = cdc,mapping = aes(x=age,y = height,color = gender))+
-  stat_summary(fun.y = median,fun.ymax = max,fun.ymin = min)+
-  facet_grid(genhlth~hlthplan)
-```
-
-#The linear relationship between age, gender and exerany
-```{r}
-ggplot(data = cdc,mapping = aes(x = age, y = exerany, color = gender))+
-  geom_smooth(method = "lm")+
-  facet_wrap(~smoke100)+
-  labs(x = "age",y = "exerany",title="The linear relationship between age, gender and exerany")
-
-```
-
 # Team Work
 
 ## Overall Question:
--- Why is this important? 
+How is general health related to weight and exercise?
+
+It is commonly thought an individual in good health exercises frequently and has a lower weight. However, this is not always the case. It is important to compare general health with weight and exercise in order to determine if there is a correlation between the two and if any outliers exist.
 
 ## Plot to answer the Question
 
@@ -87,6 +42,7 @@ ggplot(data = cdc,mapping = aes(x = age, y = exerany, color = gender))+
 # Summary of Who did What
 
 ## Lauren
+
 
 ## Kaite
 
