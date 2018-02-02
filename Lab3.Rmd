@@ -19,7 +19,7 @@ cdc <- as_tibble(cdc)
 # Team Work
 
 ## Overall Question:
-How is general health related to weight and exercise?
+  How is general health related to weight and exercise?
 
 It is commonly thought that an individual in good health exercises frequently and has a lower weight. However, this is not always the case. It is important to compare general health with weight and exercise in order to determine if there is a correlation between the two and if any outliers exist.
 
@@ -37,7 +37,9 @@ d+geom_bar(aes(y=..prop..,group=1,fill=..x..))+facet_wrap(~exerany)+scale_fill_g
 
 
 ## Conclusion
-
+  We focus on the relationship between exercise and the general health, and how the exercise affects our health. And most people often thought the more exercise, the healthier they are, but why this holds? 
+In order to provide a solid answer to this main question, we plot the bar diagram to visualize their relationship and the general health distribution. In this bar chart, it shows that when people do exercise more, the proportion of their excellent health quality is high, and majority persons lie on very good health. Only a few people are in poor health. However, comparing left side which fewer exercise with right side, the proportion indicates that the people in excellent health are less than right, and the majority people are in good health. The number of persons who are in poor health rises a lot.
+  Therefore, the regular exercise not only helps us to keep good health, but improve our life quality. And the best way to keep health is to do more exercise.
 
 ## Recommendation for Action
 
@@ -106,7 +108,10 @@ With this understanding of the plot, we can make some interesting observations. 
 
 
 ## Kaite
-  Due to that our main question is about exercise and the I plot the relationship between weight, gender and exerany.The data showed for different gender the tendency of exercise is different, when the weight increases. We can visualize from each plot that female always decrease exercise even they have good health, when the weight increases. However, for male, they tend to exercise more, except for good health and fair health. I used the geom-smooth function and set the method to lm, in order to see the direct relationship between weight and exercise and compare with the general health. The reason that I didn??t avoid standard deviation is the line only shows the tendency between weight and exercise and the standard deviation could help readers to analyse. In addition I used facet-wrap function to separate them into different health conditions and label each axis. It can make the plot more clear and easy to read.  
+  Due to that our main question is about exercise and the I plot the relationship between weight, gender and exerany.The data showed for different gender the tendency of exercise is different, when the weight increases. We can visualize from each plot that female always decrease exercise even they have good health, when the weight increases. However, for male, they tend to exercise more, except for good health and fair health. I used the geom-smooth function and set the method to lm, in order to see the direct relationship between weight and exercise and compare with the general health. The reason that I didn??t avoid standard deviation is the line only shows the tendency between weight and exercise and the standard deviation could help readers to analyse. In addition I used facet-wrap function to separate them into different health conditions and label each axis. It can make the plot more clear and easy to read. 
+  
+What I did in lab:
+  I wrote the conclusion.
 ## Ryan
 My individual exploration sought to explore two concepts in health. The first concept was the relationship between general health and exercise, and the second (somewhat more abstract) sought to explore the relationship between a person's current weight, and their desired weight loss. The first plot I created aimed to visualize the distribution of health for the set of people who DO exercise, and for the set of people who DO NOT exercise at all. The findings from this exploration fit my hypothesis exactly! The majority of exercisers report having "very good" health, while the majority of non-exercisers report only having "good" health. The way the plot is set up, higher general health is toward represented to the left, while lower general health is represented toward the right. The general heatlth reports from the set of people who do exercise is quite obviously shifted left (toward health) when compared to the health reports from the set of people who do not exercise. This has direct and obvious relation to the team's question.
 
