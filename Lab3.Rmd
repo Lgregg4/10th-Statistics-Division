@@ -47,6 +47,11 @@ ggplot(data = cdc,mapping = aes(x = weight, y = exerany, color = gender))+
 ## Ryan
 
 ## Chris
+```{r}
+ggplot(data = cdc, mapping = aes(y=weight,x=genhlth,color=gender)) + geom_point() +
+  facet_wrap(~exerany)
+```
+
 
 
 # Summary of Who did What
@@ -55,12 +60,10 @@ ggplot(data = cdc,mapping = aes(x = weight, y = exerany, color = gender))+
 
 
 ## Kaite
-  Due to that our main question is about exercise and the I plot the relationship between weight, gender and exerany.The data showed for different gender the tendency of exercise is different, when the weight increases. We can visualize from each plot that female always decrease exercise even they have good health, when the weight increases. However, for male, they tend to exercise more, except for good health and fair health. I used the geom-smooth function and set the method to lm, in order to see the direct relationship between weight and exercise and compare with the general health. The reason that I didn¡¯t avoid standard deviation is the line only shows the tendency between weight and exercise and the standard deviation could help readers to analyse. In addition I used facet-wrap function to separate them into different health conditions and label each axis. It can make the plot more clear and easy to read.  
+  Due to that our main question is about exercise and the I plot the relationship between weight, gender and exerany.The data showed for different gender the tendency of exercise is different, when the weight increases. We can visualize from each plot that female always decrease exercise even they have good health, when the weight increases. However, for male, they tend to exercise more, except for good health and fair health. I used the geom-smooth function and set the method to lm, in order to see the direct relationship between weight and exercise and compare with the general health. The reason that I didn??t avoid standard deviation is the line only shows the tendency between weight and exercise and the standard deviation could help readers to analyse. In addition I used facet-wrap function to separate them into different health conditions and label each axis. It can make the plot more clear and easy to read.  
 ## Ryan
 
 ## Chris
 
-
-
-
+due to the data that we got, I try to find the relationship between "exercise","weight","gender". I know the team question is about "exercise" and "weight". I was concern more about "gender", and I know the graph is weird but I thought we could find some relation between this two graph wether they do exercise or not. And we could see the different color to discuss different gender in this case. but I thought there are only small variation between two graph and not enough to support our conclusion.  
 
