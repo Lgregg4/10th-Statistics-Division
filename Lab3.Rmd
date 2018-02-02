@@ -28,9 +28,23 @@ It is commonly thought an individual in good health exercises frequently and has
 
 ## Recommendation for Action
 
+
 # Individual Work
 
 ## Lauren
+```{r}
+ggplot(data = cdc, mapping = aes(y=weight, x=wtdesire)) +
+  geom_point() +
+  facet_wrap(~exerany) + 
+  geom_jitter() + 
+  coord_fixed() +
+  geom_smooth(aes(color=gender), method = "lm") +
+  geom_abline()
+```
+
+The data has been divided into two groups: 1 indicates that the individuals have exercised in the past month and 0 indicates otherwise. Additionally, a linear fit has been assigned to males (m) and females (f) comparing individuals actual weight versus desired weight. I have also included a black line; this line indicates an individual whose desired weight is his actual weight.
+
+With this understanding of the plot, we can make some interesting observations. In both the exercise and non-exercise groups, the linear fit for males is closest to the control line. 
 
 ## Kaite
 
