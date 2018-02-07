@@ -16,12 +16,22 @@ babies <- rename(babies, bwtoz = `bwt/oz`) #renaming `bwt/oz` because the "/" si
 1. Does Smoking Lead to Babies Born Prematurely?
 2. Does Smoking lead to Babies with Low Birth Weight?
 
+##Preliminary Question
+1. Which Variables are Similar between Smokers and Nonsmokers? Which are different?
+
 ## Importance of the Questions:
 
 
 ## Conclusions
+```{r, prelim_question}
+
+
+```
+
+
 
 # Recommendation
+
 
 # Individual Findings
 
