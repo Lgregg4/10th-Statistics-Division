@@ -1,5 +1,5 @@
 ---
-title: "Lab $: Smoking and Low Birth Weight"
+title: "Lab 4: Smoking and Low Birth Weight"
 author: "Lauren Gregg"
 date: "2/7/2018"
 output: html_document
@@ -7,22 +7,28 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+babies <- read_csv("https://raw.githubusercontent.com/ervance1/Sp2018-Data-Science-repo/master/babies2a.dat")
+babies <- rename(babies, bwtoz = `bwt/oz`) #renaming `bwt/oz` because the "/" sign requires special care
 ```
 
-## R Markdown
+# Motivating Questions
+1. Does Smoking Lead to Babies Born Prematurely?
+2. Does Smoking lead to Babies with Low Birth Weight?
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+## Importance of the Questions:
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-```{r cars}
-summary(cars)
-```
+## Conclusions
 
-## Including Plots
+# Recommendation
 
-You can also embed plots, for example:
+# Individual Findings
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+## Lauren 
+
+## Katie
+
+## Chris
+
+## Ryan
