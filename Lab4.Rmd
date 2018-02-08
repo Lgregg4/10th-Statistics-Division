@@ -1,6 +1,6 @@
 ---
 title: "Lab 4: Smoking and Low Birth Weight"
-author: "Lauren Gregg"
+author: "10th-statistics-division"
 date: "2/7/2018"
 output: html_document
 ---
@@ -21,6 +21,7 @@ babies <- rename(babies, bwtoz = `bwt/oz`) #renaming `bwt/oz` because the "/" si
 
 ## Importance of the Questions:
 
+  Generally speaking, smoking is harm for our body. But in society, a lot of people still smoke and the tendency for women smoking is increasing, which may have some negative effect on next generation. Babies are significant in a family, and also important for our future, thus in order to figure out what kind of effect of smoking will lead to on both mother and babies, we analyzed whether smoking Lead to Babies Born Prematurely and whether smoking lead to Babies with Low Birth Weight. These results will give us solid solutions to smoking effects on babies and mothers. 
 
 ## Conclusions
 ```{r, prelim_question}
