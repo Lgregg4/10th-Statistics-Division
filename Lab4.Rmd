@@ -1,0 +1,72 @@
+---
+title: "Lab 4: Smoking and Low Birth Weight"
+author: "10th-statistics-division"
+date: "2/7/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+babies <- read_csv("https://raw.githubusercontent.com/ervance1/Sp2018-Data-Science-repo/master/babies2a.dat")
+babies <- rename(babies, bwtoz = `bwt/oz`) #renaming `bwt/oz` because the "/" sign requires special care
+```
+
+# Motivating Questions
+1. Does Smoking Lead to Babies Born Prematurely?
+2. Does Smoking lead to Babies with Low Birth Weight?
+
+##Preliminary Question
+1. Which Variables are Similar between Smokers and Nonsmokers? Which are different?
+
+## Importance of the Questions:
+
+  Generally speaking, smoking is harm for our body. But in society, a lot of people still smoke and the tendency for women smoking is increasing, which may have some negative effect on next generation. Babies are significant in a family, and also important for our future, thus in order to figure out what kind of effect of smoking will lead to on both mother and babies, we analyzed whether smoking Lead to Babies Born Prematurely and whether smoking lead to Babies with Low Birth Weight. These results will give us solid solutions to smoking effects on babies and mothers. 
+
+## Conclusions
+```{r, prelim_question}
+
+
+```
+
+
+
+# Recommendation
+
+
+# Individual Findings
+
+## Lauren 
+
+## Katie
+My question:
+ Does Smoking make short gestation days and premature birth, which causes light baby weight?
+```{r}
+ggplot(data = babies,mapping = aes(x = gestation  , y = bwtoz,color = Premature ))+
+  facet_wrap(~smoke)+
+  geom_smooth(method = "loess")+
+  geom_jitter()+
+  labs(x="gestation (days)",y = "baby birth weight (ounces)",title = "Gestation days and premature birth compares babies weight,\n whether mothers smoke")
+```
+```{r}
+ggplot(data = babies,mapping = aes(x = gestation  , y = bwtoz,color = Premature))+
+  geom_col()+
+  facet_wrap(~smoke)+
+  labs(x="gestation (days)",y = "baby birth weight (ounces)")
+```
+#Explanation
+Based on my question which is Does Smoking make short gestation days and premature birth, which causes light baby weight? I use aesthetic function to set x equals gestation days, y equals babies weight and make the color to represent premature scale. After the basic elements of this graph, I added geom_smooth setting method equals ¡°loess¡± and geom_jitter, which gives us a curve and more random points representing the relationship between gestation days and babies¡¯ weight. Then I use facet_wrapp to divide the plot into three parts: smoking, nonsmoking and don¡¯t know. In order to compare the number of mothers having gestation days and premature births, I plot another geom_col graph. In this case, we can visualize from the graph that whether mothers smoke or not, there are around 1/3 of them have premature births, but the number of smoking mothers having premature births is more than those nonsmoking. And those babies of nonsmoking mothers are heavier than smoking ones. 
+
+Therefore, my answer is yes. Smoking makes premature birth which cause light weight of babies. 
+## Chris
+
+## Ryan
+
+##Contributions
+## Lauren 
+
+## Katie
+
+## Chris
+
+## Ryan
