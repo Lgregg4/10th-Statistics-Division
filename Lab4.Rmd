@@ -19,15 +19,89 @@ babies <- rename(babies, bwtoz = `bwt/oz`) #renaming `bwt/oz` because the "/" si
 ##Preliminary Question
 1. Which Variables are Similar between Smokers and Nonsmokers? Which are different?
 
+-- We definitely dont need to show ALL of these plots, I was just playing around and couldnt find a significant difference in any variables between smokers and nonsmokers
+
+```{r, prelim_question_parity}
+#Which Variables are Similar between Smokers and Nonsmokers? Which are different?
+#   the main questions are about premature and birth weight already
+
+ggplot(data=babies, mapping = aes(parity)) +
+  geom_bar() +
+  facet_wrap(~smoke)
+
+```
+
+```{r, prelim_question_MothersRace}
+ggplot(data=babies, mapping = aes(mrace)) +
+  geom_bar() +
+  facet_wrap(~smoke)
+
+```
+
+```{r, prelim_question_FathersRace}
+ggplot(data=babies, mapping = aes(drace)) +
+  geom_bar() +
+  facet_wrap(~smoke)
+
+```
+
+```{r, prelim_question_FathersRace}
+ggplot(data=babies, mapping = aes(drace)) +
+  geom_bar() +
+  facet_wrap(~smoke)
+
+```
+
+```{r, prelim_question_MomsAge}
+ggplot(data=babies, mapping = aes(mage)) +
+  geom_bar() +
+  facet_wrap(~smoke)
+
+```
+
+```{r, prelim_question_MomsEducation}
+ggplot(data=babies, mapping = aes(x=as.character(smoke), y=med)) +
+  geom_boxplot() 
+
+```
+
+```{r, prelim_question_gestation}
+ggplot(data=babies, mapping = aes(x=as.character(smoke), y=gestation)) +
+  geom_boxplot() 
+
+```
+
+
 ## Importance of the Questions:
 
   Generally speaking, smoking is harm for our body. But in society, a lot of people still smoke and the tendency for women smoking is increasing, which may have some negative effect on next generation. Babies are significant in a family, and also important for our future, thus in order to figure out what kind of effect of smoking will lead to on both mother and babies, we analyzed whether smoking Lead to Babies Born Prematurely and whether smoking lead to Babies with Low Birth Weight. These results will give us solid solutions to smoking effects on babies and mothers. 
 
 ## Conclusions
-```{r, prelim_question}
+1. Does smoking lead to babies being born prematurely?
 
-
+```{r, Q1}
+ggplot(data=babies, mapping=aes(as.character(Premature), color=as.character(Premature))) + 
+  geom_bar() +
+  facet_wrap(~smoke)
 ```
+
+```{r, Q1cont}
+NonSmokePrem <- length(which(babies$Premature==1 & babies$smoke==0))
+SmokePrem <- length(which(babies$Premature==1 & babies$smoke==1))
+
+NonSmokers <- length(which(babies$smoke==0))
+Smokers <- length(which(babies$smoke==1))
+
+RatioNonSm <- NonSmokePrem/NonSmokers
+RatioSm <- SmokePrem/Smokers
+```
+```{r}
+RatioNonSm
+```
+```{r}
+RatioSm
+```
+In the sample, the group of mothers who smoke, did have a greater percentage of premature births. However, I am unsure if the difference in these values are statistically significant.
 
 
 
@@ -55,7 +129,7 @@ ggplot(data = babies,mapping = aes(x = gestation  , y = bwtoz,color = Premature)
   labs(x="gestation (days)",y = "baby birth weight (ounces)")
 ```
 #Explanation
-Based on my question which is Does Smoking make short gestation days and premature birth, which causes light baby weight? I use aesthetic function to set x equals gestation days, y equals babies weight and make the color to represent premature scale. After the basic elements of this graph, I added geom_smooth setting method equals ¡°loess¡± and geom_jitter, which gives us a curve and more random points representing the relationship between gestation days and babies¡¯ weight. Then I use facet_wrapp to divide the plot into three parts: smoking, nonsmoking and don¡¯t know. In order to compare the number of mothers having gestation days and premature births, I plot another geom_col graph. In this case, we can visualize from the graph that whether mothers smoke or not, there are around 1/3 of them have premature births, but the number of smoking mothers having premature births is more than those nonsmoking. And those babies of nonsmoking mothers are heavier than smoking ones. 
+Based on my question which is Does Smoking make short gestation days and premature birth, which causes light baby weight? I use aesthetic function to set x equals gestation days, y equals babies weight and make the color to represent premature scale. After the basic elements of this graph, I added geom_smooth setting method equals ??loess?? and geom_jitter, which gives us a curve and more random points representing the relationship between gestation days and babies?? weight. Then I use facet_wrapp to divide the plot into three parts: smoking, nonsmoking and don??t know. In order to compare the number of mothers having gestation days and premature births, I plot another geom_col graph. In this case, we can visualize from the graph that whether mothers smoke or not, there are around 1/3 of them have premature births, but the number of smoking mothers having premature births is more than those nonsmoking. And those babies of nonsmoking mothers are heavier than smoking ones. 
 
 Therefore, my answer is yes. Smoking makes premature birth which cause light weight of babies. 
 ## Chris
