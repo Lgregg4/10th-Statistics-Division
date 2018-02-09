@@ -80,9 +80,9 @@ ggplot(data=babies, mapping = aes(x=as.character(smoke), y=gestation)) +
 1. Does smoking lead to babies being born prematurely?
 
 ```{r, Q1}
-ggplot(data=babies, mapping=aes(as.character(Premature), color=as.character(Premature))) + 
+ggplot(data=babies, mapping=aes(Premature, color=Premature)) + 
   geom_bar() +
-  facet_wrap(~smoke)
+  facet_wrap(~babies$smoke)
 ```
 
 ```{r, Q1cont}
@@ -102,8 +102,17 @@ RatioNonSm
 RatioSm
 ```
 In the sample, the group of mothers who smoke, did have a greater percentage of premature births. However, I am unsure if the difference in these values are statistically significant.
+** Note: i want to ask Prof. about significance testing - ANOVA or t-test
 
 
+2. Does Smoking lead to Babies with Low Birth Weight?
+
+```{r, Q2}
+ggplot(data=babies, mapping=aes(y=bwtoz, x=smoke, color=as.factor(smoke))) +
+  geom_boxplot()
+```
+
+Again, it appears that the mothers who smoke give birth to children with, on average, a lower birth rate than mothers who do not smoke. I do not know if this difference is statistically significant. 
 
 # Recommendation
 
@@ -111,6 +120,57 @@ In the sample, the group of mothers who smoke, did have a greater percentage of 
 # Individual Findings
 
 ## Lauren 
+My Question:
+  It may seem intuitive that the longer a baby is in the womb, the bigger that baby will be! Is the length of gestation related to a baby's birthweight? What other factors may contribute to a baby's birthweight?
+
+```{r, gestation_v_birthweight}
+ggplot(data=babies, mapping=aes(x=gestation, y=bwtoz))+
+  geom_point()+
+  geom_jitter() +
+  geom_smooth(method="lm") +
+  geom_smooth(method = "loess", color="green")
+```
+```{r, gestation_v_birthweightCorrelation}
+#cor(na.omit(babies$gestation), na.omit(babies$bwtoz))
+###NEED TO ASK PROFESSOR###
+```
+
+
+There appears to be some linear relationship between gestation and birthweight.This was too be expected. 
+
+```{r, gestation_v_birthweight-NoPrem}
+#babies[as.character(babies$Premature)!=1]
+df = babies[ !grepl("1", babies$Premature) , ] #getting rid of premature data
+
+ggplot(data=df, mapping=aes(x=gestation, y=bwtoz))+
+  geom_point()+
+    geom_jitter()+
+  geom_smooth(method="lm") +
+  geom_smooth(method = "loess", color="green")
+```
+
+Babies who are born prematurely tend to be underweight. When focus on babies who had reach full term, we see a linear relationship between gestation and birthweight still exists, but it is less dramatic. 
+
+This relationship seems pretty obvious, but other factors may play a role in a babies birthweight. Below we look at the mother's weight and the father's weight in comparison to the child's birthweight.
+
+```{r, brtweight_v_momWeight}
+ggplot(data=babies, mapping=aes(x=babies$bwtoz,y=babies$mpregwt)) + 
+  geom_point() + 
+  geom_jitter() +
+  geom_smooth() + 
+  geom_smooth(method="lm", color="green")
+```
+
+```{r, brtwght_v_dadWright}
+ggplot(babies, aes(x=bwtoz, y=dwt)) +
+  geom_point() + 
+  geom_jitter() +
+  geom_smooth() + 
+  geom_smooth(method="lm", color="green")
+
+```
+
+
 
 ## Katie
 My question:
