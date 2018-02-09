@@ -253,6 +253,8 @@ I continued my individual exploration by first looking at the relationship betwe
 
 ### Katie
 
+After we decided our main question, I began to think the importance of our questions, put them into words by describing the reasons and the society influence, then added to the importance part. Based on our questions, I came up with my own question which is whether the Smoking make short gestation days and premature birth, which causes light baby weight. Looking at the plot, I found there is co-relation between smoking mothers and their gestation days, but the number of mothers is not that obvious. So I plot another bar plot and compare the number of smoking mothers with their gestation days and nonsmoking mothers, which gave me good conclusion.
+
 ### Chris
 I created two plot to expolred to the relationship between the "birth weight","premature" and "whether they smoke", after I made two graph, I found some correlation although it against my logical thinking. But that's the thing I got and I made my own conclusion relative to the two main question for this lab. smoke does make low birth weight. also, I fixed some grammer problem and some format problem for this team report.
 
