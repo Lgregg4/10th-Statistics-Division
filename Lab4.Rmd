@@ -84,7 +84,7 @@ ggplot(data=babies, mapping = aes(x=as.character(smoke), y=gestation)) +
 1. Does smoking lead to babies being born prematurely?
 
 ```{r, Q1}
-ggplot(data=babies, mapping=aes(Premature, color=Premature)) + 
+ggplot(data = babies, mapping=aes(Premature, color=Premature)) + 
   geom_bar() +
   facet_wrap(~babies$smoke)
 ```
@@ -105,7 +105,7 @@ RatioNonSm
 ```{r}
 RatioSm
 ```
-In the sample, the group of mothers who smoke, did have a greater percentage of premature births. However, I am unsure if the difference in these values are statistically significant.
+In the sample, the group of mothers who smoke, did have a greater percentage of premature births. However, I am unsure if the difference in these values are statistically significant. 
 ** Note: i want to ask Prof. about significance testing - ANOVA or t-test
 
 
@@ -119,8 +119,7 @@ ggplot(data=babies, mapping=aes(y=bwtoz, x=smoke, color=as.factor(smoke))) +
 Again, it appears that the mothers who smoke give birth to children with, on average, a lower birth weight than mothers who do not smoke. I do not know if this difference is statistically significant. 
 
 # Recommendation
-
-
+As stated in the conclusions of this report, there is a small but significant relationship between smoking and premature birth as well as smoking and low birth weight. Even though the relationship is not alarmingly strong, due simply to the importance of the data, the findings still give rise to recommendations for action. These recommendations are motivated by the fact that babies born prematurely are less healthy than babies born on time, and that lightweight babies are generally less healthy than "normal" weight babies. With these facts in mind, we recommend that action is taken to inform expecting mothers of the dangers of smoking while preagnant. Specifically, we recommend that a small advertisement be placed on preagnancy tests saying "Smoking during preagnancy may cause adverse health effects for your child!". Putting this recommendation on on preagnancy tests gets the information out to the relevant audience. The hope of this recommendation is that preagnant mothers will be more informed about the possible dangers associated with smoking during preagnancy. 
 # Individual Findings
 
 ## Lauren 
