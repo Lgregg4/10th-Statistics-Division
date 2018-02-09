@@ -29,48 +29,49 @@ babies1 <- na.omit(babies)
 #Which Variables are Similar between Smokers and Nonsmokers? Which are different?
 #   the main questions are about premature and birth weight already
 
-ggplot(data=babies, mapping = aes(parity)) +
+ggplot(subset(babies,smoke!="NA"), mapping = aes(parity)) +
   geom_bar() +
   facet_wrap(~smoke)
 
 ```
 
 ```{r, prelim_question_MothersRace}
-ggplot(data=babies, mapping = aes(mrace)) +
+ggplot(subset(babies,smoke!="NA"), mapping = aes(mrace)) +
   geom_bar() +
   facet_wrap(~smoke)
 
 ```
 
 ```{r, prelim_question_FathersRace}
-ggplot(data=babies, mapping = aes(drace)) +
+ggplot(subset(babies,smoke!="NA"), mapping = aes(drace)) +
   geom_bar() +
   facet_wrap(~smoke)
 
 ```
 
 ```{r, prelim_question_FathersRace2}
-ggplot(data=babies, mapping = aes(drace)) +
+ggplot(subset(babies,smoke!="NA"), mapping = aes(drace)) +
   geom_bar() +
   facet_wrap(~smoke)
 
 ```
 
 ```{r, prelim_question_MomsAge}
-ggplot(data=babies, mapping = aes(mage)) +
+ggplot(subset(babies,smoke!="NA"), mapping = aes(mage)) +
   geom_bar() +
   facet_wrap(~smoke)
 
 ```
 
 ```{r, prelim_question_MomsEducation}
-ggplot(data=babies, mapping = aes(x=as.character(smoke), y=med)) +
+ggplot(subset(babies,smoke!="NA"), mapping = aes(x=as.character(smoke), y=med)) +
   geom_boxplot() 
 
 ```
 
 ```{r, prelim_question_gestation}
-ggplot(data=babies, mapping = aes(x=as.character(smoke), y=gestation)) +
+ggplot(subset(babies,smoke!="NA")
+       , mapping = aes(x=as.character(smoke), y=gestation)) +
   geom_boxplot() 
 
 ```
@@ -84,9 +85,9 @@ ggplot(data=babies, mapping = aes(x=as.character(smoke), y=gestation)) +
 1. Does smoking lead to babies being born prematurely?
 
 ```{r, Q1}
-ggplot(data = babies, mapping=aes(Premature, color=Premature)) + 
+ggplot(subset(babies,smoke!="NA"), mapping=aes(Premature, color=Premature)) + 
   geom_bar() +
-  facet_wrap(~babies$smoke)
+  facet_wrap(~smoke)
 ```
 
 ```{r, Q1cont}
