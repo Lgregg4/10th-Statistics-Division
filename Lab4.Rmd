@@ -219,6 +219,17 @@ Based on my question which is Does Smoking make short gestation days and prematu
 Therefore, my answer is yes. Smoking makes premature birth which cause light weight of babies. 
 
 ## Chris
+for this question, I was concern about the relationship between whether they smoke or not, and the influence in children's birth weight, so I made a graph with variable(smoke and bwtoz) although we could get some information about the relationship between whether they smoke or not, but the graph are strange and seems not beautiful. but the conclusion seems when they smoke, the birth weight decrease.
+
+```{r}
+ggplot(data=babies, mapping=aes(x=smoke, y=bwtoz))+geom_jitter()+geom_smooth(method="lm")
+```
+
+then I tried to get the density relationship between the gestation day and the birth weight which relative to the main question 2, and I used the boxplot function to check the information. but the conclusion is weird. It seems when the smoke, people might birth before 270, and they have a higher birth weight. I thought it seems wrong plot and I can not understand why this happen. cause in my point of view, smoke alwasy made bad influence in this situation.
+```{r}
+ggplot(data = babies,mapping = aes(x = gestation  , y = bwtoz, color="Premature" ))+facet_wrap(~smoke)+geom_boxplot()
+```
+so the conclusion that I get is when people smoked, the birth weight will decrease, but when people didnot smoked, baby might born before gestational age of 270. 
 
 ## Ryan
 
