@@ -23,7 +23,7 @@ babies1 <- na.omit(babies)
 ## Preliminary Question
 1. Which Variables are Similar between Smokers and Nonsmokers? Which are different?
 
-```{r, prelim_question_parity}
+```{r, prelim_question_parity, warning=FALSE}
 ggplot(subset(babies,smoke!="NA"), mapping = aes(parity)) +
   geom_bar() +
   facet_wrap(~smoke)
@@ -51,20 +51,20 @@ ggplot(subset(babies,smoke!="NA"), mapping = aes(parity)) +
 
 ```
 
-```{r, prelim_question_MomsAge}
+```{r, prelim_question_MomsAge, warning=FALSE}
 ggplot(subset(babies,smoke!="NA"), mapping = aes(mage)) +
   geom_bar() +
   facet_wrap(~smoke)
 
 ```
 
-```{r, prelim_question_MomsEducation}
+```{r, prelim_question_MomsEducation, warning=FALSE}
 ggplot(subset(babies,smoke!="NA"), mapping = aes(x=as.character(smoke), y=med)) +
   geom_boxplot() 
 
 ```
 
-```{r, prelim_question_gestation}
+```{r, prelim_question_gestation, warning=FALSE}
 ggplot(subset(babies,smoke!="NA")
        , mapping = aes(x=as.character(smoke), y=gestation)) +
   geom_boxplot() 
@@ -86,13 +86,13 @@ Overall, with the plots shown, and the ones not pictured, we did not determine t
 ## Conclusions
 1. Does smoking lead to babies being born prematurely?
 
-```{r, Q1}
+```{r, Q1, warning=FALSE}
 ggplot(subset(babies,smoke!="NA"), mapping=aes(Premature, color=Premature)) + 
   geom_bar() +
   facet_wrap(~smoke)
 ```
 
-```{r, Q1cont}
+```{r, Q1cont, warning=FALSE}
 NonSmokePrem <- length(which(babies$Premature==1 & babies$smoke==0))
 SmokePrem <- length(which(babies$Premature==1 & babies$smoke==1))
 
@@ -108,29 +108,33 @@ RatioNonSm
 ```{r}
 RatioSm
 ```
-In the sample, the group of mothers who smoke, did have a greater percentage of premature births. However, I am unsure if the difference in these values are statistically significant. 
-** Note: i want to ask Prof. about significance testing - ANOVA or t-test
+Let us first consider the bar graph. If a baby is born premature, it is counted in the bars labeled "1". If the mother smokes, the data is in the plot labeled "1". It appears that mothers who smoke carry fewer babies to term and give birth early slightly more. We have to keep in mind that a bar graph only shows counts, so we must consider percentages.
+
+In the sample, the group of mothers who smoke did have a greater percentage of premature births. With this data, a mother who smokes had a 21% chance of giving birth prematurely while a non-smoking mother had a 16% chance of giving birth prematurely. However, I am unsure if the difference in these values are statistically significant. In order to make this conclucion, a significance test must be preformed. 
 
 
 2. Does Smoking lead to Babies with Low Birth Weight?
 
-```{r, Q2}
+```{r, Q2, warning=FALSE}
 ggplot(data=babies, mapping=aes(y=bwtoz, x=smoke, color=as.factor(smoke))) +
   geom_boxplot()
 ```
 
-Again, it appears that the mothers who smoke give birth to children with, on average, a lower birth weight than mothers who do not smoke. I do not know if this difference is statistically significant. 
+Again, it appears that the mothers who smoke give birth to children with, on average, a lower birth weight than mothers who do not smoke. Utilizing the boxplot, we know the median weight of babies born to non-smoking mothers was about 124oz, while the median weight of babies born to smoking motheres is around 115oz. We can also note that non-smoking mothers seem to have a higher change of having heavier babies. However, without a formal signififance test, we can not be certain that this relationship is significant. 
 
 # Recommendation
-As stated in the conclusions of this report, there is a small but significant relationship between smoking and premature birth as well as smoking and low birth weight. Even though the relationship is not alarmingly strong, due simply to the importance of the data, the findings still give rise to recommendations for action. These recommendations are motivated by the fact that babies born prematurely are less healthy than babies born on time, and that lightweight babies are generally less healthy than "normal" weight babies. With these facts in mind, we recommend that action is taken to inform expecting mothers of the dangers of smoking while preagnant. Specifically, we recommend that a small advertisement be placed on preagnancy tests saying "Smoking during preagnancy may cause adverse health effects for your child!". Putting this recommendation on on preagnancy tests gets the information out to the relevant audience. The hope of this recommendation is that preagnant mothers will be more informed about the possible dangers associated with smoking during preagnancy. 
+As stated in the conclusions of this report, there is a small relationship between smoking and premature birth as well as smoking and low birth weight. Even though the relationship is not alarmingly strong, due simply to the importance of the data, the findings still give rise to recommendations for action. These recommendations are motivated by the fact that babies born prematurely are less healthy than babies born on time, and that lightweight babies are generally less healthy than "normal" weight babies. With these facts in mind, we recommend that action is taken to inform expecting mothers of the dangers of smoking while preagnant. Specifically, we recommend that a small advertisement be placed on preagnancy tests saying "Smoking during preagnancy may cause adverse health effects for your child!". Putting this recommendation on on preagnancy tests gets the information out to the relevant audience. The hope of this recommendation is that preagnant mothers will be more informed about the possible dangers associated with smoking during preagnancy. 
+
 # Individual Findings
 
 ## Lauren 
 My Question:
-  It may seem intuitive that the longer a baby is in the womb, the bigger that baby will be! Is the length of gestation related to a baby's birthweight? What other factors may contribute to a baby's birthweight?
-  When my sister was pregnant, she was so concerned about going past her due date, joking that she did not want the baby to be any bigger than she needed to be. This is what influences my question. I hope to have data to show my sister that their is or is not fact behind her humor. 
 
-```{r, gestation_v_birthweight}
+It may seem intuitive that the longer a baby is in the womb, the bigger that baby will be! Is the length of gestation related to a baby's birthweight? What other factors may contribute to a baby's birthweight?
+
+When my sister was pregnant, she was so concerned about going past her due date, joking that she did not want the baby to be any bigger than she needed to be. This is what influences my question. I hope to have data to show my sister wether or not there is fact behind her humor. 
+
+```{r, gestation_v_birthweight, warning=FALSE}
 ggplot(data=babies, mapping=aes(x=gestation, y=bwtoz))+
   geom_point()+
   geom_jitter() +
@@ -138,15 +142,10 @@ ggplot(data=babies, mapping=aes(x=gestation, y=bwtoz))+
   geom_smooth(method = "loess", color="green")
 ```
 ```{r, gestation_v_birthweightCorrelation}
-#cor(na.omit(babies$gestation), na.omit(babies$bwtoz))
 cor(babies1$gestation, babies1$bwtoz)
 ```
 
-
-There appears to be some linear relationship between gestation and birthweight.This was too be expected. 
-
-```{r, gestation_v_birthweight-NoPrem}
-#babies[as.character(babies$Premature)!=1]
+```{r, gestation_v_birthweight-NoPrem, warning=FALSE}
 df = babies[ !grepl("1", babies$Premature) , ] #getting rid of premature data
 
 ggplot(data=df, mapping=aes(x=gestation, y=bwtoz))+
@@ -156,7 +155,7 @@ ggplot(data=df, mapping=aes(x=gestation, y=bwtoz))+
   geom_smooth(method = "loess", color="green")
 ```
 
-```{r, gestation_v_birthweightCorrelation2}
+```{r, gestation_v_birthweightCorrelation2, warning=FALSE}
 df1 = na.omit(df)
 cor(df1$gestation, df1$bwtoz)
 ```
@@ -165,7 +164,7 @@ Birthweight and length of gestation are clearly related, with a correlation coef
 
 Ultimately, the relationship between birthweight and gestation period is pretty obvious, but other factors may play a role in a babies birthweight. Below we look at the mother's weight and the father's weight in comparison to the child's birthweight.
 
-```{r, brtweight_v_momWeight}
+```{r, brtweight_v_momWeight, warning=FALSE}
 ggplot(data=babies, mapping=aes(x=babies$bwtoz,y=babies$mpregwt)) + 
   geom_point() + 
   geom_jitter() +
@@ -173,7 +172,7 @@ ggplot(data=babies, mapping=aes(x=babies$bwtoz,y=babies$mpregwt)) +
   geom_smooth(method="lm", color="green")
 ```
 
-```{r, brtwght_v_dadWright}
+```{r, brtwght_v_dadWright, warning=FALSE}
 ggplot(babies, aes(x=bwtoz, y=dwt)) +
   geom_point() + 
   geom_jitter() +
@@ -249,7 +248,7 @@ As far as an answer to my question: it seems as if nonsmokers have a slightly gr
 
 ## Contributions
 ### Lauren 
-I began by creating several plots in an anttempt to answer the preliminary question. We then worked as a team to decide which were siginifcant enough to discuss. I then created plots to answer the two motivating questions. I wrote minimal explanation for these visual aides to begin a team discussion. 
+I began by creating several plots in an anttempt to answer the preliminary question. We then worked as a team to decide which were siginifcant enough to discuss. Next, I created plots to answer the two motivating questions. I wrote the explanation for these visuals. Ultimately, we were unable to determine any statistically significant relationship because we did not perform a significance test on the data. However, we did acknowledge possible correlations that may be occuring.
 
 I continued my individual exploration by first looking at the relationship between the length of the gestation period and the babies birth weight. This question was motivated by my sister. I was surprised to find that the two variables are not strongly correlated, especially when I looked at a subset of babies who were carried to full term. I dug a little deeper in seeing if the parents' weight has any correlation to the baby's weight; again, I found little to no correlation existed.
 
