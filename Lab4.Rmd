@@ -23,36 +23,31 @@ babies1 <- na.omit(babies)
 ## Preliminary Question
 1. Which Variables are Similar between Smokers and Nonsmokers? Which are different?
 
--- We definitely dont need to show ALL of these plots, I was just playing around and couldnt find a significant difference in any variables between smokers and nonsmokers
-
 ```{r, prelim_question_parity}
-#Which Variables are Similar between Smokers and Nonsmokers? Which are different?
-#   the main questions are about premature and birth weight already
-
 ggplot(subset(babies,smoke!="NA"), mapping = aes(parity)) +
   geom_bar() +
   facet_wrap(~smoke)
 
 ```
 
-```{r, prelim_question_MothersRace}
-ggplot(subset(babies,smoke!="NA"), mapping = aes(mrace)) +
-  geom_bar() +
-  facet_wrap(~smoke)
+```{r, prelim_question_MothersRace, include=FALSE}
+#ggplot(subset(babies,smoke!="NA"), mapping = aes(mrace)) +
+#  geom_bar() +
+#  facet_wrap(~smoke)
 
 ```
 
-```{r, prelim_question_FathersRace}
-ggplot(subset(babies,smoke!="NA"), mapping = aes(drace)) +
-  geom_bar() +
-  facet_wrap(~smoke)
+```{r, prelim_question_FathersRace, include=FALSE}
+#ggplot(subset(babies,smoke!="NA"), mapping = aes(drace)) +
+#  geom_bar() +
+#  facet_wrap(~smoke)
 
 ```
 
-```{r, prelim_question_FathersRace2}
-ggplot(subset(babies,smoke!="NA"), mapping = aes(drace)) +
-  geom_bar() +
-  facet_wrap(~smoke)
+```{r, prelim_question_FathersRace2, include=FALSE}
+#ggplot(subset(babies,smoke!="NA"), mapping = aes(drace)) +
+#  geom_bar() +
+#  facet_wrap(~smoke)
 
 ```
 
@@ -76,6 +71,13 @@ ggplot(subset(babies,smoke!="NA")
 
 ```
 
+The above plots investigate wether or not smoking is related to any other variable. We looked at nearly all of the variables and did not find anything interesting. We decided to inlude only the four plots above.
+
+The first plot gives the impression that smokers have a lower number of parities - meaning these women, more often then non-smokers, have been pregnant before. 
+The second plot shows the number of women at each age. We see the distribution of age between smokers and non-smokers is very similar. 
+The third plot, a boxplot, shows the mothers education. We see the median education for mother's who smoke is less than mother's who don't smoke, but the distribution is the same.
+We finally consider gestation period in relation to smoke. We see the median is slightly less for smoking mothers, but the spread is much less.
+Overall, with the plots shown, and the ones not pictured, we did not determine that any variables were significantly different between smokers and nonsmokers, but we were able to identify some minor differences. 
 
 ## Importance of the Questions:
 
