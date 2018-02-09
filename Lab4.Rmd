@@ -1,4 +1,4 @@
-<<<<<<< Updated upstream
+
 ---
 title: "Lab 4: Smoking and Low Birth Weight"
 author: "10th-statistics-division"
@@ -49,7 +49,7 @@ ggplot(data=babies, mapping = aes(drace)) +
 
 ```
 
-```{r, prelim_question_FathersRace}
+```{r, prelim_question_FathersRace2}
 ggplot(data=babies, mapping = aes(drace)) +
   geom_bar() +
   facet_wrap(~smoke)
@@ -154,7 +154,7 @@ ggplot(data=df, mapping=aes(x=gestation, y=bwtoz))+
   geom_smooth(method = "loess", color="green")
 ```
 
-```{r, gestation_v_birthweightCorrelation}
+```{r, gestation_v_birthweightCorrelation2}
 df1 = na.omit(df)
 cor(df1$gestation, df1$bwtoz)
 ```
@@ -217,6 +217,7 @@ ggplot(data = babies,mapping = aes(x = gestation  , y = bwtoz,color = Premature)
 Based on my question which is Does Smoking make short gestation days and premature birth, which causes light baby weight? I use aesthetic function to set x equals gestation days, y equals babies weight and make the color to represent premature scale. After the basic elements of this graph, I added geom_smooth setting method equals ??loess?? and geom_jitter, which gives us a curve and more random points representing the relationship between gestation days and babies?? weight. Then I use facet_wrapp to divide the plot into three parts: smoking, nonsmoking and don??t know. In order to compare the number of mothers having gestation days and premature births, I plot another geom_col graph. In this case, we can visualize from the graph that whether mothers smoke or not, there are around 1/3 of them have premature births, but the number of smoking mothers having premature births is more than those nonsmoking. And those babies of nonsmoking mothers are heavier than smoking ones. 
 
 Therefore, my answer is yes. Smoking makes premature birth which cause light weight of babies. 
+
 ## Chris
 
 ## Ryan
@@ -235,6 +236,9 @@ As far as an answer to my question: it seems as if nonsmokers have a slightly gr
 
 ##Contributions
 ## Lauren 
+I began by creating several plots in an anttempt to answer the preliminary question. We then worked as a team to decide which were siginifcant enough to discuss. I then created plots to answer the two motivating questions. I wrote minimal explanation for these visual aides to begin a team discussion. 
+
+I continued my individual exploration by first looking at the relationship between the length of the gestation period and the babies birth weight. This question was motivated by my sister. I was surprised to find that the two variables are not strongly correlated, especially when I looked at a subset of babies who were carried to full term. I dug a little deeper in seeing if the parents' weight has any correlation to the baby's weight; again, I found little to no correlation existed.
 
 ## Katie
 
