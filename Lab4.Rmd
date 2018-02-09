@@ -10,6 +10,9 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 babies <- read_csv("https://raw.githubusercontent.com/ervance1/Sp2018-Data-Science-repo/master/babies2a.dat")
 babies <- rename(babies, bwtoz = `bwt/oz`) #renaming `bwt/oz` because the "/" sign requires special care
+
+##PROFESSOR?? can I preprocess the data and just delete all of the NA rows
+babies1 <- na.omit(babies)
 ```
 
 # Motivating Questions
@@ -122,6 +125,7 @@ Again, it appears that the mothers who smoke give birth to children with, on ave
 ## Lauren 
 My Question:
   It may seem intuitive that the longer a baby is in the womb, the bigger that baby will be! Is the length of gestation related to a baby's birthweight? What other factors may contribute to a baby's birthweight?
+  When my sister was pregnant, she was so concerned about going past her due date, joking that she did not want the baby to be any bigger than she needed to be. This is what influences my question. I hope to have data to show my sister that their is or is not fact behind her humor. 
 
 ```{r, gestation_v_birthweight}
 ggplot(data=babies, mapping=aes(x=gestation, y=bwtoz))+
@@ -132,7 +136,7 @@ ggplot(data=babies, mapping=aes(x=gestation, y=bwtoz))+
 ```
 ```{r, gestation_v_birthweightCorrelation}
 #cor(na.omit(babies$gestation), na.omit(babies$bwtoz))
-###NEED TO ASK PROFESSOR###
+cor(babies1$gestation, babies1$bwtoz)
 ```
 
 
@@ -149,9 +153,14 @@ ggplot(data=df, mapping=aes(x=gestation, y=bwtoz))+
   geom_smooth(method = "loess", color="green")
 ```
 
-Babies who are born prematurely tend to be underweight. When focus on babies who had reach full term, we see a linear relationship between gestation and birthweight still exists, but it is less dramatic. 
+```{r, gestation_v_birthweightCorrelation}
+df1 = na.omit(df)
+cor(df1$gestation, df1$bwtoz)
+```
 
-This relationship seems pretty obvious, but other factors may play a role in a babies birthweight. Below we look at the mother's weight and the father's weight in comparison to the child's birthweight.
+Birthweight and length of gestation are clearly related with a correlation coeffecient of 0.392. However, babies who are born prematurely tend to be outliers - as seen in the firts plot. When we focus on babies who had reach full term, we see a linear relationship between gestation and birthweight still exists, but it is less dramatic. In fact, when we consider a curved best fit (the green line), rather than a linear best fit (the blue line), we see a decline in birth weight beginning around day 290. This fit still has a pretty large standard error, shown by the gray color surrounding the green line. The correlation coefficient between birthweight and length of gestation for babies who reached full term is 0.178. 
+
+Ultimately, the relationship between birthweight and gestation period is pretty obvious, but other factors may play a role in a babies birthweight. Below we look at the mother's weight and the father's weight in comparison to the child's birthweight.
 
 ```{r, brtweight_v_momWeight}
 ggplot(data=babies, mapping=aes(x=babies$bwtoz,y=babies$mpregwt)) + 
@@ -170,6 +179,21 @@ ggplot(babies, aes(x=bwtoz, y=dwt)) +
 
 ```
 
+
+```{r, mpregwt_v_bwtoz_corr}
+cor(babies1$mpregwt,babies1$bwtoz)
+```
+
+
+```{r, dwt_v_bwtoz_corr}
+cor(babies1$dwt, babies1$bwtoz)
+```
+
+Based on the plots and the correlation coefficients, there is an extrememly weak correlation between the parents' weight and the baby's birthweight. In fact, this relationship is so weak that I am able to say the birthweight is not impacted by the parents weight. 
+
+To completely answer my initial question, there is a moderate correlation between length of gestation and a baby's birthweight when I consider children born premature. However, when I consider only babies who have reached full term, the correlation coefficient changes and tells us that a baby's weight is not correlated to the gestation period after 270 days. When I attempted to identify other influencing factors of birthweight, I considered the mother's and father's weight. Again, the correlation coefficient were not large enough to conclude a relationship exists. 
+
+To continue answering this question, I could compare a baby's birthweight to other variables within our dataframe - mother's height, father's height, mother's race, or number of cigarettes smoked a day. I believe that gestation period will remain the most influencing factor of a bay's birthweight, even though the relationship does not appear to be very strong.
 
 
 ## Katie
