@@ -116,7 +116,7 @@ ggplot(data=babies, mapping=aes(y=bwtoz, x=smoke, color=as.factor(smoke))) +
   geom_boxplot()
 ```
 
-Again, it appears that the mothers who smoke give birth to children with, on average, a lower birth rate than mothers who do not smoke. I do not know if this difference is statistically significant. 
+Again, it appears that the mothers who smoke give birth to children with, on average, a lower birth weight than mothers who do not smoke. I do not know if this difference is statistically significant. 
 
 # Recommendation
 
