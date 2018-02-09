@@ -260,3 +260,8 @@ After we decided our main question, I began to think the importance of our quest
 I created two plot to expolred to the relationship between the "birth weight","premature" and "whether they smoke", after I made two graph, I found some correlation although it against my logical thinking. But that's the thing I got and I made my own conclusion relative to the two main question for this lab. smoke does make low birth weight. also, I fixed some grammer problem and some format problem for this team report.
 
 ### Ryan
+I wrote the section on future recommendations. I made grammatical edits throughout the report. I updated the plots which were separated into smoke/non-smokers/NA to no longer inclide the data from NA.
+
+
+
+
