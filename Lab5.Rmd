@@ -28,8 +28,7 @@ ms_4 <- ms %>% filter(spec5 > 1 & spec5<10000)%>%mutate(log.spec5 = log10(spec5)
 ggplot(data = ms_4,aes(x=mass,y = log.spec5))+geom_violin() #the plot of mass vs. log spec5
 
 ```
-
-This is a log transform of the spec5 data compared against the mass. 
+This is a log transform of our data compared against the mass. The major takeaway from this plot is how much of the data is concentrated between spec5=1 and spec5=10 (corresponding to 0 and 1 on the y axis). This observation sheds some light on a possible issue in this mass spectrometry experiment: noise. If the atmospheric researcher is looking for some specific compounds whose spectrum lies outside of this early range (spec5=1 to spec5=10), then this large concentration of data obscures the relevant data. The sheer volume of this data means that some very careful filtering is required to extract any valuable information.
 
 
 ```{r}
