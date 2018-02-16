@@ -20,7 +20,7 @@ ggplot(data=msLG, aes(mass, spec5)) +
   geom_point()
 ```
 
-Because so many values of mass are close to zero, it is difficult to see the variance in the "heavier" particles. Because of this, I filtered all particles with mass less than 50 out of the data set. Plotting this data, we can see peaks occur arounf masses of 75, 150, 175, 210, 275, and 350. This is not visible without filtering the data.
+Because so many values of mass are close to zero, it is difficult to see the variance in the "heavier" particles. I decided to filter all particles with mass less than 50 out of the data set. Plotting this data, we can see peaks occur around masses of 75, 150, 175, 210, 275, and 350. This is not visible without filtering the data.
 
 ## Covariance
 ```{r}
@@ -39,10 +39,13 @@ cor(ms$spec10, ms$spec5)
 ```
 
 The correlation is moderate with a coeffecient of 0.67. However, this is much less than the coefficient of 0.99, which is the result if we consider objects with a mass less than 50.
+
 #Katie
+
 ##Variance
 ```{r}
-install.packages("hexbin")
+#install.packages("hexbin")
+library(hexbin)
 ms %>% summarise(total = length(spec5),
                  numNAs = sum(is.na(spec5)),
                  neg = length(spec5[spec5<0]), 
@@ -57,9 +60,9 @@ ggplot(mas)+
   geom_hex(mapping = aes(y = spec10, x = mass))
 ```
 
-First I plot the variation about the spec10 with mass without filtering, and I found there are lots of points stick together and the density is large, and it¡¯s hard to visualize the actual spec10 points. So I narrowed down the scales , took the logarithm and pick some specific arranges about the data, in this case, it¡¯s easier to read the tendency and the spread of those points.
+First I plot the variation about the spec10 with mass without filtering, and I found there are lots of points stick together and the density is large, and it's hard to visualize the actual spec10 points. So I narrowed down the scales , took the logarithm and pick some specific arranges about the data, in this case, it's easier to read the tendency and the spread of those points.
 ```{r}
-install.packages("GGally")
+#install.packages("GGally")
 library(GGally)
 mms <- ms %>% filter(spec5>0 & spec5<5000 & spec10>0 & spec10<5000) 
 mea <- mms %>% summarise(mean(spec5),mean(spec10))
@@ -69,4 +72,4 @@ ggplot(mms,mapping = aes(y = spec5,x = spec10,color = mass))+
   geom_smooth(method = "lm", se = TRUE)+
   labs(x = "spec10",y = "spec5",title = "The corelation between spec5 and spec10, and their mean values are \n spec5:30.23052, spec10: 26.9792")
 ```
-For the correlation part, I narrowed it down and pick the same scale to plot the points for each variable. Then I calculated the mean value for spec5 and spec10, which I found they¡¯re close. The mean for spec5 is 30.23052, for spec10 is 26.9792, and the close relationship could be visualize from the plot---they are not far away from each other. 
+For the correlation part, I narrowed it down and pick the same scale to plot the points for each variable. Then I calculated the mean value for spec5 and spec10, which I found they??re close. The mean for spec5 is 30.23052, for spec10 is 26.9792, and the close relationship could be visualize from the plot---they are not far away from each other. 
