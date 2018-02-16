@@ -28,6 +28,7 @@ ms_4 <- ms %>% filter(spec5 > 1 & spec5<10000)%>%mutate(log.spec5 = log10(spec5)
 ggplot(data = ms_4,aes(x=mass,y = log.spec5))+geom_violin() #the plot of mass vs. log spec5
 
 ```
+
 This is a log transform of our data compared against the mass. The major takeaway from this plot is how much of the data is concentrated between spec5=1 and spec5=10 (corresponding to 0 and 1 on the y axis). This observation sheds some light on a possible issue in this mass spectrometry experiment: noise. If the atmospheric researcher is looking for some specific compounds whose spectrum lies outside of this early range (spec5=1 to spec5=10), then this large concentration of data obscures the relevant data. The sheer volume of this data means that some very careful filtering is required to extract any valuable information.
 
 
@@ -37,12 +38,23 @@ ms5 <- ms_4 %>% filter(diff<150)
 ggplot(data = ms5,aes(x=diff))+geom_histogram()
 ```
 
-This shows the difference between the two variables, sepc5 and spec10. We considered only values less then 150 in order to see a distribution pattern.
+This shows the difference between the two variables, sepc5 and spec10. We considered only values less then 150 in order to see a distribution pattern. We see that the differences between the two variables are mostly zero. This intuitively makes sense because the raw data shows that most of the values for each variable are 0.
+
+
+
+```{r}
+
+#one individual plot
+
+ggplot(data = ms_4,aes(x=mass,y = log.spec5))+geom_bin2d(binwidth = c(5,0.1))
+```
+
+We determined this to be the plot that gives the most information. Please reference Ryan's Variance of Spec5 section for an explanation of the plot.
 
 
 
 # Lauren Gregg
-## Variance
+## Variance of spec5
 ```{r}
 msLG <- ms %>% filter(mass>50)
 ggplot(data=msLG, aes(mass, spec5)) + 
@@ -51,7 +63,7 @@ ggplot(data=msLG, aes(mass, spec5)) +
 
 Because so many values of mass are close to zero, it is difficult to see the variance in the "heavier" particles. I decided to filter all particles with mass less than 50 out of the data set. Plotting this data, we can see peaks occur around masses of 75, 150, 175, 210, 275, and 350. This is not visible without filtering the data.
 
-## Covariance
+## Covariance of spec5 and spec10
 ```{r}
 ggplot(data=msLG, aes(spec5, spec10)) +
   geom_point()
@@ -71,7 +83,7 @@ The correlation is moderate with a coeffecient of 0.67. However, this is much le
 
 # Katie
 
-## Variance
+## Variance of spec10
 ```{r}
 #install.packages("hexbin")
 library(hexbin)
@@ -91,7 +103,7 @@ ggplot(mas)+
 
 First I plot the variation about the spec10 with mass without filtering, and I found there are lots of points stick together and the density is large, and it's hard to visualize the actual spec10 points. So I narrowed down the scales , took the logarithm and pick some specific arranges about the data, in this case, it's easier to read the tendency and the spread of those points.
 
-## Covariance
+## Covariance of spec5 and spec10
 ```{r}
 #install.packages("GGally")
 library(GGally)
@@ -136,6 +148,7 @@ ms5<-ms %>% filter(spec5>0 & spec5<=1000) %>% mutate(log(spec5)) %>% arrange(des
 
 ggplot(data=ms5,aes(x=log(spec5),y=mass))+geom_hex()+geom_smooth(method = "lm", se = TRUE)
 ```
+
 at first, I tried to narrow down the whole number to a relatively small number, so I made a filter function to make a restirct that spec5 need to greater than 5 and less or equal than 1000 and I install the hexbin file to use the hexbin function, to ingore the negative number and to show the relationship between the value, I made a new variable "mutatae"(log(spec5)) to show the new relation. in the ggplot code, I just random made a name called ms5 and used the hexbin and the smooth to show the change and the tendecy. And we can see the count would increase when the log value increase and sone negative value shows.
 
 ## cov of spec5 and spec 10
