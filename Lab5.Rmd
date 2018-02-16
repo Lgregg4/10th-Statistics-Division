@@ -105,3 +105,34 @@ ggplot(mms,mapping = aes(y = spec5,x = spec10,color = mass))+
   labs(x = "spec10",y = "spec5",title = "The corelation between spec5 and spec10, and their mean values are \n spec5:30.23052, spec10: 26.9792")
 ```
 For the correlation part, I narrowed it down and pick the same scale to plot the points for each variable. Then I calculated the mean value for spec5 and spec10, which I found they??re close. The mean for spec5 is 30.23052, for spec10 is 26.9792, and the close relationship could be visualize from the plot---they are not far away from each other. 
+
+#Ryan
+##Variance of Spec5
+```{r}
+
+#one individual plot
+
+ggplot(data = ms_4,aes(x=mass,y = log.spec5))+geom_bin2d(binwidth = c(5,0.1))
+```
+
+In classic mass spectrometry form, this plot shows spikes of the spec5 variable for certain mass/charge ratios. Since the spikes give some information about the composition of the material, I thought it best to create a plot which excentuates these spikes. Unfortunatley, the spikes for masses between 0 and 50 are immense, so the normal histogram does a poor job at displaying the spec5 spikes at higher mass/charge ratios. My solution was to display log(spec5) vs. mass. The count (displayed with a color gradient) is useful to visualize where the majority of the data was collected. From this, one can easily see that a large majority of the data was collected in the low mass/charge reigon. 
+
+##Covariance of Spec5 and Spec10
+```{r}
+
+#the other individual plot
+ggplot(data = ms_4,aes(x=spec5,y =spec10))+geom_point()
+
+```
+
+I've chosen to display the covariation of the spec10 and spec5 variables using a dot plot. The dot plot does the job well because of the extremely strong correlation between spec5 and spec10. The most astounding thing about this plot, is that there seems to be a bilinear (I made that word up, but it seems nice) relationship between spec5 and spec10, in which points fall either on a line with a high slope(the top points), or on a line with a low slope (the bottom points). 
+
+
+
+
+
+
+
+
+
+
