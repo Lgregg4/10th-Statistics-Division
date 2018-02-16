@@ -70,9 +70,9 @@ cor(ms$spec10, ms$spec5)
 
 The correlation is moderate with a coeffecient of 0.67. However, this is much less than the coefficient of 0.99, which is the result if we consider objects with a mass less than 50.
 
-#Katie
+# Katie
 
-##Variance
+## Variance
 ```{r}
 #install.packages("hexbin")
 library(hexbin)
@@ -106,8 +106,8 @@ ggplot(mms,mapping = aes(y = spec5,x = spec10,color = mass))+
 ```
 For the correlation part, I narrowed it down and pick the same scale to plot the points for each variable. Then I calculated the mean value for spec5 and spec10, which I found they??re close. The mean for spec5 is 30.23052, for spec10 is 26.9792, and the close relationship could be visualize from the plot---they are not far away from each other. 
 
-#Ryan
-##Variance of Spec5
+# Ryan
+## Variance of Spec5
 ```{r}
 
 #one individual plot
@@ -117,7 +117,7 @@ ggplot(data = ms_4,aes(x=mass,y = log.spec5))+geom_bin2d(binwidth = c(5,0.1))
 
 In classic mass spectrometry form, this plot shows spikes of the spec5 variable for certain mass/charge ratios. Since the spikes give some information about the composition of the material, I thought it best to create a plot which excentuates these spikes. Unfortunatley, the spikes for masses between 0 and 50 are immense, so the normal histogram does a poor job at displaying the spec5 spikes at higher mass/charge ratios. My solution was to display log(spec5) vs. mass. The count (displayed with a color gradient) is useful to visualize where the majority of the data was collected. From this, one can easily see that a large majority of the data was collected in the low mass/charge reigon. 
 
-##Covariance of Spec5 and Spec10
+## Covariance of Spec5 and Spec10
 ```{r}
 
 #the other individual plot
@@ -129,10 +129,22 @@ I've chosen to display the covariation of the spec10 and spec5 variables using a
 
 
 
+# Chris He
+## Variance of log(Spec5)
 
+```{r}
+ms5<-ms %>% filter(spec5>0 & spec5<=1000) %>% mutate(log(spec5)) %>% arrange(desc(spec5))
 
+ggplot(data=ms5,aes(x=log(spec5),y=mass))+geom_hex()+geom_smooth(method = "lm", se = TRUE)
+```
+at first, I tried to narrow down the whole number to a relatively small number, so I made a filter function to make a restirct that spec5 need to greater than 5 and less or equal than 1000 and I install the hexbin file to use the hexbin function, to ingore the negative number and to show the relationship between the value, I made a new variable "mutatae"(log(spec5)) to show the new relation. in the ggplot code, I just random made a name called ms5 and used the hexbin and the smooth to show the change and the tendecy. And we can see the count would increase when the log value increase and sone negative value shows.
 
+## cov of spec5 and spec 10
+```{r}
+ggplot(data=ms5,aes(x=log(spec5),y=spec10))+geom_point()+geom_hex()+geom_smooth(method=lm, se=FALSE)
+```
 
+then I tried to show the covariation in my new variable ms5 and I used the hexbin function and the smooth to show the covariation and we could get the linear relation between log(spec5) and spec 10 that I choose in ms5.
 
 
 
