@@ -1,0 +1,41 @@
+---
+title: "Lab5"
+author: "Lauren, Chris, Ryan, Katie"
+date: "2/16/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+## notice i load the data here so we dont have to do it each indiviudally
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+ms <- read_csv("https://raw.githubusercontent.com/ervance1/Sp2018-Data-Science-repo/master/ms.csv") # load the data
+```
+
+# Lauren Gregg
+## Variance
+```{r}
+msLG <- ms %>% filter(mass>50)
+ggplot(data=msLG, aes(mass, spec5)) + 
+  geom_point()
+```
+
+Because so many values of mass are close to zero, it is difficult to see the variance in the "heavier" particles. Because of this, I filtered all particles with mass less than 50 out of the data set. Plotting this data, we can see peaks occur arounf masses of 75, 150, 175, 210, 275, and 350. This is not visible without filtering the data.
+
+## Covariance
+```{r}
+ggplot(data=msLG, aes(spec5, spec10)) +
+  geom_point()
+```
+
+In order to continue on my path, I was interested in seeing if a strong correlation between spec5 and spec10 was still visible when considering only the objects with mass greater than 50. The covariation between the variables is still very evident. 
+
+```{r}
+cor(msLG$spec5, msLG$spec10)
+```
+
+```{r}
+cor(ms$spec10, ms$spec5)
+```
+
+The correlation is moderate with a coeffecient of 0.67. However, this is much less than the coefficient of 0.99, which is the result if we consider objects with a mass less than 50.
