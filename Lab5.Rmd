@@ -89,10 +89,13 @@ First I plot the variation about the spec10 with mass without filtering, and I f
 library(GGally)
 mms <- ms %>% filter(spec5>0 & spec5<5000 & spec10>0 & spec10<5000) 
 mea <- mms %>% summarise(mean(spec5),mean(spec10))
-mea
 ggplot(mms,mapping = aes(y = spec5,x = spec10,color = mass))+
   geom_point()+
   geom_smooth(method = "lm", se = TRUE)+
   labs(x = "spec10",y = "spec5",title = "The corelation between spec5 and spec10, and their mean values are \n spec5:30.23052, spec10: 26.9792")
 ```
-For the correlation part, I narrowed it down and pick the same scale to plot the points for each variable. Then I calculated the mean value for spec5 and spec10, which I found they??re close. The mean for spec5 is 30.23052, for spec10 is 26.9792, and the close relationship could be visualize from the plot---they are not far away from each other. 
+```{r}
+cor(mms$spec5,mms$spec10)
+```
+
+For the correlation part, I narrowed it down and pick the same scale to plot the points for each variable. Then I calculated the mean value for spec5 and spec10, which I found they??re close. The mean for spec5 is 30.23052, for spec10 is 26.9792, and the close relationship could be visualize from the plot---they are not far away from each other. And the correlation is 0.857, which is close to 0.99. 
