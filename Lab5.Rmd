@@ -12,6 +12,29 @@ library(tidyverse)
 ms <- read_csv("https://raw.githubusercontent.com/ervance1/Sp2018-Data-Science-repo/master/ms.csv") # load the data
 ```
 
+
+```{r}
+
+ms_4 <- ms %>% filter(spec5 > 1 & spec5<10000)%>%mutate(log.spec5 = log10(spec5),log.spec10 =log10(spec10),diff = abs(spec5-spec10)) #create the new dataset
+
+ggplot(data = ms_4,aes(x=mass,y = log.spec5))+geom_violin() #the plot of mass vs. log spec5
+
+```
+
+```{r}
+
+ggplot(data = ms_4,aes(x=mass,y = log.spec5))+geom_bin2d(binwidth = c(5,0.1))
+
+```
+
+```{r}
+
+ms5 <- ms_4 %>% filter(diff<150)
+ggplot(data = ms5,aes(x=diff))+geom_histogram()
+```
+
+
+
 # Lauren Gregg
 ## Variance
 ```{r}
