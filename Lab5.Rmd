@@ -12,6 +12,13 @@ library(tidyverse)
 ms <- read_csv("https://raw.githubusercontent.com/ervance1/Sp2018-Data-Science-repo/master/ms.csv") # load the data
 ```
 
+# Team 
+
+```{r}
+ggplot(ms, aes(spec5)) +
+  geom_histogram()
+```
+This is a simple plot of the raw spec5 data. We see that there are so many values at or near 0 that we are unable to see any information at other values.
 
 ```{r}
 
@@ -20,6 +27,7 @@ ms_4 <- ms %>% filter(spec5 > 1 & spec5<10000)%>%mutate(log.spec5 = log10(spec5)
 ggplot(data = ms_4,aes(x=mass,y = log.spec5))+geom_violin() #the plot of mass vs. log spec5
 
 ```
+This is a log transform of our data compared against the mass. 
 
 ```{r}
 
@@ -32,6 +40,7 @@ ggplot(data = ms_4,aes(x=mass,y = log.spec5))+geom_bin2d(binwidth = c(5,0.1))
 ms5 <- ms_4 %>% filter(diff<150)
 ggplot(data = ms5,aes(x=diff))+geom_histogram()
 ```
+This shows the difference between the two variables, sepc5 and spec10. We considered only values less then 150 in order to see a distribution pattern.
 
 
 
