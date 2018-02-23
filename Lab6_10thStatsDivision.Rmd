@@ -38,6 +38,39 @@ These impacts are important because everyone who travels wants to spend more tim
 ## Chris
 
 ## Katie
+For my personal experience, I think the weather and the late aircraft may be the big reasons that affect the delay of flights. So I first look at each month, and calculate the probability of delayed flights due to the weather in each month and use ggplot to show the tendency of the probability based on weather and month. Then I classify each carrier, and look at their probability of late aircraft, then plot bar graph to show which one has the greatest probability because of the late aircraft.
+```{r}
+delay <- tibble(month = 1:12, p1 = 1:12)
+delay[2][3,1]
+for (j in 1:12) {
+  delaymonth <- COflights %>% filter(ARR_DELAY >= 15 & !is.na(ARR_TIME) & MONTH == j) %>% count(n())
+  delayweather <- COflights %>% filter(WEATHER_DELAY >= 1&!is.na(ARR_TIME) & MONTH == j) %>% count(n())
+  delay[2][j,1] <- delayweather/delaymonth
+    }
+delay
+ggplot(delay, mapping = aes(x = month, y = p1))+
+  geom_jitter()+
+  geom_smooth(method = "loess")+
+  labs(x = "month", y = "probability of weather delay ", title = "The probability of weather delay on each month")
+```
+
+As we can see from the above plot, the greatest probability of weather delay occurs on January, and lower chances to have weather delay happen around July and September. And based on this, comparing with the weather in Colorado, there are more heavy snowing days in the beginning of each year, and in the fall, the snowy days are relative fewer. So I guess that frequency of snowing is the main reason that caused flight delay.
+
+```{r}
+carr <- COflights %>% group_by(CARRIER) %>% summarise() %>% mutate(p = 1)
+carr[11,1]
+for (i in 1:11) {
+  delaycarr<- COflights %>% filter(ARR_DELAY >= 15 & !is.na(ARR_TIME) & CARRIER == carr[[i,1]]) %>% count(n())
+  delayair <- COflights %>% filter(LATE_AIRCRAFT_DELAY >= 1& !is.na(ARR_TIME) & CARRIER == carr[[i,1]]) %>% count(n())
+  carr[2][i,1] <- delayair/delaycarr
+}
+carr
+ggplot(carr, mapping = aes(x = CARRIER, y = p, color = CARRIER))+
+  geom_col()+
+  labs(x = "carriers", y = "probability due to late aircraft",title = "Probability of each carrier delay due to late aircraft")
+```
+The bar chart above shows for each carrier, the probability that their flights delay because of the late aircraft. I use the goem_bar in ggplot to show the range of their probabilities. The bar chart is more easy to read and pretty straightforward to illustrate the highest and the lowest probability for each carrier. Thus from the plot, we can visualize the highest one is WN, and the lowest is NK, which is obvious from the plot. So maybe the manager can allow more NK carriers in Colorado, in order to lower the chances of flight delay.
+
  
 ## Lauren
 I considered how the seasons impact the tardiness of flights and if weather is a confounding variable. Please take note that I determined the seasons as such; Spring: March, April, May; Summer: June, July, August; Fall: Spetember, October, November; and Winter: December, January, February.
