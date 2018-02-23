@@ -20,9 +20,9 @@ What tends to cause flight delays?
 
 ## Why They Are Important
 
-Answering these questions could, potentially, allow DIA to make changes to increase the chances of a flight arriving on time. These answers could also aide individual travelers by helping them choose "better" airlines.
-
+ Answering these questions could, potentially, allow DIA to make changes to increase the chances of a flight arriving on time. These answers could also aide individual travelers by helping them choose "better" airlines.
 These impacts are important because everyone who travels wants to spend more time at their destination than on the plane. Knowing the answers to our overall questions makes this desire more attainable.
+ Besides, knowing the factors that making flights delay, the manager can do some modification with each airline and the schedules of flights. Considering the seasons, different months, and the carriers, they could make good arrangements for those flights, which saves a lot of time for passengers.
 
 
 # Team Plots
@@ -164,6 +164,11 @@ Ultimately, if a passenger wants to be have a higher chance of arriving on time,
 
 These findings are important for indiviudal travelers as well as the Denver airport. With this knowledge, travelers can decide to allow for longer layovers in the winter in order to avoid missing a connection. They can also recognize that their chances of being delayed are higher so they should stay relaxed if it happens. The airport can use this knowledge to know which seasons they need to have more staff on hand. Delayed flights tend to cause angry passengers. For example, the summer months seem to have the largest number of flights and a fair percentage of those flights are delayed; I would recommend that the airport have a larger staff force during these months to handle the large amounts of disgruntled customers.
 
-# Summary
-
+## Contributions
+#Lauren
 Lauren outlined the project as a whole to help us get started. She then discussed why the team's general questions are important. Lauren implemented the size aesthetic in her first plot in order to visualize how many completed flights occur in each season abd she used the label non-default layers.
+
+#Katie
+Katie added some parts of the importance of delay factors, and compared the weather delay on each month in her first plot. She found the tendency of the probability on each month due to the flight delay, which could help manager to schedule flight time on each month to aviod delay. Then for every airline, she found their delay probabilities due to the late aircraft. The bar chart above is obvious to see the delay for each carrier.
+#Chris
+#Ryan
