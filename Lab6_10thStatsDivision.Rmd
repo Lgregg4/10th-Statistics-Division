@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
 COflights <- read_csv("https://files.osf.io/v1/resources/3z5as4pej8/providers/osfstorage/5a8ca28f57103100104584db")
+landed_flights<-COflights%>%filter(!is.na(ARR_TIME))
 ```
 
 # Overall Questions
@@ -26,15 +27,140 @@ These impacts are important because everyone who travels wants to spend more tim
 
 
 # Team Plots
+This first plot shows the apparent relationship between the carrier and the probability that the flight will be delayed by more than 15 minutes.
+```{r}
+carr <- COflights %>% group_by(CARRIER) %>% summarise() %>% mutate(p = 1)
+carr[11,1]
+for (i in 1:11) {
+  delaycarr<- COflights %>% filter(ARR_DELAY >= 15 & !is.na(ARR_TIME) & CARRIER == carr[[i,1]]) %>% count(n())
+  delayair <- COflights %>% filter(LATE_AIRCRAFT_DELAY >= 1& !is.na(ARR_TIME) & CARRIER == carr[[i,1]]) %>% count(n())
+  carr[2][i,1] <- delayair/delaycarr
+}
+carr
+ggplot(carr, mapping = aes(x = CARRIER, y = p, color = CARRIER))+
+  geom_col()+
+  labs(x = "carriers", y = "probability due to late aircraft",title = "Probability of each carrier delay due to late aircraft")
+```
+
+The following plot shows the covariation of the probability of a flight being delayed by more than 15 minutes with the month of the year.
+
+```{r}
+
+monthdata <- COflights%>%group_by(MONTH)%>%summarise()
+
+carrierdata <- COflights%>%group_by(CARRIER)%>%summarise()
+
+pm=c()
+ 
+for (i in 1:12) {
+  data <- COflights%>%filter(MONTH == i)
+  pm[i] <- data%>%filter(ARR_DELAY>15)%>%count()/data%>%count()
+}
+
+
+pc=c()
+
+for (i in 1:11) {
+  data <- COflights%>%filter(CARRIER == carrierdata$CARRIER[i])
+  pc[i] <- data%>%filter(ARR_DELAY>15)%>%count()/data%>%count()
+}
+
+
+
+monthdata$PM<-as.data.frame(sapply(pm,c))
+
+ggplot(monthdata, aes(x=MONTH,y=PM))+
+  geom_col(aes(fill=MONTH))
+
+```
+
+This final plot shows how the probability of a flight being delayed changes based on the season.
+```{r}
+spring_flights <- landed_flights %>% filter(MONTH==3 | MONTH==4 | MONTH==5)
+summer_flights <- landed_flights %>% filter(MONTH==6 | MONTH==7 | MONTH==8)
+fall_flights <- landed_flights %>% filter(MONTH==9 | MONTH==10 | MONTH==11)
+winter_flights <- landed_flights %>% filter(MONTH==12 | MONTH==1 | MONTH==2)
+
+spring_flights_count <- spring_flights %>% count(n())
+summer_flights_count <- summer_flights %>% count(n())
+fall_flights_count <- fall_flights %>% count(n())
+winter_flights_count <- winter_flights %>% count(n())
+
+spring_flights_late_count <- spring_flights %>% filter(ARR_DELAY>=15) %>% count(n())
+summer_flights_late_count <- summer_flights %>% filter(ARR_DELAY>=15) %>% count(n())
+fall_flights_late_count <- fall_flights %>% filter(ARR_DELAY>=15) %>% count(n())
+winter_flights_late_count <- winter_flights %>% filter(ARR_DELAY>=15) %>% count(n())
+
+spring_late_prob <- spring_flights_late_count / spring_flights_count
+summer_late_prob <- summer_flights_late_count / summer_flights_count
+fall_late_prob <- fall_flights_late_count / fall_flights_count
+winter_late_prob <- winter_flights_late_count / winter_flights_count
+
+seasons <- c("spring", "summer", "fall", "winter")
+prob_late <- c(spring_late_prob$n, summer_late_prob$n, fall_late_prob$n, winter_late_prob$n)
+total_flights <-c(spring_flights_count$n, summer_flights_count$n, fall_flights_count$n, winter_flights_count$n)
+plot_data <- data_frame(seasons, prob_late, total_flights)
+
+ggplot(plot_data, aes(x=seasons, y=prob_late, size= total_flights)) +
+  geom_point() + 
+  ggtitle("Probability of Flights Arriving Late, Depending on the Season") +
+  xlab("Seasons") +
+  ylab("Probability of a Flight Arriving Late (dependent on season)" )
+```
 
 # Conlusions
+Based on the plots above, one can conclude that the carriers: UA, NK, and AS have fairly low probabilities of delay, while the carriers B6, VX and WN have fairly high probabilities of delay. 
 
+Furthermore, one can see that the month of the year has a powerful effect on the probability of a flight being delayed. The effect being that during December and January, there is a high probability of a flight being delayed, while in the fall months, September, October, and November, there is a fairly low probability of the flight being delayed. This is seen even more clearly in the third plot which shows the variation of the probability of delay with the season.
 # Recommendation
 
 # Individual Findings
 
 ## Ryan
+The probability of a late arrival seems to vary throughout the year, peaking in January, and with a minumum in November. What is surprising about this plot is the peak in late arrivals during the middle of the summer (July/August), and the the sudden drop off for September, October and November. The high probability of late arrivals during January is expected because of weather conditions, and holiday air traffic. 
+```{r}
 
+monthdata <- COflights%>%group_by(MONTH)%>%summarise()
+
+carrierdata <- COflights%>%group_by(CARRIER)%>%summarise()
+
+pm=c()
+ 
+for (i in 1:12) {
+  data <- COflights%>%filter(MONTH == i)
+  pm[i] <- data%>%filter(ARR_DELAY>15)%>%count()/data%>%count()
+}
+
+
+pc=c()
+
+for (i in 1:11) {
+  data <- COflights%>%filter(CARRIER == carrierdata$CARRIER[i])
+  pc[i] <- data%>%filter(ARR_DELAY>15)%>%count()/data%>%count()
+}
+
+
+
+monthdata$PM<-as.data.frame(sapply(pm,c))
+
+ggplot(monthdata, aes(x=MONTH,y=PM))+
+  geom_col(aes(fill=MONTH))
+
+```
+
+From this second plot, one can easily observe that UA is the carrier which has the lowest probability of late arrival (throughout this dataset). The difference in probabilities of late arrivals between carriers is more shocking than I expected. In fact, the carrier which arrives late with the highest probability, does so almost 20% more than the carrier with the lowest probability.
+
+
+```{r}
+carrierdata$PC<-as.data.frame(sapply(pc,c))
+
+ggplot(carrierdata, aes(x=CARRIER,y=PC))+
+  geom_col(aes(fill=CARRIER))+scale_fill_grey()
+
+```
+
+
+The findings above are important becasue they shed some light on the flight scenarios which make for the lowest or highest probabilities of having a delay. This is important because when planning a vacation, one could use this data to optimize their chances of not being delayed.
 ## Chris
 
 ## Katie
