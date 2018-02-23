@@ -7,14 +7,23 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+COflights <- read_csv("https://files.osf.io/v1/resources/3z5as4pej8/providers/osfstorage/5a8ca28f57103100104584db")
 ```
 
 # Overall Questions
 
+What factors increase the probability of a delayed arrival and decrease the probability of a delayed arrival?
+
+What tends to cause flight delays?
 
 ## Why They Are Important
 
-## Why Those Reasons are Important
+Answering these questions could, potentially, allow DIA to make changes to increase the chances of a flight arriving on time. These answers could also aide individual travelers by helping them choose "better" airlines.
+
+These impacts are important because everyone who travels wants to spend more time at their destination than on the plane. Knowing the answers to our overall questions makes this desire more attainable.
+
 
 # Team Plots
 
@@ -31,14 +40,97 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Katie
  
 ## Lauren
+I considered how the seasons impact the tardiness of flights and if weather is a confounding variable. Please take note that I determined the seasons as such; Spring: March, April, May; Summer: June, July, August; Fall: Spetember, October, November; and Winter: December, January, February.
 
+```{r}
+spring_flights <- landed_flights %>% filter(MONTH==3 | MONTH==4 | MONTH==5)
+summer_flights <- landed_flights %>% filter(MONTH==6 | MONTH==7 | MONTH==8)
+fall_flights <- landed_flights %>% filter(MONTH==9 | MONTH==10 | MONTH==11)
+winter_flights <- landed_flights %>% filter(MONTH==12 | MONTH==1 | MONTH==2)
+
+spring_flights_count <- spring_flights %>% count(n())
+summer_flights_count <- summer_flights %>% count(n())
+fall_flights_count <- fall_flights %>% count(n())
+winter_flights_count <- winter_flights %>% count(n())
+
+spring_flights_late_count <- spring_flights %>% filter(ARR_DELAY>=15) %>% count(n())
+summer_flights_late_count <- summer_flights %>% filter(ARR_DELAY>=15) %>% count(n())
+fall_flights_late_count <- fall_flights %>% filter(ARR_DELAY>=15) %>% count(n())
+winter_flights_late_count <- winter_flights %>% filter(ARR_DELAY>=15) %>% count(n())
+
+spring_late_prob <- spring_flights_late_count / spring_flights_count
+summer_late_prob <- summer_flights_late_count / summer_flights_count
+fall_late_prob <- fall_flights_late_count / fall_flights_count
+winter_late_prob <- winter_flights_late_count / winter_flights_count
+
+seasons <- c("spring", "summer", "fall", "winter")
+prob_late <- c(spring_late_prob$n, summer_late_prob$n, fall_late_prob$n, winter_late_prob$n)
+total_flights <-c(spring_flights_count$n, summer_flights_count$n, fall_flights_count$n, winter_flights_count$n)
+plot_data <- data_frame(seasons, prob_late, total_flights)
+
+ggplot(plot_data, aes(x=seasons, y=prob_late, size= total_flights)) +
+  geom_point() + 
+  ggtitle("Probability of Flights Arriving Late, Depending on the Season") +
+  xlab("Seasons") +
+  ylab("Probability of a Flight Arriving Late (dependent on season)" )
+```
+
+As we can see from the above plot, a larger probability of winter flights tend to arrive more than 15 minutes late compared to the other seasons. Additionally, the winter season has about 110,000 completed flights, which is the smallest number among the seasons. This is reasonable because we are considering flights that departed from or landed in an airport in Colorado and snow is obviously impactful during the winter months. However, Colorado sees a fair share of snow in the spring months (March, April, May) as well. Perhaps I could adjust for this by only focusing on flights departing from DIA.
+
+```{r}
+landed_flights_seasons <- landed_flights %>% mutate(season =
+                                              case_when((MONTH==3|MONTH==4|MONTH==5)~"Spring",
+                                                    (MONTH==6 | MONTH==7 | MONTH==8)~"Summer",
+                                                    (MONTH==9 | MONTH==10 | MONTH==11)~"Fall",
+                                                    (MONTH==12 | MONTH==1|MONTH==2)~"Winter"))
+
+
+seasons_late_flights <- landed_flights_seasons %>% filter(ARR_DELAY>15)
+
+ggplot(seasons_late_flights, aes(x=factor(season), fill=(WEATHER_DELAY>15))) + 
+  geom_bar(position="fill") +
+  ggtitle("Percentage of Late Flights that Also Experienced a Weather Delay") +
+  xlab("Season")
+```
+
+This plot shows us that the winter months (December, January, February) tend to have a higher percentage of weather delays amongst their late flights.
+
+```{r}
+late_spring_flights_weather_count <- spring_flights %>% 
+  filter(ARR_DELAY>15 &WEATHER_DELAY>15) %>% count(n())
+prob_spring_weather <- late_spring_flights_weather_count / spring_flights_late_count
+
+late_summer_flights_weather_count <- summer_flights %>% 
+  filter(ARR_DELAY>15 &WEATHER_DELAY>15) %>% count(n())
+prob_summer_weather <- late_summer_flights_weather_count / summer_flights_late_count
+
+late_fall_flights_weather_count <- fall_flights %>% 
+  filter(ARR_DELAY>15 &WEATHER_DELAY>15) %>% count(n())
+prob_fall_weather <- late_fall_flights_weather_count / fall_flights_late_count
+
+late_winter_flights_weather_count <- winter_flights %>% 
+  filter(ARR_DELAY>15 &WEATHER_DELAY>15) %>% count(n())
+prob_winter_weather <- late_winter_flights_weather_count / winter_flights_late_count
+```
+```{r}
+prob_spring_weather$n
+```
+```{r}
+prob_summer_weather$n
+```
+```{r}
+prob_fall_weather$n
+```
+```{r}
+prob_winter_weather$n
+```
+
+The probability of a flight having experienced a weather delay given that it arrived late is 3.9% in the winter season, 3.6% during the summer season, 2.8% during the spring season, and 1.6% during the fall season.
+
+Ultimately, if a passenger wants to be have a higher chance of arriving on time, he or she sould travel in the fall. This obviously is not always reasonable, so those traveling in the winter have a higher chance of arriving more than 15 minutes late and nearly 4% of those delays will be compounded with weather delays.
+
+These findings are important for indiviudal travelers as well as the Denver airport. With this knowledge, travelers can decide to allow for longer layovers in the winter in order to avoid missing a connection. They can also recognize that their chances of being delayed are higher so they should stay relaxed if it happens. The airport can use this knowledge to know which seasons they need to have more staff on hand. Delayed flights tend to cause angry passengers. For example, the summer months seem to have the largest number of flights and a fair percentage of those flights are delayed; I would recommend that the airport have a larger staff force during these months to handle the large amounts of disgruntled customers.
 
 # Summary
 
-## Ryan
-
-## Chris
-
-## Katie
-
-##Lauren
+Lauren outlined the project as a whole to help us get started. She then discussed why the team's general questions are important. Lauren implemented the size aesthetic in her first plot in order to visualize how many completed flights occur in each season abd she used the label non-default layers.
