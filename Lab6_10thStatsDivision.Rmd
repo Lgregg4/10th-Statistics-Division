@@ -1,0 +1,44 @@
+---
+title: "Lab6_10thStatsDivision"
+author: "Lauren, Ryan, Katie, Chris"
+date: "2/21/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Overall Questions
+
+
+## Why They Are Important
+
+## Why Those Reasons are Important
+
+# Team Plots
+
+# Conlusions
+
+# Recommendation
+
+# Individual Findings
+
+## Ryan
+
+## Chris
+
+## Katie
+ 
+## Lauren
+
+
+# Summary
+
+## Ryan
+
+## Chris
+
+## Katie
+
+##Lauren
