@@ -112,8 +112,13 @@ ggplot(plot_data, aes(x=seasons, y=prob_late, size= total_flights)) +
 Based on the plots above, one can conclude that the carriers: UA, NK, and AS have fairly low probabilities of delay, while the carriers B6, VX and WN have fairly high probabilities of delay. 
 
 Furthermore, one can see that the month of the year has a powerful effect on the probability of a flight being delayed. The effect being that during December and January, there is a high probability of a flight being delayed, while in the fall months, September, October, and November, there is a fairly low probability of the flight being delayed. This is seen even more clearly in the third plot which shows the variation of the probability of delay with the season.
+
+The third plot, however, gives some extra explination about why the probabilities of delay may be so low in the fall months. Namely, there arent many flights during that time. This may mean that it is easier for the flights to land on time (due to less traffic), but it may also mean that there is not enough flight data to draw relevant conclusions about flights during the fall.
+
+Regardless, it seems clear that the carrier, the weather, and the amount of air traffic are important factors effecting the probability of a flight delay.
+
 # Recommendation
-as we could see from our individual plot and team plot, we know that to avoid the late prob. the best way that we could do is choose our flights time, the best season that we could choose is fall, the prob is relatively low that we get a arrive delay. and in winter, due to the weather or the snow situation, the late prob is higher, so maybe we could choose donot choose a flight in the snow day. another thing that we would recommad is avoide choose those company that have higher late rate like "B6", "VX" or "WN" cause it is have higher delay rate and late aircraft in all kind of situation. in a word, our recommend is don't choose flights durning the winter season and avoide always take a flights with carrier "B6", "VX" or "WN".
+As we could see from our individual plot and team plot, we know that to avoid the late prob. the best way that we could do is choose our flights time, the best season that we could choose is fall, the prob is relatively low that we get a arrive delay. and in winter, due to the weather or the snow situation, the late prob is higher, so maybe we could choose donot choose a flight in the snow day. another thing that we would recommad is avoide choose those company that have higher late rate like "B6", "VX" or "WN" cause it is have higher delay rate and late aircraft in all kind of situation. in a word, our recommend is don't choose flights durning the winter season and avoide always take a flights with carrier "B6", "VX" or "WN".
 
 # Individual Findings
 
@@ -386,3 +391,4 @@ Katie added some parts of the importance of delay factors, and compared the weat
 Chris added his own interesting problem that he found, the carrier that would influence our late rate and give us his own opinions about the plan that when we want to choose a carrier to go travel, also, he do the recommand part and submit our lab.
 
 # Ryan
+Aside from his individual section, Ryan selected the relevant plots to be shown in the team plots section. He also wrote the conclusions section. 
