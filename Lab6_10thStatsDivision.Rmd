@@ -30,6 +30,7 @@ These impacts are important because everyone who travels wants to spend more tim
 # Conlusions
 
 # Recommendation
+as we could see from our individual plot and team plot, we know that to avoid the late prob. the best way that we could do is choose our flights time, the best season that we could choose is fall, the prob is relatively low that we get a arrive delay. and in winter, due to the weather or the snow situation, the late prob is higher, so maybe we could choose donot choose a flight in the snow day. another thing that we would recommad is avoide choose those company that have higher late rate like "B6", "VX" or "WN" cause it is have higher delay rate and late aircraft in all kind of situation. in a word, our recommend is don't choose flights durning the winter season and avoide always take a flights with carrier "B6", "VX" or "WN".
 
 # Individual Findings
 
