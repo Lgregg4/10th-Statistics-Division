@@ -30,6 +30,10 @@ I am interested in comparing the leading causes of death in Illinois versus Colo
 
 ### Chris
 
+the most attractive important variable that I want to discuss is the "cancer" and "homicide" especially the baby's cancer rate and the baby's homicide, cause we all know that the baby's grow up is a big problem in our society and we all hope that we could improve that stituation and avoid the death rate relate to baby. for that I was concern that tidy 5 or 6 state, I just try to find the most population state like "CA", "IL" some states like that. If I could find a way to analysis the baby's death, I could make some conclusion and make some recommand step. It might help our soceity.
+
+
+
 ### Katie
 
 ## Visualization from 2-28 Team Application Exercise
