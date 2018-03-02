@@ -15,6 +15,11 @@ We have been hired by the Census Bureau to look at trends of mortality.
 
 ## Overall Question
 
+Does a relationship exist between race (White, Black, Hispanic, Other) and leading causes of death? Futhermore, are these trends consistent across states?
+This question proves relevant as an exploration into if race can indicate liklihood of causes of death. For example, people think that race can act as clue to individuals risk of heart disease. Perhaps we will identify a relationship with heart disease and race within this dataset to support that claim. It is interesting to add the state component because each state has unique conditions that may impact other mortality factors.
+
+
+
 ## Description of the Dataset
 
 We have decided on a very large data set. We are focusing on the "Leading Causes of Death" tab. This data frame has aboout 230 attributes and over 3000 observations. The attributes include county, state, and causes of death ranging from birth defect to injury to cancer. 
@@ -24,7 +29,7 @@ We plan to tidy the data set by removing redundant or unnecessary attributes and
 
 ### Lauren
 
-I am interested in comparing the leading causes of death in Illinois versus Colorado. Being from Illinois, and now living in Colorado, I recognize how different the lifestyles are in each state. Even just what people buy at the grocery stores tells me that Colorado is a much healthier state than Illinois. I want to see if this intuition is reflected in leading causes of death. For example, I would expect to find more outdoor accidents leading to death in Colorado because it is a much more active state than Illinois. This becomes interesting on a larger scale because Colorado is known as one of the least-obese states and has the most physcial activity. Considering leading causes of deaths in the healthiest state could result in some more insights into the definition of "healthy"... 
+I am interested in comparing the leading causes of death in Illinois versus Colorado. Being from Illinois, and now living in Colorado, I recognize how different the lifestyles are in each state. Even just what people buy at the grocery stores tells me that Colorado is a much healthier state than Illinois. I want to see if this intuition is reflected in leading causes of death. For example, I would expect to find more outdoor accidents leading to death in Colorado because it is a much more active state than Illinois. This becomes interesting on a larger scale because Colorado is known as one of the least-obese states and has the most physcial activity. Considering leading causes of deaths in the healthiest state could result in some more insights into the definition of "healthy". 
 
 ### Ryan
 
