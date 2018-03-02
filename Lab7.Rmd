@@ -24,7 +24,7 @@ We plan to tidy the data set by removing redundant or unnecessary attributes and
 
 ### Lauren
 
-I am interested in comparing the leading causes of death in Illinois versus Colorado. Being from Illinois, and now living in Colorado, I recognize how different the lifestyles are in each state. Even just what people buy at the grocery stores tells me that Colorado is a much healthier state than Illinois. I want to see if this intuition is reflected in leading causes of death. For example, I would expect to find more outdoor accidents leading to death in Colorado because it is a much more active state than Illinois. This becomes interesting on a larger scale because Colorado is known as one of the least-obese states and has the most physcial activity. Considering leading causes of deaths in the healthiest state could result in some more insights into the definition of "healthy". 
+I am interested in comparing the leading causes of death in Illinois versus Colorado. Being from Illinois, and now living in Colorado, I recognize how different the lifestyles are in each state. Even just what people buy at the grocery stores tells me that Colorado is a much healthier state than Illinois. I want to see if this intuition is reflected in leading causes of death. For example, I would expect to find more outdoor accidents leading to death in Colorado because it is a much more active state than Illinois. This becomes interesting on a larger scale because Colorado is known as one of the least-obese states and has the most physcial activity. Considering leading causes of deaths in the healthiest state could result in some more insights into the definition of "healthy"... 
 
 ### Ryan
 
