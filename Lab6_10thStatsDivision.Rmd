@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
 COflights <- read_csv("https://files.osf.io/v1/resources/3z5as4pej8/providers/osfstorage/5a8ca28f57103100104584db")
+landed_flights<-COflights%>%filter(!is.na(ARR_TIME))
 ```
 
 # Overall Questions
@@ -20,24 +21,272 @@ What tends to cause flight delays?
 
 ## Why They Are Important
 
-Answering these questions could, potentially, allow DIA to make changes to increase the chances of a flight arriving on time. These answers could also aide individual travelers by helping them choose "better" airlines.
-
+ Answering these questions could, potentially, allow DIA to make changes to increase the chances of a flight arriving on time. These answers could also aide individual travelers by helping them choose "better" airlines.
 These impacts are important because everyone who travels wants to spend more time at their destination than on the plane. Knowing the answers to our overall questions makes this desire more attainable.
+ Besides, knowing the factors that making flights delay, the manager can do some modification with each airline and the schedules of flights. Considering the seasons, different months, and the carriers, they could make good arrangements for those flights, which saves a lot of time for passengers.
 
 
 # Team Plots
+This first plot shows the apparent relationship between the carrier and the probability that the flight will be delayed by more than 15 minutes.
+```{r}
+carr <- COflights %>% group_by(CARRIER) %>% summarise() %>% mutate(p = 1)
+carr[11,1]
+for (i in 1:11) {
+  delaycarr<- COflights %>% filter(ARR_DELAY >= 15 & !is.na(ARR_TIME) & CARRIER == carr[[i,1]]) %>% count(n())
+  delayair <- COflights %>% filter(LATE_AIRCRAFT_DELAY >= 1& !is.na(ARR_TIME) & CARRIER == carr[[i,1]]) %>% count(n())
+  carr[2][i,1] <- delayair/delaycarr
+}
+carr
+ggplot(carr, mapping = aes(x = CARRIER, y = p, color = CARRIER))+
+  geom_col()+
+  labs(x = "carriers", y = "probability due to late aircraft",title = "Probability of each carrier delay due to late aircraft")
+```
+
+The following plot shows the covariation of the probability of a flight being delayed by more than 15 minutes with the month of the year.
+
+```{r}
+
+monthdata <- COflights%>%group_by(MONTH)%>%summarise()
+
+carrierdata <- COflights%>%group_by(CARRIER)%>%summarise()
+
+pm=c()
+ 
+for (i in 1:12) {
+  data <- COflights%>%filter(MONTH == i)
+  pm[i] <- data%>%filter(ARR_DELAY>15)%>%count()/data%>%count()
+}
+
+
+pc=c()
+
+for (i in 1:11) {
+  data <- COflights%>%filter(CARRIER == carrierdata$CARRIER[i])
+  pc[i] <- data%>%filter(ARR_DELAY>15)%>%count()/data%>%count()
+}
+
+
+
+monthdata$PM<-as.data.frame(sapply(pm,c))
+
+ggplot(monthdata, aes(x=MONTH,y=PM))+
+  geom_col(aes(fill=MONTH))
+
+```
+
+This final plot shows how the probability of a flight being delayed changes based on the season.
+```{r}
+spring_flights <- landed_flights %>% filter(MONTH==3 | MONTH==4 | MONTH==5)
+summer_flights <- landed_flights %>% filter(MONTH==6 | MONTH==7 | MONTH==8)
+fall_flights <- landed_flights %>% filter(MONTH==9 | MONTH==10 | MONTH==11)
+winter_flights <- landed_flights %>% filter(MONTH==12 | MONTH==1 | MONTH==2)
+
+spring_flights_count <- spring_flights %>% count(n())
+summer_flights_count <- summer_flights %>% count(n())
+fall_flights_count <- fall_flights %>% count(n())
+winter_flights_count <- winter_flights %>% count(n())
+
+spring_flights_late_count <- spring_flights %>% filter(ARR_DELAY>=15) %>% count(n())
+summer_flights_late_count <- summer_flights %>% filter(ARR_DELAY>=15) %>% count(n())
+fall_flights_late_count <- fall_flights %>% filter(ARR_DELAY>=15) %>% count(n())
+winter_flights_late_count <- winter_flights %>% filter(ARR_DELAY>=15) %>% count(n())
+
+spring_late_prob <- spring_flights_late_count / spring_flights_count
+summer_late_prob <- summer_flights_late_count / summer_flights_count
+fall_late_prob <- fall_flights_late_count / fall_flights_count
+winter_late_prob <- winter_flights_late_count / winter_flights_count
+
+seasons <- c("spring", "summer", "fall", "winter")
+prob_late <- c(spring_late_prob$n, summer_late_prob$n, fall_late_prob$n, winter_late_prob$n)
+total_flights <-c(spring_flights_count$n, summer_flights_count$n, fall_flights_count$n, winter_flights_count$n)
+plot_data <- data_frame(seasons, prob_late, total_flights)
+
+ggplot(plot_data, aes(x=seasons, y=prob_late, size= total_flights)) +
+  geom_point() + 
+  ggtitle("Probability of Flights Arriving Late, Depending on the Season") +
+  xlab("Seasons") +
+  ylab("Probability of a Flight Arriving Late (dependent on season)" )
+```
 
 # Conlusions
+Based on the plots above, one can conclude that the carriers: UA, NK, and AS have fairly low probabilities of delay, while the carriers B6, VX and WN have fairly high probabilities of delay. 
+
+Furthermore, one can see that the month of the year has a powerful effect on the probability of a flight being delayed. The effect being that during December and January, there is a high probability of a flight being delayed, while in the fall months, September, October, and November, there is a fairly low probability of the flight being delayed. This is seen even more clearly in the third plot which shows the variation of the probability of delay with the season.
+
+The third plot, however, gives some extra explination about why the probabilities of delay may be so low in the fall months. Namely, there arent many flights during that time. This may mean that it is easier for the flights to land on time (due to less traffic), but it may also mean that there is not enough flight data to draw relevant conclusions about flights during the fall.
+
+Regardless, it seems clear that the carrier, the weather, and the amount of air traffic are important factors effecting the probability of a flight delay.
 
 # Recommendation
+As we could see from our individual plot and team plot, we know that to avoid the late prob. the best way that we could do is choose our flights time, the best season that we could choose is fall, the prob is relatively low that we get a arrive delay. and in winter, due to the weather or the snow situation, the late prob is higher, so maybe we could choose donot choose a flight in the snow day. another thing that we would recommad is avoide choose those company that have higher late rate like "B6", "VX" or "WN" cause it is have higher delay rate and late aircraft in all kind of situation. in a word, our recommend is don't choose flights durning the winter season and avoide always take a flights with carrier "B6", "VX" or "WN".
 
 # Individual Findings
 
 ## Ryan
+The probability of a late arrival seems to vary throughout the year, peaking in January, and with a minumum in November. What is surprising about this plot is the peak in late arrivals during the middle of the summer (July/August), and the the sudden drop off for September, October and November. The high probability of late arrivals during January is expected because of weather conditions, and holiday air traffic. 
+```{r}
 
+monthdata <- COflights%>%group_by(MONTH)%>%summarise()
+
+carrierdata <- COflights%>%group_by(CARRIER)%>%summarise()
+
+pm=c()
+ 
+for (i in 1:12) {
+  data <- COflights%>%filter(MONTH == i)
+  pm[i] <- data%>%filter(ARR_DELAY>15)%>%count()/data%>%count()
+}
+
+
+pc=c()
+
+for (i in 1:11) {
+  data <- COflights%>%filter(CARRIER == carrierdata$CARRIER[i])
+  pc[i] <- data%>%filter(ARR_DELAY>15)%>%count()/data%>%count()
+}
+
+
+
+monthdata$PM<-as.data.frame(sapply(pm,c))
+
+ggplot(monthdata, aes(x=MONTH,y=PM))+
+  geom_col(aes(fill=MONTH))
+
+```
+
+From this second plot, one can easily observe that UA is the carrier which has the lowest probability of late arrival (throughout this dataset). The difference in probabilities of late arrivals between carriers is more shocking than I expected. In fact, the carrier which arrives late with the highest probability, does so almost 20% more than the carrier with the lowest probability.
+
+
+```{r}
+carrierdata$PC<-as.data.frame(sapply(pc,c))
+
+ggplot(carrierdata, aes(x=CARRIER,y=PC))+
+  geom_col(aes(fill=CARRIER))+scale_fill_grey()
+
+```
+
+
+The findings above are important becasue they shed some light on the flight scenarios which make for the lowest or highest probabilities of having a delay. This is important because when planning a vacation, one could use this data to optimize their chances of not being delayed.
 ## Chris
 
+as for me, I was consider the carrier is the most important reason to the delay time, cause I have some personal experience, some carrier always delay and some are always on time, so I wanna compare all the carrier in American that I could get each carriers have their own late prob and show some relation between each carrier. It's take a long time to get all the carrier in the file that we have, fianlly, I got following 11 carrier company. 
+
+first, I was try to use the count to calculate the prob directly
+```{r}
+PUA_delay<-filter(COflights,CARRIER=="UA" & ARR_DELAY>=15)%>%count()/count(COflights)
+PAA_delay<-filter(COflights,CARRIER=="AA" & ARR_DELAY>=15)%>%count()/count(COflights)
+PDL_delay<-filter(COflights,CARRIER=="DL" & ARR_DELAY>=15)%>%count()/count(COflights)
+PB6_delay<-filter(COflights,CARRIER=="B6" & ARR_DELAY>=15)%>%count()/count(COflights)
+PEV_delay<-filter(COflights,CARRIER=="EV" & ARR_DELAY>=15)%>%count()/count(COflights)
+PF9_delay<-filter(COflights,CARRIER=="F9" & ARR_DELAY>=15)%>%count()/count(COflights)
+PNK_delay<-filter(COflights,CARRIER=="NK" & ARR_DELAY>=15)%>%count()/count(COflights)
+PVX_delay<-filter(COflights,CARRIER=="VX" & ARR_DELAY>=15)%>%count()/count(COflights)
+PWN_delay<-filter(COflights,CARRIER=="WN" & ARR_DELAY>=15)%>%count()/count(COflights)
+PAS_delay<-filter(COflights,CARRIER=="AS" & ARR_DELAY>=15)%>%count()/count(COflights)
+POO_delay<-filter(COflights,CARRIER=="OO" & ARR_DELAY>=15)%>%count()/count(COflights)
+
+```
+it seems great, But I found that itis only divide the whole COflights by each kinds of carrier, itis not the prob of each prob and we could not get the answer, so need to consider the each carrier and calculate the prob of each carrier.
+
+
+at first, I need to filter 11 new files that showns the results that the flights delay more than 15 minutes in each carrier. And if I want to calculate the prob of each carrier's delay rate, I need to know the exact number that each carrier on time statistics. So I filter one more files that shows all carriers on time flights. 
+
+after that I just calculate each carriers late rate, it is not exact the prob but I could get the information that I need to compare each carrier. 
+
+```{r}
+UA_delay<- filter(COflights, !is.na(ARR_TIME) & ARR_DELAY >= 15 & CARRIER=="UA" )
+UA_ontime <- filter(COflights, !is.na(ARR_TIME) & CARRIER=="UA")
+
+
+AA_delay<- filter(COflights, !is.na(ARR_TIME) & ARR_DELAY >= 15 & CARRIER=="AA" )
+AA_ontime <- filter(COflights, !is.na(ARR_TIME),CARRIER=="AA")
+
+DL_delay<-filter(COflights, !is.na(ARR_TIME) & ARR_DELAY >= 15 & CARRIER=="DL" )
+DL_ontime <- filter(COflights, !is.na(ARR_TIME) & CARRIER=="DL") 
+
+B6_delay<-filter(COflights, !is.na(ARR_TIME) & ARR_DELAY >= 15 & CARRIER=="B6" )
+B6_ontime <- filter(COflights, !is.na(ARR_TIME) & CARRIER=="B6") 
+
+EV_delay<-filter(COflights, !is.na(ARR_TIME) & ARR_DELAY >= 15 & CARRIER=="EV" )
+EV_ontime <- filter(COflights, !is.na(ARR_TIME) & CARRIER=="EV") 
+
+F9_delay<-filter(COflights, !is.na(ARR_TIME) & ARR_DELAY >= 15 & CARRIER=="F9" )
+F9_ontime <- filter(COflights, !is.na(ARR_TIME) & CARRIER=="F9") 
+
+NK_delay<-filter(COflights, !is.na(ARR_TIME) & ARR_DELAY >= 15 & CARRIER=="NK" )
+NK_ontime <- filter(COflights, !is.na(ARR_TIME) & CARRIER=="NK") 
+
+VX_delay<-filter(COflights, !is.na(ARR_TIME) & ARR_DELAY >= 15 & CARRIER=="VX" )
+VX_ontime <- filter(COflights, !is.na(ARR_TIME) & CARRIER=="VX") 
+
+WN_delay<-filter(COflights, !is.na(ARR_TIME) & ARR_DELAY >= 15 & CARRIER=="WN" )
+WN_ontime <- filter(COflights, !is.na(ARR_TIME) & CARRIER=="WN") 
+
+AS_delay<-filter(COflights, !is.na(ARR_TIME) & ARR_DELAY >= 15 & CARRIER=="AS" )
+AS_ontime <- filter(COflights, !is.na(ARR_TIME) & CARRIER=="AS") 
+
+OO_delay<-filter(COflights, !is.na(ARR_TIME) & ARR_DELAY >= 15 & CARRIER=="OO" )
+OO_ontime <- filter(COflights, !is.na(ARR_TIME) & CARRIER=="OO")
+
+prob_UA_LATE_RATE=  nrow(UA_delay)/nrow(UA_ontime)
+prob_AA_LATE_RATE=  nrow(AA_delay)/nrow(AA_ontime)
+prob_DL_LATE_RATE=  nrow(DL_delay)/nrow(DL_ontime)
+prob_B6_LATE_RATE=  nrow(B6_delay)/nrow(B6_ontime)
+prob_EV_LATE_RATE=  nrow(EV_delay)/nrow(EV_ontime)
+prob_F9_LATE_RATE=  nrow(F9_delay)/nrow(F9_ontime)
+prob_NK_LATE_RATE=  nrow(NK_delay)/nrow(NK_ontime)
+prob_VX_LATE_RATE=  nrow(VX_delay)/nrow(VX_ontime)
+prob_WN_LATE_RATE=  nrow(WN_delay)/nrow(WN_ontime)
+prob_AS_LATE_RATE=  nrow(AS_delay)/nrow(AS_ontime)
+prob_OO_LATE_RATE=  nrow(OO_delay)/nrow(OO_ontime)
+```
+than I need use the plot function to show each carrier prob. at first, I used a dataframe to get the new data files and do the x,y lab. 
+
+```{r}
+wholeprob<- data.frame(x=c("UA","AA","DL","B6","EV","F9","NK","VX","WN","AS","OO"),y=c(prob_UA_LATE_RATE,prob_AA_LATE_RATE,prob_DL_LATE_RATE,prob_B6_LATE_RATE,prob_EV_LATE_RATE,prob_F9_LATE_RATE,prob_NK_LATE_RATE,prob_VX_LATE_RATE,prob_WN_LATE_RATE,prob_AS_LATE_RATE,prob_OO_LATE_RATE))
+
+ggplot(data = wholeprob, aes(x,y)) + geom_col()+geom_point()+ xlab("CARRIERS")+ylab("Prob of each carrier")
+```
+after we got this graph, I could easily know the stituation that each carriers prob. like that the carrier "B6" and "VX" have the most late rate, the carrier "DL", "UA" and "EV" have relatively low late rate, and the rest of six carrier have median late rate. 
+
+
+So I could get the answer to my question, for me or for everyone, when they have a plan to travel or go to another place by plane, the best carrier that he could choose is "DL", "UA" and "EV". Itis the most on-time carrier when we consider the aircraft in DEN. for my personal, next time I take a vacation I must choose those flights that have relatively low late rate carrier.
+
+
 ## Katie
+For my personal experience, I think the weather and the late aircraft may be the big reasons that affect the delay of flights. So I first look at each month, and calculate the probability of delayed flights due to the weather in each month and use ggplot to show the tendency of the probability based on weather and month. Then I classify each carrier, and look at their probability of late aircraft, then plot bar graph to show which one has the greatest probability because of the late aircraft.
+```{r}
+delay <- tibble(month = 1:12, p1 = 1:12)
+delay[2][3,1]
+for (j in 1:12) {
+  delaymonth <- COflights %>% filter(ARR_DELAY >= 15 & !is.na(ARR_TIME) & MONTH == j) %>% count(n())
+  delayweather <- COflights %>% filter(WEATHER_DELAY >= 1&!is.na(ARR_TIME) & MONTH == j) %>% count(n())
+  delay[2][j,1] <- delayweather/delaymonth
+    }
+delay
+ggplot(delay, mapping = aes(x = month, y = p1))+
+  geom_jitter()+
+  geom_smooth(method = "loess")+
+  labs(x = "month", y = "probability of weather delay ", title = "The probability of weather delay on each month")
+```
+
+As we can see from the above plot, the greatest probability of weather delay occurs on January, and lower chances to have weather delay happen around July and September. And based on this, comparing with the weather in Colorado, there are more heavy snowing days in the beginning of each year, and in the fall, the snowy days are relative fewer. So I guess that frequency of snowing is the main reason that caused flight delay.
+
+```{r}
+carr <- COflights %>% group_by(CARRIER) %>% summarise() %>% mutate(p = 1)
+carr[11,1]
+for (i in 1:11) {
+  delaycarr<- COflights %>% filter(ARR_DELAY >= 15 & !is.na(ARR_TIME) & CARRIER == carr[[i,1]]) %>% count(n())
+  delayair <- COflights %>% filter(LATE_AIRCRAFT_DELAY >= 1& !is.na(ARR_TIME) & CARRIER == carr[[i,1]]) %>% count(n())
+  carr[2][i,1] <- delayair/delaycarr
+}
+carr
+ggplot(carr, mapping = aes(x = CARRIER, y = p, color = CARRIER))+
+  geom_col()+
+  labs(x = "carriers", y = "probability due to late aircraft",title = "Probability of each carrier delay due to late aircraft")
+```
+The bar chart above shows for each carrier, the probability that their flights delay because of the late aircraft. I use the goem_bar in ggplot to show the range of their probabilities. The bar chart is more easy to read and pretty straightforward to illustrate the highest and the lowest probability for each carrier. Thus from the plot, we can visualize the highest one is WN, and the lowest is NK, which is obvious from the plot. So maybe the manager can allow more NK carriers in Colorado, in order to lower the chances of flight delay.
+
  
 ## Lauren
 I considered how the seasons impact the tardiness of flights and if weather is a confounding variable. Please take note that I determined the seasons as such; Spring: March, April, May; Summer: June, July, August; Fall: Spetember, October, November; and Winter: December, January, February.
@@ -131,6 +380,15 @@ Ultimately, if a passenger wants to be have a higher chance of arriving on time,
 
 These findings are important for indiviudal travelers as well as the Denver airport. With this knowledge, travelers can decide to allow for longer layovers in the winter in order to avoid missing a connection. They can also recognize that their chances of being delayed are higher so they should stay relaxed if it happens. The airport can use this knowledge to know which seasons they need to have more staff on hand. Delayed flights tend to cause angry passengers. For example, the summer months seem to have the largest number of flights and a fair percentage of those flights are delayed; I would recommend that the airport have a larger staff force during these months to handle the large amounts of disgruntled customers.
 
-# Summary
-
+## Contributions
+# Lauren
 Lauren outlined the project as a whole to help us get started. She then discussed why the team's general questions are important. Lauren implemented the size aesthetic in her first plot in order to visualize how many completed flights occur in each season abd she used the label non-default layers.
+
+# Katie
+Katie added some parts of the importance of delay factors, and compared the weather delay on each month in her first plot. She found the tendency of the probability on each month due to the flight delay, which could help manager to schedule flight time on each month to aviod delay. Then for every airline, she found their delay probabilities due to the late aircraft. The bar chart above is obvious to see the delay for each carrier.
+
+# Chris
+Chris added his own interesting problem that he found, the carrier that would influence our late rate and give us his own opinions about the plan that when we want to choose a carrier to go travel, also, he do the recommand part and submit our lab.
+
+# Ryan
+Aside from his individual section, Ryan selected the relevant plots to be shown in the team plots section. He also wrote the conclusions section. 
