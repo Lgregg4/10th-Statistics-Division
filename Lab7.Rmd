@@ -1,0 +1,35 @@
+---
+title: "Lab 7"
+author: "Lauren, Ryan, Chris, Katie"
+date: "3/2/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Who is hiring you?
+
+We have been hired by the Census Bureau to look at trends of mortality.
+
+## Overall Question
+
+## Description of the Dataset
+
+We have decided on a very large data set. We are focusing on the "Leading Causes of Death" tab. This data frame has aboout 230 attributes and over 3000 observations. The attributes include county, state, and causes of death ranging from birth defect to injury to cancer. 
+We plan to tidy the data set by removing redundant or unnecessary attributes and reorganizing the data to end with 5 or fewer attributes. 
+
+## Individual Questions
+
+### Lauren
+
+I am interested in comparing the leading causes of death in Illinois versus Colorado. Being from Illinois, and now living in Colorado, I recognize how different the lifestyles are in each state. Even just what people buy at the grocery stores tells me that Colorado is a much healthier state than Illinois. I want to see if this intuition is reflected in leading causes of death. For example, I would expect to find more outdoor accidents leading to death in Colorado because it is a much more active state than Illinois. This becomes interesting on a larger scale because Colorado is known as one of the least-obese states and has the most physcial activity. Considering leading causes of deaths in the healthiest state could result in some more insights into the definition of "healthy". 
+
+### Ryan
+
+### Chris
+
+### Katie
+
+## Visualization from 2-28 Team Application Exercise
