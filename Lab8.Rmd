@@ -1,0 +1,59 @@
+---
+title: "Lab 8"
+author: "Lauren, Ryan, Katie, Chris"
+date: "3/7/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Overall Question
+
+Does a relationship exist between race (White, Black, Hispanic, Other) and leading causes of death? Futhermore, are these trends consistent across states?
+This question proves relevant as an exploration into if race can indicate liklihood of causes of death. For example, people think that race can act as clue to individuals risk of heart disease. Perhaps we will identify a relationship with heart disease and race within this dataset to support that claim. It is interesting to add the state component because each state has unique conditions that may impact other mortality factors.
+
+This is especially interesting for our domain expert, the Census Bureau, because they are concerned with the general trends of mortality. 
+
+# Conclusion
+
+## Recommendation
+(including why its important)
+
+# Description of the Dataset
+
+(Note: I wrote this based off of my tidy data, obvioulsy it can be changed.)
+
+We have decided on a very large data set found on ____. We are focusing on the "Leading Causes of Death" tab. This data frame has aboout 230 attributes and over 3000 observations. The attributes include county, state, and causes of death ranging from birth defect to injury to cancer. 
+
+We have tidied the data set and omitted unnecessary information. The data now has eight attributes (County Name, State Name, State Abbreviation, Cause of Death, Count, Time Span, Race, and Age Range) and 238,716 observations.
+
+The attribute Cause of Death includes eight causes of death: pregnancy or birth complication, birth defect, injury, cancer, homicide, suicide, heart disease, and HIV. The age range is a range of ages that the data has been collected for and there are six groupings: under 1, 1-14, 15-24, 25-44, 45-64, and 65+. Race was divided into 4 groupings: white, black, hispanic, and other.
+
+# Individual Findings
+
+## Chris
+
+## Katie
+
+## Ryan
+
+## Lauren
+
+
+
+# Who Did What
+
+## Chris
+
+## Katie
+
+## Ryan
+
+## Lauren
+I outlined our R ddocument, helped write our the "Overall Question" section, and assisted in the "Description of the Dataset" section. 
+When tidying the data, I knew the most imporatnt function I needed to use was gather(). Using the pipe, I gathered each of the causes of death into a Cause_of_Death column and a Count column. I then realized that we really did not need the confidence intervals that were associated with each cause of death, so I used select() within the pipe so my data would only include the following attributes: HSI_County_Name, CHSI_State_Name, CHSI_State_Abbr, Cause_of_Death, Count, and LCD_Time_Span. I made this decision because our overall question, and my individual question, did not require these attributes.
+Race and Age Range were hidden within the Cause_of_Death attributes. I knew these were attributes and a tidy dataset has a column for each attribute. I used mutate to establish a Race attribute and an Age Range attribute both filled with NA values. I decided the easiest way for me to extract the race and age data from Cause_of_Death was to use the ifelse() function with grepl() function in order to compare a substring to the Cause_of_Death string. For example, an original observation for cause of death was A_Wh_BirthDef. I wrote the code so it would identify pieces of that observation. If the string contains "A_", then change the associated age range to "under 1". If the string contains "Wh", change the associated race to "White". Finally, if the string contains "BirthDef", change Cause_of_Death to "Birth Defect".
+When checking my work, considering ranges and listing the unqiue observations for each attribute, I noticed several negative values within count. I assumed all of these to be missing values since you can not have less than zero people dying. I again used the conditional statement ifelse() to change all values of Count less than zero to be NA.
+After each of these steps, the data set was finally tidy with 8 variables and 238,716 observations, as opposed to the original 235 bariables with 3,141 observations.
