@@ -11,8 +11,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Overall Question
 
-Does a relationship exist between race (White, Black, Hispanic, Other) and leading causes of death? Futhermore, are these trends consistent across states?
-This question proves relevant as an exploration into if race can indicate liklihood of causes of death. For example, people think that race can act as clue to individuals risk of heart disease. Perhaps we will identify a relationship with heart disease and race within this dataset to support that claim. It is interesting to add the state component because each state has unique conditions that may impact other mortality factors.
+Does a relationship exist between race (White, Black, Hispanic, Other) in some certain ages and leading causes of death? Futhermore, are these trends consistent across states, and which states have the highest percengate that people dead ?
+This question proves relevant as an exploration into if race and ages can indicate liklihood of causes of death. For example, people think that race can act as clue to individuals risk of heart disease. Perhaps we will identify a relationship with heart disease and race within this dataset to support that claim. It is interesting to add the state component because each state has unique conditions that may impact other mortality factors.
 
 This is especially interesting for our domain expert, the Census Bureau, because they are concerned with the general trends of mortality. 
 
@@ -30,6 +30,8 @@ We have decided on a very large data set found on ____. We are focusing on the "
 We have tidied the data set and omitted unnecessary information. The data now has eight attributes (County Name, State Name, State Abbreviation, Cause of Death, Count, Time Span, Race, and Age Range) and 238,716 observations.
 
 The attribute Cause of Death includes eight causes of death: pregnancy or birth complication, birth defect, injury, cancer, homicide, suicide, heart disease, and HIV. The age range is a range of ages that the data has been collected for and there are six groupings: under 1, 1-14, 15-24, 25-44, 45-64, and 65+. Race was divided into 4 groupings: white, black, hispanic, and other.
+
+And based on the overall tidied data, for each individual, we created our own tidy data to explore our questions towards the cause of death. We selected some useful columns and combinded some datas to illustrate the tendency of the death for each state.
 
 # Individual Findings
 
@@ -108,6 +110,7 @@ ggplot(newda,mapping = aes(x = CHSI_State_Abbr, y = The_prob_of_death,fill =CHSI
 ## Chris
 
 ## Katie
+I modified our main question and the description of our tidied data-set. Adding some specific points and more explanations to the tidy data based on my tidy data. In my individual part, I first gathered all data about dead children under age one, and selected columns for each state. Then in order to show the percentage for each state, I calculated the number of children doe to same death reason and divided by the total number to get the percentage. Because the bar chart is obvious to show the percentage, I indicated the numbers into the bar chart.
 
 ## Ryan
 
