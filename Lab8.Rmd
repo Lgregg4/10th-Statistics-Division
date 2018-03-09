@@ -36,6 +36,66 @@ The attribute Cause of Death includes eight causes of death: pregnancy or birth 
 ## Chris
 
 ## Katie
+#Question:
+ My interesting part is Which states of white people at age less than 1 dead due to Preg/Birth Complication have the highest death precentage? 
+Knowing which range of age is the highest percentage death is very important.
+Because due to the rapid development of our country, more people not only want to improve their life quality, but hope to have a longer healthy life. And those dead childen are the youngest, they need our protection and the attentions of the society.
+Once we figure out the range that having highest dead chances and their reasons, we can take some actions to decrease the risk, in order to give people better lives. 
+Hence, we want to pay more attention on why people dead, and in which range of ages people have the highest dead chances.
+
+Based on our team tidy data, I modified some parts and made it accessible for me to explore the highest percentage of states. First, I tidied data by gathering all the white children who¡¯s age is less than one, and selected the columns that I want to explore. Because there are several races and year, so I modified them to separate columns.And now this tidy data only contains the reasons of death for age under one year old, which is what I need.
+```{r}
+library(tidyverse)
+leading<- read.csv("LEADINGCAUSESOFDEATH.csv")
+data1 <- leading %>% gather('A_Wh_Comp', 'A_Bl_Comp', 'A_Ot_Comp', 'A_Hi_Comp',
+                         'A_Wh_BirthDef', 'A_Bl_BirthDef', 'A_Ot_BirthDef', 'A_Hi_BirthDef',key="Cause_of_Death_For_Age_less_than_1", value = "Count") %>%mutate()
+
+data2 <- data1 %>% select(c(CHSI_County_Name, CHSI_State_Name, CHSI_State_Abbr,
+                            Cause_of_Death_For_Age_less_than_1, Count, LCD_Time_Span)) %>%mutate(Race=NA)
+
+data2$Race <- ifelse(grepl("Wh",data2$Cause_of_Death), "White", 
+                     ifelse(grepl("Bl",data2$Cause_of_Death), "Black", 
+                            ifelse(grepl("Ot",data2$Cause_of_Death), "Other", 
+                                   ifelse(grepl("Hi",data2$Cause_of_Death), "Hispanic", NA)
+                            )
+                     )
+
+)
+
+```
+But then I noticed that for all states the number of death and the reason spread, so I want to combine them for each state, and calculate the percentage of death reason for each state. Thus, I created a new tibble which contains the state abbreviation, the race , the death reason, the sum of dead children and the percentage that they dead.And I used the double for loops to calculate the sum and the percentage.
+```{r}
+total<-0
+newda<- tibble(CHSI_State_Abbr = state.abb, Race = "White", Cause_of_death = "Preg/Birth Complication",Sum = 0,The_prob_of_death = 0)
+for (j in 1:25128) {
+  if(data2$Count[[j]] != -1111){
+    total <- sum(data2$Count[[j]],total)
+  } 
+}
+total
+
+a<-1
+for (i in state.abb) {
+  s<- data2%>% filter(CHSI_State_Abbr==i,Cause_of_Death_For_Age_less_than_1 == "A_Wh_Comp")%>%count(n())
+  #print(s)
+  for (j in 1:s$n[[1]]) {
+    if(data2$Count[[j]] != -1111){
+      newda$Sum[[a]]<- sum(data2$Count[j],newda$Sum[[a]])
+      newda$The_prob_of_death[[a]] <- sum(data2$Count[j],newda$Sum[[a]])/total
+     
+    } 
+  }
+ a<- a+1
+}
+```
+After dealing with my final plot data, I uesd geom_col to show the distribution of the percentage of Preg/Birth Complication death for each state.
+And from visualization, the highest percentage occurs in CA and the lowest in TX.
+```{r}
+ggplot(newda,mapping = aes(x = CHSI_State_Abbr, y = The_prob_of_death,fill =CHSI_State_Abbr))+
+  geom_col()+
+  coord_flip()+
+  labs(x = "State Abbreviation", y = "The percentage of death", title = "The percentage of Preg/Birth Complication\n death for children under age one" )
+```
 
 ## Ryan
 
