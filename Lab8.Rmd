@@ -217,12 +217,13 @@ ggplot(data_West_Coast, aes(x=COD, y=Count, color=COD)) +
   geom_col()
 ```
 
-
 ```{r, IL_v_CO}
-ggplot(data_West_Coast, aes(x=COD, y=Count, color=COD)) +
-  geom_col()+
-  facet_wrap(Age_Range~CHSI_State_Abbr)
+ggplot(data2, aes(x=COD, y=Count, color=COD)) +
+  geom_col()
 ```
+
+I was interested in looking at the differences in the leading causes of death on the West Coast versus for the country as a whole. It seems as if 
+
 
 ## Lauren
 
@@ -364,6 +365,24 @@ ggplot() +
   labs(x="Year", y="Data Set") 
 ```
 The above plot shows we have alot of data between year 1900 to 2006. Unfortunately, in order to consider this data we must drop the information from the Malawi data set.
+```{r}
+
+ryan_std = read_csv("R_std.csv")
+lauren_std = read_csv("L_std.csv")
+challa_std = read_csv("C_std.csv")
+
+ggplot()+
+  geom_smooth(aes(x = ryan_std$year,y = ryan_std[ ,5],color = "Tanzanika"))+
+  geom_smooth(aes(x = lauren_std$Year,y = lauren_std[ ,3],color ="VOI Data"))+
+  geom_smooth(aes(x = challa_std$Year,y = challa_std$std,color="Challa"))
+```
+
+
+
+
+
+
+
 
 
 
