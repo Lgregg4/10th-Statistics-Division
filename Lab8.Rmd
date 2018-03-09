@@ -38,14 +38,14 @@ And based on the overall tidied data, for each individual, we created our own ti
 ## Chris
 
 ## Katie
-#Question:
+###Question:
  My interesting part is Which states of white people at age less than 1 dead due to Preg/Birth Complication have the highest death precentage? 
 Knowing which range of age is the highest percentage death is very important.
 Because due to the rapid development of our country, more people not only want to improve their life quality, but hope to have a longer healthy life. And those dead childen are the youngest, they need our protection and the attentions of the society.
 Once we figure out the range that having highest dead chances and their reasons, we can take some actions to decrease the risk, in order to give people better lives. 
 Hence, we want to pay more attention on why people dead, and in which range of ages people have the highest dead chances.
 
-Based on our team tidy data, I modified some parts and made it accessible for me to explore the highest percentage of states. First, I tidied data by gathering all the white children who¡¯s age is less than one, and selected the columns that I want to explore. Because there are several races and year, so I modified them to separate columns.And now this tidy data only contains the reasons of death for age under one year old, which is what I need.
+Based on our team tidy data, I modified some parts and made it accessible for me to explore the highest percentage of states. First, I tidied data by gathering all the white children who??s age is less than one, and selected the columns that I want to explore. Because there are several races and year, so I modified them to separate columns.And now this tidy data only contains the reasons of death for age under one year old, which is what I need.
 ```{r}
 library(tidyverse)
 leading<- read.csv("LEADINGCAUSESOFDEATH.csv")
@@ -103,6 +103,96 @@ ggplot(newda,mapping = aes(x = CHSI_State_Abbr, y = The_prob_of_death,fill =CHSI
 
 ## Lauren
 
+```{r, include=FALSE}
+#data <- read.csv("/Users/laurengregg/Desktop/IntrotoDataScience/Lab8/chsi_dataset/LEADINGCAUSESOFDEATH.csv")
+data<- read.csv("LEADINGCAUSESOFDEATH.csv")
+
+data1 <- data %>% gather('A_Wh_Comp', 'A_Bl_Comp', 'A_Ot_Comp', 'A_Hi_Comp',
+                         'A_Wh_BirthDef', 'A_Bl_BirthDef', 'A_Ot_BirthDef', 'A_Hi_BirthDef',
+                         
+                         'B_Wh_Injury', 'B_Bl_Injury', 'B_Ot_Injury', 'B_Hi_Injury',
+                         'B_Wh_Cancer', 'B_Bl_Cancer', 'B_Ot_Cancer', 'B_Hi_Cancer',
+                         'B_Wh_Homicide', 'B_Bl_Homicide', 'B_Ot_Homicide', 'B_Hi_Homicide',
+                         
+                         'C_Wh_Injury', 'C_Bl_Injury', 'C_Ot_Injury','C_Hi_Injury',
+                         'C_Wh_Homicide', 'C_Bl_Homicide', 'C_Ot_homicide', 'C_Hi_Homicide',
+                         'C_Wh_Suicide','C_Bl_Suicide', 'C_Ot_Suicide', 'C_Hi_Suicide',
+                         'C_Wh_Cancer', 'C_Bl_Cancer', 'C_Ot_Cancer', 'C_Hi_Cancer',
+                         
+                         'D_Wh_Injury', 'D_Bl_Injury', 'D_Ot_Injury', 'D_Hi_Injury',
+                         'D_Wh_Cancer', 'D_Bl_Cancer', 'D_Ot_Cancer', 'D_Hi_Cancer',
+                         'D_Wh_HeartDis', 'D_Bl_HeartDis', 'D_Ot_HeartDis', 'D_Hi_HeartDis',
+                         'D_Wh_Suicide', 'D_Bl_Suicide', 'D_Ot_Suicide', 'D_Hi_Suicide',
+                         'D_Wh_HIV', 'D_Bl_HIV', 'D_Ot_HIV', 'D_Hi_HIV',
+                         'D_Wh_Homicide', 'D_Bl_Homicide', 'D_Ot_Homicide', 'D_Hi_Homicide',
+                         
+                         'E_Wh_Cancer', 'E_Bl_Cancer', 'E_Ot_Cancer', 'E_Hi_Cancer',
+                         'E_Wh_HeartDis', 'E_Bl_HeartDis', 'E_Ot_HeartDis', 'E_Hi_HeartDis',
+                         
+                         'F_Wh_HeartDis', 'F_Bl_HeartDis', 'F_Ot_HeartDis', 'F_Hi_HeartDis',
+                         'F_Wh_Cancer', 'F_Bl_Cancer', 'F_Ot_Cancer', 'F_Hi_Cancer',
+                         
+                         key="Cause_of_Death", value = "Count") 
+
+data2 <- data1 %>% select(c(CHSI_County_Name, CHSI_State_Name, CHSI_State_Abbr,
+                        Cause_of_Death, Count, LCD_Time_Span)) %>%
+  mutate(Race=NA) %>%
+  mutate(Age_Range=NA)
+head(data2)
+
+data2$Race <- ifelse(grepl("Wh",data2$Cause_of_Death), "White", 
+                     ifelse(grepl("Bl",data2$Cause_of_Death), "Black", 
+                            ifelse(grepl("Ot",data2$Cause_of_Death), "Other", 
+                                   ifelse(grepl("Hi",data2$Cause_of_Death), "Hispanic", NA)
+                                  )
+                            )
+                      )
+
+data2$Age_Range <- ifelse(grepl("A_",data2$Cause_of_Death), "under 1", 
+                          ifelse(grepl("B_",data2$Cause_of_Death), "1-14", 
+                                 ifelse(grepl("C_",data2$Cause_of_Death), "15-24", 
+                                        ifelse(grepl("D_",data2$Cause_of_Death), "25-44",
+                                               ifelse(grepl("E_",data2$Cause_of_Death), "45-64",
+                                                      ifelse(grepl("F_",data2$Cause_of_Death), "65+", data2$Cause_of_Death)
+                                                      )
+                                               )
+                                        )
+                                )
+                          )
+
+data2$Count <- ifelse(data2$Count < 0, NA, data2$Count)
+
+data2$Cause_of_Death <- ifelse(grepl('Comp',data2$Cause_of_Death), "Preg/Birth Complication",
+                          ifelse(grepl('BirthDef',data2$Cause_of_Death), "Birth Defect",
+                            ifelse(grepl('Injury',data2$Cause_of_Death), "Injury",
+                              ifelse(grepl('Cancer',data2$Cause_of_Death), "Cancer",
+                                ifelse(grepl('omicide',data2$Cause_of_Death), "Homicide",
+                                  ifelse(grepl('Suicide',data2$Cause_of_Death), "Suicide",
+                                    ifelse(grepl('HeartDis',data2$Cause_of_Death), "Heart Disease",
+                                      ifelse(grepl('HIV',data2$Cause_of_Death), "HIV", NA
+                                            )
+                                          )
+                                        )
+                                      )
+                                    )
+                                  )
+                                )
+                               )
+
+
+data_IL_CO <- data2 %>% filter(CHSI_State_Abbr == "CO" | CHSI_State_Abbr == "IL")
+```
+
+```{r, IL_v_CO}
+ggplot(data=data_IL_CO, aes(x=Cause_of_Death, y=Count, color=Cause_of_Death)) +
+  geom_col()+
+  facet_wrap(Age_Range~CHSI_State_Name)
+```
+```{r, IL_v_CO_age}
+ggplot(data=data_IL_CO, aes(x=Cause_of_Death, y=Count, color=Cause_of_Death)) +
+  geom_col()+
+  facet_wrap(~CHSI_State_Name)
+```
 
 
 # Who Did What
@@ -119,4 +209,13 @@ I outlined our R ddocument, helped write our the "Overall Question" section, and
 When tidying the data, I knew the most imporatnt function I needed to use was gather(). Using the pipe, I gathered each of the causes of death into a Cause_of_Death column and a Count column. I then realized that we really did not need the confidence intervals that were associated with each cause of death, so I used select() within the pipe so my data would only include the following attributes: HSI_County_Name, CHSI_State_Name, CHSI_State_Abbr, Cause_of_Death, Count, and LCD_Time_Span. I made this decision because our overall question, and my individual question, did not require these attributes.
 Race and Age Range were hidden within the Cause_of_Death attributes. I knew these were attributes and a tidy dataset has a column for each attribute. I used mutate to establish a Race attribute and an Age Range attribute both filled with NA values. I decided the easiest way for me to extract the race and age data from Cause_of_Death was to use the ifelse() function with grepl() function in order to compare a substring to the Cause_of_Death string. For example, an original observation for cause of death was A_Wh_BirthDef. I wrote the code so it would identify pieces of that observation. If the string contains "A_", then change the associated age range to "under 1". If the string contains "Wh", change the associated race to "White". Finally, if the string contains "BirthDef", change Cause_of_Death to "Birth Defect".
 When checking my work, considering ranges and listing the unqiue observations for each attribute, I noticed several negative values within count. I assumed all of these to be missing values since you can not have less than zero people dying. I again used the conditional statement ifelse() to change all values of Count less than zero to be NA.
-After each of these steps, the data set was finally tidy with 8 variables and 238,716 observations, as opposed to the original 235 bariables with 3,141 observations.
+
+
+
+# Team Exercise Plot (East Africa Lake Data)
+
+i have a plot to go here
+```{r}
+
+```
+
