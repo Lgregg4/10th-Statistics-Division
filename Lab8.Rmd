@@ -97,15 +97,18 @@ data2$Cause_of_Death <- ifelse(grepl('Comp',data2$Cause_of_Death), "Preg/Birth C
 
 ```{r}
 ggplot(data=data2, aes(x=Cause_of_Death, y=Count, color=Cause_of_Death)) +
-  geom_col()+
+  geom_histogram()+
   facet_wrap(~Race)
 ```
 
 
 
 ## Recommendation
-(including why its important)
+It seems as if across all races, the leading causes of death are primarially cancer, heart disease, and injury. There were some significant differences between each of the races. Primarially, and most easily observed, is that black people tend to die less frequently of injury than any of the other races. Also that there is a higher proportion of black people who die of homicide than any of teh other races. White people tend to die more frequently than the other races by suicide. 
 
+This information is important because it may allow targeted information about these causes of death to be sent out to relative focus groups. For example, from this dataset it is apparent that suicide prevention methods are more necessary for white people than any of the other races. 
+
+Therefore, our recommendation is this: obseve the chart above (possibly normalize it by dividing by the total count for each race!), and see which races are dying more frequently of which factors. Then, using that information, create targeted health care for each race. This would provide possible antidotes to each of the most prevalent factors within the race. Hopefully this will decrease the amount of preventable deaths which are occuring, and will help educate each race based on its specific need. 
 # Description of the Dataset
 
 (Note: I wrote this based off of my tidy data, obvioulsy it can be changed.)
