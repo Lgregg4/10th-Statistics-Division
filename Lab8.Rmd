@@ -147,6 +147,83 @@ ggplot(newda,mapping = aes(x = CHSI_State_Abbr, y = The_prob_of_death,fill =CHSI
 
 ## Ryan
 
+```{r}
+
+data<- read.csv("LEADINGCAUSESOFDEATH.csv")
+
+data[data == -1111] <- NA
+
+tidy_data <- data%>%select(c("County_FIPS_Code","CHSI_State_Abbr","A_Wh_Comp","A_Bl_Comp","A_Ot_Comp","A_Hi_Comp","A_Wh_BirthDef","A_Bl_BirthDef","A_Ot_BirthDef","A_Hi_BirthDef","B_Wh_Injury","B_Bl_Injury","B_Ot_Injury","B_Hi_Injury","B_Wh_Cancer","B_Bl_Cancer","B_Ot_Cancer","B_Hi_Cancer","B_Wh_Homicide","B_Bl_Homicide","B_Ot_Homicide","B_Hi_Homicide","C_Wh_Injury","C_Bl_Injury","C_Ot_Injury","C_Hi_Injury","C_Wh_Homicide","C_Bl_Homicide","C_Ot_homicide","C_Hi_Homicide","C_Wh_Suicide","C_Bl_Suicide","C_Ot_Suicide","C_Hi_Suicide","C_Wh_Cancer","C_Bl_Cancer","C_Ot_Cancer","C_Hi_Cancer","D_Wh_Injury","D_Bl_Injury","D_Ot_Injury","D_Hi_Injury","D_Wh_Cancer","D_Bl_Cancer","D_Ot_Cancer","D_Hi_Cancer","D_Wh_HeartDis","D_Bl_HeartDis","D_Ot_HeartDis","D_Hi_HeartDis","D_Wh_Suicide","D_Bl_Suicide","D_Ot_Suicide","D_Hi_Suicide","D_Wh_HIV","D_Bl_HIV","D_Ot_HIV","D_Hi_HIV","D_Wh_Homicide","D_Bl_Homicide","D_Ot_Homicide","D_Hi_Homicide","E_Wh_Cancer","E_Bl_Cancer","E_Ot_Cancer","E_Hi_Cancer","E_Wh_HeartDis","E_Bl_HeartDis","E_Ot_HeartDis","E_Hi_HeartDis","F_Wh_HeartDis","F_Bl_HeartDis","F_Ot_HeartDis","F_Hi_HeartDis","F_Wh_Cancer","F_Bl_Cancer","F_Ot_Cancer","F_Hi_Cancer"))
+
+tidy_data<-tidy_data%>%gather("A_Wh_Comp","A_Bl_Comp","A_Ot_Comp","A_Hi_Comp","A_Wh_BirthDef","A_Bl_BirthDef","A_Ot_BirthDef","A_Hi_BirthDef","B_Wh_Injury","B_Bl_Injury","B_Ot_Injury","B_Hi_Injury","B_Wh_Cancer","B_Bl_Cancer","B_Ot_Cancer","B_Hi_Cancer","B_Wh_Homicide","B_Bl_Homicide","B_Ot_Homicide","B_Hi_Homicide","C_Wh_Injury","C_Bl_Injury","C_Ot_Injury","C_Hi_Injury","C_Wh_Homicide","C_Bl_Homicide","C_Ot_homicide","C_Hi_Homicide","C_Wh_Suicide","C_Bl_Suicide","C_Ot_Suicide","C_Hi_Suicide","C_Wh_Cancer","C_Bl_Cancer","C_Ot_Cancer","C_Hi_Cancer","D_Wh_Injury","D_Bl_Injury","D_Ot_Injury","D_Hi_Injury","D_Wh_Cancer","D_Bl_Cancer","D_Ot_Cancer","D_Hi_Cancer","D_Wh_HeartDis","D_Bl_HeartDis","D_Ot_HeartDis","D_Hi_HeartDis","D_Wh_Suicide","D_Bl_Suicide","D_Ot_Suicide","D_Hi_Suicide","D_Wh_HIV","D_Bl_HIV","D_Ot_HIV","D_Hi_HIV","D_Wh_Homicide","D_Bl_Homicide","D_Ot_Homicide","D_Hi_Homicide","E_Wh_Cancer","E_Bl_Cancer","E_Ot_Cancer","E_Hi_Cancer","E_Wh_HeartDis","E_Bl_HeartDis","E_Ot_HeartDis","E_Hi_HeartDis","F_Wh_HeartDis","F_Bl_HeartDis","F_Ot_HeartDis","F_Hi_HeartDis","F_Wh_Cancer","F_Bl_Cancer","F_Ot_Cancer","F_Hi_Cancer",key = "COD",value = "Count")                            
+                        
+
+
+   
+
+
+
+data2 <- tidy_data %>% select(c(County_FIPS_Code, CHSI_State_Abbr,
+                        COD, Count)) %>%
+  mutate(Race=NA) %>%
+  mutate(Age_Range=NA)
+head(data2)
+
+
+
+data2$COD <- ifelse(grepl('Comp',data2$COD), "Preg/Birth Complication",
+                          ifelse(grepl('BirthDef',data2$COD), "Birth Defect",
+                            ifelse(grepl('Injury',data2$COD), "Injury",
+                              ifelse(grepl('Cancer',data2$COD), "Cancer",
+                                ifelse(grepl('omicide',data2$COD), "Homicide",
+                                  ifelse(grepl('Suicide',data2$COD), "Suicide",
+                                    ifelse(grepl('HeartDis',data2$COD), "Heart Disease",
+                                      ifelse(grepl('HIV',data2$COD), "HIV", NA
+                                            )
+                                          )
+                                        )
+                                      )
+                                    )
+                                  )
+                                )
+                               )
+
+
+
+
+
+data2$Age_Range <- ifelse(grepl("A_",data2$COD), "under 1", 
+                          ifelse(grepl("B_",data2$COD), "1-14", 
+                                 ifelse(grepl("C_",data2$COD), "15-24", 
+                                        ifelse(grepl("D_",data2$COD), "25-44",
+                                               ifelse(grepl("E_",data2$COD), "45-64",
+                                                      ifelse(grepl("F_",data2$COD), "65+", data2$COD)
+                                                      )
+                                               )
+                                        )
+                                )
+                          )
+
+
+data_West_Coast <- data2 %>% filter(CHSI_State_Abbr == "CA" | CHSI_State_Abbr == "OR"| CHSI_State_Abbr == "WA")
+
+
+
+```
+
+
+```{r, IL_v_CO}
+ggplot(data_West_Coast, aes(x=COD, y=Count, color=COD)) +
+  geom_col()
+```
+
+
+```{r, IL_v_CO}
+ggplot(data_West_Coast, aes(x=COD, y=Count, color=COD)) +
+  geom_col()+
+  facet_wrap(Age_Range~CHSI_State_Abbr)
+```
+
 ## Lauren
 
 ```{r, include=FALSE}
