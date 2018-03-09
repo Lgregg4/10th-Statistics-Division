@@ -7,6 +7,8 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(tidyr)
 ```
 
 # Overall Question
@@ -97,23 +99,25 @@ data2$Cause_of_Death <- ifelse(grepl('Comp',data2$Cause_of_Death), "Preg/Birth C
 
 ```{r}
 ggplot(data=data2, aes(x=Cause_of_Death, y=Count, color=Cause_of_Death)) +
-  geom_histogram()+
-  facet_wrap(~Race)
+  geom_col()+
+  facet_wrap(~Race) +
+  ylab("Count") +
+  xlab("Cause of Death") + 
+  theme(axis.text.x=element_blank())
 ```
 
 
 
 ## Recommendation
-It seems as if across all races, the leading causes of death are primarially cancer, heart disease, and injury. There were some significant differences between each of the races. Primarially, and most easily observed, is that black people tend to die less frequently of injury than any of the other races. Also that there is a higher proportion of black people who die of homicide than any of teh other races. White people tend to die more frequently than the other races by suicide. 
+It seems as if across all races, the leading causes of death are primarially cancer, heart disease, and injury. There were some significant differences between each of the races. Primarially, and most easily observed, is that black people tend to die less frequently of injury than any of the other races. Also that there is a higher proportion of black people who die of homicide than any of the other races. White people tend to die more frequently than the other races by suicide. 
 
 This information is important because it may allow targeted information about these causes of death to be sent out to relative focus groups. For example, from this dataset it is apparent that suicide prevention methods are more necessary for white people than any of the other races. 
 
-Therefore, our recommendation is this: obseve the chart above (possibly normalize it by dividing by the total count for each race!), and see which races are dying more frequently of which factors. Then, using that information, create targeted health care for each race. This would provide possible antidotes to each of the most prevalent factors within the race. Hopefully this will decrease the amount of preventable deaths which are occuring, and will help educate each race based on its specific need. 
+Therefore, our recommendation is this: observe the chart above (possibly normalize it by dividing by the total count for each race!), and see which races are dying more frequently of which factors. Then, using that information, create targeted health care for each race. This would provide possible antidotes to each of the most prevalent factors within the race. Hopefully this will decrease the amount of preventable deaths which are occuring, and will help educate each race based on its specific need. 
+
 # Description of the Dataset
 
-(Note: I wrote this based off of my tidy data, obvioulsy it can be changed.)
-
-We have decided on a very large data set found on ____. We are focusing on the "Leading Causes of Death" tab. This data frame has aboout 230 attributes and over 3000 observations. The attributes include county, state, and causes of death ranging from birth defect to injury to cancer. 
+We have decided on a very large data set found by our team member, Ryan. We are focusing on the "Leading Causes of Death" tab. This data frame has aboout 230 attributes and over 3000 observations. The attributes include county, state, and causes of death ranging from birth defect to injury to cancer. 
 
 We have tidied the data set and omitted unnecessary information. The data now has eight attributes (County Name, State Name, State Abbreviation, Cause of Death, Count, Time Span, Race, and Age Range) and 238,716 observations.
 
@@ -136,7 +140,6 @@ library("ggplot2")
 
 
 death<- read.csv(file="LEADINGCAUSESOFDEATH.csv")
-death
 
 ```
 what I concerned is the different states stitution and about cancer or homicide in all four race: "White", "Black", "others" and "hispanic"
@@ -306,7 +309,6 @@ ggplot(data_West_Coast, aes(x=COD, y=Count, color=COD)) +
   geom_col()
 ```
 
-<<<<<<< Updated upstream
 ```{r, IL_v_CO}
 ggplot(data2, aes(x=COD, y=Count, color=COD)) +
   geom_col()
@@ -396,32 +398,46 @@ data2$Cause_of_Death <- ifelse(grepl('Comp',data2$Cause_of_Death), "Preg/Birth C
 data_IL_CO <- data2 %>% filter(CHSI_State_Abbr == "CO" | CHSI_State_Abbr == "IL")
 ```
 
+I am interested in comparing causes of death in Illinois to causes of death in Colorado. Being from Illinois, and now living in Colorado, I recognize how different the lifestyles are in each state. Even just what people buy at the grocery stores tells me that Colorado is a much healthier state than Illinois. I want to see if this intuition is reflected in leading causes of death. For example, I would expect to find more outdoor accidents leading to death in Colorado because it is a much more active state than Illinois. This becomes interesting on a larger scale because Colorado is known as one of the least-obese states and has the most physcial activity. Considering leading causes of deaths in the healthiest state could result in some more insights into the definition of "healthy".
 ```{r}
 ggplot(data=data_IL_CO, aes(x=Cause_of_Death, y=Count, color=Cause_of_Death)) +
   geom_col()+
-  facet_wrap(Age_Range~CHSI_State_Name)
+  facet_wrap(~CHSI_State_Name) +
+  theme(axis.text.x=element_blank(), axis.ticks.x=element_blank()) +
+  xlab("Cause of Death")
 ```
+
+I first considered just comparing the two states. It would be better to normalize the data relative to the states in order to have a cleaner comparison. However, it appears the Illinoisans tend ot suffer more from cancer and heart disease than Coloradoans. After seeing this plot, I figured I should probably consider age as well.
+
 ```{r}
 ggplot(data=data_IL_CO, aes(x=Cause_of_Death, y=Count, color=Cause_of_Death)) +
   geom_col()+
-  facet_wrap(~CHSI_State_Name)
+  facet_wrap(Age_Range~CHSI_State_Name)+
+  theme(axis.text.x=element_blank(), axis.ticks.x=element_blank()) +
+  xlab("Cause of Death")
 ```
+
+Even at each age group, we see a similar pattern as before. I would not want to make any finalized conclusions until the counts were normalized by state, but it does appear that Colorado may be more healthy than Illinois based on the mortality counts caused by cancer and heart disease.
 
 
 # Who Did What
 
 ## Chris
 I tried to analysis the own aspect that I am interesting and I tidy my data set in my own easy data set which only include 435 obs of 4 variables, than I try to find the conclusion and the analysis of the casue of deaths in baby which only concern about the "cancer" and "homicide"
+
 ## Katie
 I modified our main question and the description of our tidied data-set. Adding some specific points and more explanations to the tidy data based on my tidy data. In my individual part, I first gathered all data about dead children under age one, and selected columns for each state. Then in order to show the percentage for each state, I calculated the number of children doe to same death reason and divided by the total number to get the percentage. Because the bar chart is obvious to show the percentage, I indicated the numbers into the bar chart.
 
 ## Ryan
 
 ## Lauren
-I outlined our R document, helped write our the "Overall Question" section, and assisted in the "Description of the Dataset" section. 
-When tidying the data, I knew the most imporatnt function I needed to use was gather(). Using the pipe, I gathered each of the causes of death into a Cause_of_Death column and a Count column. I then realized that we really did not need the confidence intervals that were associated with each cause of death, so I used select() within the pipe so my data would only include the following attributes: HSI_County_Name, CHSI_State_Name, CHSI_State_Abbr, Cause_of_Death, Count, and LCD_Time_Span. I made this decision because our overall question, and my individual question, did not require these attributes.
-Race and Age Range were hidden within the Cause_of_Death attributes. I knew these were attributes and a tidy dataset has a column for each attribute. I used mutate to establish a Race attribute and an Age Range attribute both filled with NA values. I decided the easiest way for me to extract the race and age data from Cause_of_Death was to use the ifelse() function with grepl() function in order to compare a substring to the Cause_of_Death string. For example, an original observation for cause of death was A_Wh_BirthDef. I wrote the code so it would identify pieces of that observation. If the string contains "A_", then change the associated age range to "under 1". If the string contains "Wh", change the associated race to "White". Finally, if the string contains "BirthDef", change Cause_of_Death to "Birth Defect".
-When checking my work, considering ranges and listing the unqiue observations for each attribute, I noticed several negative values within count. I assumed all of these to be missing values since you can not have less than zero people dying. I again used the conditional statement ifelse() to change all values of Count less than zero to be NA.
+I outlined our R document, helped write our the "Overall Question" section, and assisted in the "Description of the Dataset" section. I also played a large role in the conclusion visualizations and the first East Africa Lake data visualization.
+
+When tidying the data, I knew the most important function I needed to use was gather(). Using the pipe, I gathered each of the causes of death into a Cause_of_Death column and a Count column. I then realized that we really did not need the confidence intervals that were associated with each cause of death, so I used select() within the pipe so my data would only include the following attributes: HSI_County_Name, CHSI_State_Name, CHSI_State_Abbr, Cause_of_Death, Count, and LCD_Time_Span. I made this decision because our overall question, and my individual question, did not require these attributes.
+
+Race and Age Range were hidden within the Cause_of_Death attributes. I knew these were attributes and a tidy dataset has a column for each attribute. I used mutate to establish a Race attribute and an Age Range attribute both filled with NA values. I decided the easiest way for me to extract the race and age data from Cause_of_Death was to use the ifelse() function with grepl() function in order to compare a substring to the Cause_of_Death string value. For example, an original observation for cause of death was A_Wh_BirthDef. I wrote the code so it would identify pieces of that observation. If the string contains "A_", then change the associated age range to "under 1". If the string contains "Wh", change the associated race to "White". Finally, if the string contains "BirthDef", change Cause_of_Death to "Birth Defect".
+
+When checking my work, considering ranges and listing the unqiue observations for each attribute, I noticed several negative values wi lues since one can not have less than zero people dying. I again used the conditional statement ifelse() to change all values of Count less than zero to be NA.
 
 
 
@@ -448,30 +464,28 @@ ggplot() +
   geom_segment(data = dataR, mapping= aes(x=min(year), y =1, xend=max(year), yend=1, color="Tanganyika"), size=2) +
   geom_segment(data = dataL, mapping= aes(x=min(Year), y =2, xend=max(Year), yend=2, color="VOI Rainfall"), size=2) +
   geom_segment(data = dataK, mapping= aes(x=min(Year), y =3, xend=max(Year), yend=3, color="Malawi"), size=2) +
-  geom_segment(data = dataC, mapping= aes(x=min(na.omit(as.numeric``Age AD`)), y =4, 
+  geom_segment(data = dataC, mapping= aes(x=min(na.omit(as.numeric(`Age AD`))), y =4, 
                                 xend=max(na.omit(as.numeric(`Age AD`))), yend=4, color="Challa"), size=2) +
   theme(axis.text.y=element_blank()) +
   labs(x="Year", y="Data Set") 
 ```
+
 The above plot shows we have alot of data between year 1900 to 2006. Unfortunately, in order to consider this data we must drop the information from the Malawi data set.
-```{r}
+
+```{r, include=FALSE}
 
 ryan_std = read_csv("R_std.csv")
 lauren_std = read_csv("L_std.csv")
 challa_std = read_csv("C_std.csv")
-
+```
+```{r}
 ggplot()+
   geom_smooth(aes(x = ryan_std$year,y = ryan_std[ ,5],color = "Tanzanika"))+
   geom_smooth(aes(x = lauren_std$Year,y = lauren_std[ ,3],color ="VOI Data"))+
-  geom_smooth(aes(x = challa_std$Year,y = challa_std$std,color="Challa"))
+  geom_smooth(aes(x = challa_std$Year,y = challa_std$std,color="Challa")) +
+  xlab("Year") +
+  ylab("Standardized Values for Each Dataset")
 ```
 
-
-
-
-
-
-
-
-
+This plot compares a smoothed estimate of the data from the three lake datasets: Tanzanika, VOI Data, and Challa. 
 
