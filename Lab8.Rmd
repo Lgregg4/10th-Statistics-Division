@@ -37,8 +37,54 @@ And based on the overall tidied data, for each individual, we created our own ti
 
 ## Chris
 
+base on my interesting question of the cause of leading death, the most attract question to me is the baby's homicide and babys' cancer stituation cause I thought it was really important to every american. toady's baby's death rate became a huge problem.
+to do that , first I need to read our team csv files, which includes plenty of variable and datas that states every countries, every states and the reason of different age range of deaths reasons. 
+
+```{r}
+library(tidyverse)
+library(tidyr)
+
+library("ggplot2")
+
+
+death<- read.csv(file="~/Desktop/LEADINGCAUSESOFDEATH.csv")
+death
+
+```
+what I concerned is the different states stitution and about cancer or homicide in all four race: "White", "Black", "others" and "hispanic"
+so I select the the column which include the column name that I need right below.
+
+death1 <- select( death, CHSI_State_Name, CHSI_State_Abbr,B_Wh_Cancer, B_Bl_Cancer, B_Ot_Cancer, B_Hi_Cancer,B_Wh_Homicide, B_Bl_Homicide, B_Ot_Homicide, B_Hi_Homicide)
+
+cause we got plenty of missing value like -1111(due to the sheet in our data set, we know -1111 means no data.), so I made all -1111 value change to "NA"
+
+then I gather the colunm to new type which is eaier to conclude and I delete all NA rows. futhermore, to help me make the plot easier I change one of the column name "CHSI_State_Name" to "State" which would be easier to plot. Then, I got the whole new csv files
+death2<-death1%>%gather('B_Wh_Cancer','B_Bl_Cancer','B_Ot_Cancer','B_Hi_Cancer','B_Wh_Homicide', 'B_Bl_Homicide', 'B_Ot_Homicide', 'B_Hi_Homicide', key="Cause", value="Count")
+```{r}
+death1 <- select( death, CHSI_State_Name, CHSI_State_Abbr,B_Wh_Cancer, B_Bl_Cancer, B_Ot_Cancer, B_Hi_Cancer,B_Wh_Homicide, B_Bl_Homicide, B_Ot_Homicide, B_Hi_Homicide)
+death1[death1==-1111]<-NA
+death2<-death1%>%gather('B_Wh_Cancer','B_Bl_Cancer','B_Ot_Cancer','B_Hi_Cancer','B_Wh_Homicide', 'B_Bl_Homicide', 'B_Ot_Homicide', 'B_Hi_Homicide', key="Cause", value="Count")
+
+death2<-na.omit(death2)
+names(death2)[1]<-"State"
+```
+
+```{r}
+ggplot(death2,aes(x=Cause))+geom_bar(aes(x=Cause,fill=State))+coord_flip()+labs(list(x="number of counts",y="differect race and different kind of deaths",title="analysis of different race in baby's cancer and homicide"))
+```
+
+Then I made the plot use geom_bar function to get the graph and filp it. Then make the labs. Then I could just analysis the graph that I made. from the plot we could conclude that although the population of different race are different, cause  most of american are white. we still could see the ratio of homicide and cancer.  "others" data is too small that I cannot made some conculsion, So basicly, I was thinking about white, balck and Hispanic race.
+
+### analysis
+is that white and Hispanic babies got more percentange of deaths in Cancer when compare to Homicide , They got more safe place and be protected, so the homicide stitution are only small number. when we consider the whole population. but lots of babies got cancer and leading to death.
+but things different in "Black". the babys even got more homicide statistic than white babies, Itis horrible number that we need to concern. 
+
+### recommendation 
+through the graph and the analysis that I got, we need to concern more about the cancer stitution in "White" and "Hispanic" babies maybe we spent more time to imporve our medical treatment , and we need to spent more time or money to give the black babies a safe space to grow up to avoid the homicide. 
+
+
 ## Katie
-###Question:
+### Question:
  My interesting part is Which states of white people at age less than 1 dead due to Preg/Birth Complication have the highest death precentage? 
 Knowing which range of age is the highest percentage death is very important.
 Because due to the rapid development of our country, more people not only want to improve their life quality, but hope to have a longer healthy life. And those dead childen are the youngest, they need our protection and the attentions of the society.
@@ -198,7 +244,7 @@ ggplot(data=data_IL_CO, aes(x=Cause_of_Death, y=Count, color=Cause_of_Death)) +
 # Who Did What
 
 ## Chris
-
+I tried to analysis the own aspect that I am interesting and I tidy my data set in my own easy data set which only include 435 obs of 4 variables, than I try to find the conclusion and the analysis of the casue of deaths in baby which only concern about the "cancer" and "homicide"
 ## Katie
 I modified our main question and the description of our tidied data-set. Adding some specific points and more explanations to the tidy data based on my tidy data. In my individual part, I first gathered all data about dead children under age one, and selected columns for each state. Then in order to show the percentage for each state, I calculated the number of children doe to same death reason and divided by the total number to get the percentage. Because the bar chart is obvious to show the percentage, I indicated the numbers into the bar chart.
 
