@@ -337,8 +337,42 @@ When checking my work, considering ranges and listing the unqiue observations fo
 
 # Team Exercise Plot (East Africa Lake Data)
 
-i have a plot to go here
-```{r}
+```{r, include=FALSE}
+dataR <- read_csv("/Users/laurengregg/Desktop/IntrotoDataScience/Lab8/TeamExercise/Ryans_tidy_data.csv")
+dataL <- read_csv("/Users/laurengregg/Desktop/IntrotoDataScience/Lab8/TeamExercise/tidy_VOI_rainfall.csv")
+dataK <- read_csv("/Users/laurengregg/Desktop/IntrotoDataScience/Lab8/TeamExercise/Katies_Tidy_Data.csv")
+dataC <- read_csv("/Users/laurengregg/Desktop/IntrotoDataScience/Lab8/TeamExercise/Chris_tidy_data.csv")
 
+dataL <- dataL %>% group_by(Year)%>% summarise(Rainfall=mean(Rainfall, na.rm=TRUE))
 ```
+
+We are attemping to combine data from four data sets. The common variable across all for data sets is year. We first must consider which range of years has the most data.
+```{r, Comparing Data years}
+ggplot() +
+  geom_segment(data = dataR, mapping= aes(x=min(year), y =1, xend=max(year), yend=1, color="Tanganyika"), size=2) +
+  geom_segment(data = dataL, mapping= aes(x=min(Year), y =2, xend=max(Year), yend=2, color="VOI Rainfall"), size=2) +
+  geom_segment(data = dataK, mapping= aes(x=min(Year), y =3, xend=max(Year), yend=3, color="Malawi"), size=2) +
+  geom_segment(data = dataC, mapping= aes(x=min(na.omit(as.numeric(`Age AD`))), y =4, 
+                                xend=max(na.omit(as.numeric(`Age AD`))), yend=4, color="Challa"), size=2) +
+  theme(axis.text.y=element_blank()) +
+  labs(x="Year", y="Data Set") 
+```
+The above plot shows we have alot of data between year 504 and 1996. Unfortunately, in order to consider this data we must drop the information from the VOI rainfall data set.
+
+However, we are able to grab a variable from each data set to plot against the year the data was recorded.
+
+```{r}
+match_dataC <- dataC %>% filter(`Age AD` >= 504 & `Age AD` <=1996)
+match_dataK <- dataK %>% filter(Year >= 504 & Year<= 1996)
+match_dataR <- dataR
+
+ggplot() +
+  geom_point(data=match_dataC, aes(x=`Age AD`, y=`varve thickness`, color="varve thickness")) +
+  geom_point(data=match_dataK, aes(x=Year, y=`BSi MAR (mgSiO2/cm2y)`, color="BSi MAR (mgSiO2/cm2y)")) +
+  geom_point(data=match_dataR, aes(x=year, y=BSi, color="BSi")) +
+  labs(x="Year", y="Values", color="Values") 
+```
+
+The above plot considers BSi, BSi MAR, and varve thickness from year 505 to 1996.
+
 
