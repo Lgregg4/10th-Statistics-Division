@@ -231,6 +231,7 @@ ggplot(newda,mapping = aes(x = CHSI_State_Abbr, y = The_prob_of_death,fill =CHSI
 ```
 
 ## Ryan
+I am interested in determining if there is a significant difference in the rate of these leading causes of deaths between the West Coast of the USA and the rest of the USA. I suspect that people on the west coast are slightly above the average health of the rest of the country, so I suspect that relativley fewer people will die of heart disease on the west coast compared to the rest of the country.
 
 ```{r}
 
@@ -308,7 +309,7 @@ ggplot(data2, aes(x=COD, y=Count, color=COD)) +
   geom_col()
 ```
 
-I was interested in looking at the differences in the leading causes of death on the West Coast versus for the country as a whole. It seems as if 
+I was interested in looking at the differences in the leading causes of death on the West Coast versus for the country as a whole. It seems as if the causes of death are generally similar, however, on the west coast, there seems to be slightly less heart disease and slightly more homocides than compared to the rest of the country (relative to other causes of death).
 
 
 ## Lauren
