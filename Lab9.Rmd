@@ -20,8 +20,39 @@ library(dplyr)
 why its important
 why those reasons are important
 
+THOUGHT: How have trends changed in political party self identification?
+An answer to this question would allow politicians and law makers to understand where the country's political mind. Ideally, this knowledge would help to make policy changes in the best interest of the country's opinion.
+
 # Conclusion
-answering main question with plot
+```{r}
+unique(gss_cat$partyid)
+
+data <- gss_cat %>%
+  mutate(partyid = fct_recode(partyid,
+                              "Republican"  = "Strong republican",
+                              "Republican"  = "Not str republican",
+                              "Independent" = "Ind,near rep",
+                              "Independent" = "Ind,near dem",
+                              "Democrat"    = "Not str democrat",
+                              "Democrat"    = "Strong democrat",
+                              "Other"       = "No answer",
+                              "Other"       = "Don't know",
+                              "Other"       = "Other party"
+  )) %>%
+  select(-c(marital, age, race, rincome, relig, denom, tvhours)) %>%
+  count(year, partyid)  %>%
+  group_by(year) %>%
+  mutate(p = n / sum(n))
+
+ggplot(data, aes(x = year, y = p, colour = fct_reorder2(partyid, year, p))) +
+  geom_point() +
+  geom_line() +
+  labs(colour = "Party ID")
+```
+
+The trends of political party
+
+
 
 # Individual Findings and Plots
 
