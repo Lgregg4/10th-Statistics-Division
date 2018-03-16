@@ -1,0 +1,120 @@
+---
+title: "Lab 9"
+author: "Lauren, Chris, Ryan, Katie"
+date: "3/15/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(nycflights13)
+library(forcats)
+library(lubridate)
+```
+
+# Overall Team Question
+why its important
+why those reasons are important
+
+# Conclusion
+answering main question with plot
+
+# Individual Findings and Plots
+
+## Lauren
+
+### 13.4.6.2
+Add the location of the origin and destination (the lat and lon) to flights.
+```{r, 13.4.6.2}
+airports2 <- airports %>% select(-c(alt, tz, dst, tzone, name))
+
+flights2 <- flights %>% 
+  left_join(airports2, by = c("dest" = "faa")) %>%
+  rename(dest_lon = lon) %>%
+  rename(dest_lat = lat)
+
+flights2 <- flights2 %>%
+  left_join(airports2, by = c("origin" = "faa" )) %>%
+  rename(origin_lon = lon) %>%
+  rename(origin_lat = lat)
+
+head(flights2)
+```
+
+### 14.2.5.3
+####Use str_length() and str_sub() to extract the middle character from a string. What will you do if the string has an even number of characters?
+
+```{r, 14.2.5.3}
+string <- "Hi, my name is Lauren."
+len <- str_length(string)
+mid_char <- str_sub(string, len/2, len/2)
+mid_char
+```
+
+The above code works with an uneven number of characters. str_sub() automatically rounds down. If I change the string to be "Hi, my name is Lauren!!", the middle character will still be 'e' even though the length of the string is 23.
+
+### 15.5.1.1
+####How have the proportions of people identifying as Democrat, Republican, and Independent changed over time?
+
+```{r, 15.5.1.1}
+unique(gss_cat$partyid)
+
+data <- gss_cat %>%
+  mutate(partyid = fct_recode(partyid,
+                              "Republican"  = "Strong republican",
+                              "Republican"  = "Not str republican",
+                              "Independent" = "Ind,near rep",
+                              "Independent" = "Ind,near dem",
+                              "Democrat"    = "Not str democrat",
+                              "Democrat"    = "Strong democrat",
+                              "Other"       = "No answer",
+                              "Other"       = "Don't know",
+                              "Other"       = "Other party"
+  )) %>%
+  select(-c(marital, age, race, rincome, relig, denom, tvhours)) %>%
+  count(year, partyid)  %>%
+  group_by(year) %>%
+  mutate(p = n / sum(n))
+
+ggplot(data, aes(x = year, y = p, colour = fct_reorder2(partyid, year, p))) +
+  geom_point() +
+  geom_line() +
+  labs(colour = "Party ID")
+```
+
+There has not been any drastic changes in the proportions of how people identify their political party. We have seen a consistent descrease in republican identification 2004.
+
+### 16.2.4.3
+####Use the appropriate lubridate function to parse each of the following dates:
+```{r, 16.2.4.3}
+d1 <- "January 1, 2010"
+d2 <- "2015-Mar-07"
+d3 <- "06-Jun-2017"
+d4 <- c("August 19 (2015)", "July 1 (2015)")
+d5 <- "12/30/14" # Dec 30, 2014
+```
+```{r, 16.4.3.d1}
+mdy(d1)
+```
+```{r, 16.4.3.d2}
+ymd(d2)
+```
+```{r, 16.4.3.d3}
+dmy(d3)
+```
+```{r, 16.4.3.d4}
+mdy(d4)
+```
+```{r, 16.4.3.d5}
+mdy(d5)
+```
+
+## Chris
+
+## Ryan
+
+## Katie
+
+# Who Did What
