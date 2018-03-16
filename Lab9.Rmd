@@ -50,7 +50,9 @@ ggplot(data, aes(x = year, y = p, colour = fct_reorder2(partyid, year, p))) +
   labs(colour = "Party ID")
 ```
 
-The trends of political party
+There are a few trends that we can observe in the political trends. The percentage of individuals who identify as a republican has been decreasing since 2004. The percentage od individuals who identify as independent seems to be, overall, increasing. 
+
+This tells law makers and politicians that the public may be transisitioning to supporting ideas rather than parties. Perhaps, when presenting ideas, individuals shouldn't focus on the liberal or conservatice ideas, but the overall potential changes the ideas could cause.
 
 
 
