@@ -74,7 +74,7 @@ head(flights2)
 ```
 
 ### 14.2.5.3
-####Use str_length() and str_sub() to extract the middle character from a string. What will you do if the string has an even number of characters?
+#### Use str_length() and str_sub() to extract the middle character from a string. What will you do if the string has an even number of characters?
 
 ```{r, 14.2.5.3}
 string <- "Hi, my name is Lauren."
@@ -86,7 +86,7 @@ mid_char
 The above code works with an uneven number of characters. str_sub() automatically rounds down. If I change the string to be "Hi, my name is Lauren!!", the middle character will still be 'e' even though the length of the string is 23.
 
 ### 15.5.1.1
-####How have the proportions of people identifying as Democrat, Republican, and Independent changed over time?
+#### How have the proportions of people identifying as Democrat, Republican, and Independent changed over time?
 
 ```{r, 15.5.1.1}
 unique(gss_cat$partyid)
@@ -117,7 +117,7 @@ ggplot(data, aes(x = year, y = p, colour = fct_reorder2(partyid, year, p))) +
 There has not been any drastic changes in the proportions of how people identify their political party. We have seen a consistent descrease in republican identification 2004.
 
 ### 16.2.4.3
-####Use the appropriate lubridate function to parse each of the following dates:
+#### Use the appropriate lubridate function to parse each of the following dates:
 ```{r, 16.2.4.3}
 d1 <- "January 1, 2010"
 d2 <- "2015-Mar-07"
@@ -144,7 +144,7 @@ mdy(d5)
 
 ## Chris
 ### 13.5.1
-### 2.Filter flights to only show flights with planes that have flown at least 100 flights.
+#### 2.Filter flights to only show flights with planes that have flown at least 100 flights.
 ```{r}
 G100 <- filter(flights) %>%group_by(tailnum) %>%count() %>%filter(n > 100)
 
@@ -154,7 +154,7 @@ flights %>%
 
 
 ### 14.4.5 
-### 1.Replace all forward slashes in a string with backslashes.
+#### 1.Replace all forward slashes in a string with backslashes.
 ```{r}
 str = "iamgood/prettygood/\\/reallygood"
 writeLines(str)
@@ -163,7 +163,7 @@ writeLines(str_replace_all(str, "/", "\\\\"))
 
 
 ### 15.5.1 Exercises
-### 2.How could you collapse rincome into a small set of categories?
+#### 2.How could you collapse rincome into a small set of categories?
 ```{r}
 gss_cat %>%
   mutate(rincome =
@@ -181,7 +181,7 @@ gss_cat %>%
 ```
 
 ### 16.3.4 Exercises
-### 5.On what day of the week should you leave if you want to minimise the chance of a delay???
+#### 5.On what day of the week should you leave if you want to minimise the chance of a delay???
 ```{r}
 make_datetime_100 <- function(year, month, day, time) {
   make_datetime(year, month, day, time %/% 100, time %% 100)
@@ -326,7 +326,7 @@ Plotting the answer to this question proved to be rather difficult, if not impos
 
 ## Katie
 ### 13.5.1
-### 4. Find the 48 hours (over the course of the whole year) that have the worst delays. Cross-reference it with the weather data. Can you see any patterns?
+#### 4. Find the 48 hours (over the course of the whole year) that have the worst delays. Cross-reference it with the weather data. Can you see any patterns?
 ```{r}
 fn<- flights%>%group_by(month,day) %>% summarise(tot_delay = sum(arr_delay + dep_delay, na.rm = TRUE))%>% mutate(two_days_delay = tot_delay + lag(tot_delay))%>% arrange(desc(two_days_delay))
 wea<- weather %>%
@@ -340,13 +340,13 @@ ggplot(relation)+
 ```
 From the plot, we can see that the chances of delay in two days have some proportional relationship.
 ### 14.4.2
-###1 For each of the following challenges, try solving it by using both a single regular expression, and a combination of multiple str_detect() calls.
+#### 1 For each of the following challenges, try solving it by using both a single regular expression, and a combination of multiple str_detect() calls.
 
-### 1)Find all words that start or end with x.
+##### 1)Find all words that start or end with x.
 
-### 2)Find all words that start with a vowel and end with a consonant.
+##### 2)Find all words that start with a vowel and end with a consonant.
 
-### 3)Are there any words that contain at least one of each different vowel?
+##### 3)Are there any words that contain at least one of each different vowel?
 
 ```{r}
 #regular expression
@@ -367,7 +367,7 @@ words[str_detect(words, "a") &
 ```
 
 ### 15.4.1
-### 1. There are some suspiciously high numbers in tvhours. Is the mean a good summary?
+#### 1. There are some suspiciously high numbers in tvhours. Is the mean a good summary?
 ```{r}
 summary(gss_cat[["tvhours"]])
 gss_cat %>%
@@ -379,7 +379,7 @@ To see whether it is a good summary, it depends on what you are using for. The m
 show most numbers of preference people have.
 
 ### 16.4.5
-### 4. Write a function that given your birthday (as a date), returns how old you are in years.
+#### 4. Write a function that given your birthday (as a date), returns how old you are in years.
 ```{r}
 library(lubridate)
 ddays(1)
@@ -400,6 +400,8 @@ age(ymd("1998-02-10"))
 
 ## Lauren
 I completed the assignment for this lab by solving four exercise problems: 13.4.6.2, 14.2.5.3, 15.5.1.1, and 16.2.4.3. For chapter 13, I implemented left_join() and rename(). Solving chapter 14's problem, I used str_length() and str_sub() as specified by the question. I used the most functions solving 15.5.1.1; mutate(), select(), count(), group_by(), and ggplot(). Finally, I completed 16.2.4.3 by simply using three different lubridate functions: mdy(d1), ymd(), and dmy().
+
+Additionally, I wrote up our team question and conclusion because it was a question I had answered in my individual section.
 
 ## Katie
 For this lab, I solved questions 13.5.1.4, 14.4.2.1, 15.4.1.1, 16.4.5.4. In chapter 13, I used group_by(), summaries(), and mutate() to find the total hours in two days delay. And in group_by the same key and summaries at the ??????weather variables?????? in weather, then combined them up by using left_join(). The final plot showed there are proportional relationship between temperature and the delay. For chapter 14, I used two ways to find the specific words in words collection, one is by using regular expressions, and another is by using multiple calls. To show whether mean is a good summary for ??????tvhour??????, I did ggplot and histogram. The plot indicates that the higher mean values occur in early range of tvhours. It seems like most people??????s preference lie in this range. For the date and time function, I did the interval to find the interval between year that you was born and today.
