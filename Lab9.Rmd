@@ -113,6 +113,7 @@ mdy(d4)
 mdy(d5)
 ```
 
+
 ## Chris
 ### 13.5.1
 ### 2.Filter flights to only show flights with planes that have flown at least 100 flights.
@@ -167,4 +168,10 @@ from the tb that we got, it is very easily to say tha if we want to leave we sho
 
 ## Katie
 
+
+
+
 # Who Did What
+
+## Lauren
+I completed the assignment for this lab by solving four exercise problems: 13.4.6.2, 14.2.5.3, 15.5.1.1, and 16.2.4.3. For chapter 13, I implemented left_join() and rename(). Solving chapter 14's problem, I used str_length() and str_sub() as specified by the question. I used the most functions solving 15.5.1.1; mutate(), select(), count(), group_by(), and ggplot(). Finally, I completed 16.2.4.3 by simply using three different lubridate functions: mdy(d1), ymd(), and dmy().
