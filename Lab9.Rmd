@@ -12,6 +12,8 @@ library(tidyverse)
 library(nycflights13)
 library(forcats)
 library(lubridate)
+library(stringr)
+library(dplyr)
 ```
 
 # Overall Team Question
@@ -112,6 +114,54 @@ mdy(d5)
 ```
 
 ## Chris
+### 13.5.1
+### 2.Filter flights to only show flights with planes that have flown at least 100 flights.
+```{r}
+G100 <- filter(flights) %>%group_by(tailnum) %>%count() %>%filter(n > 100)
+
+flights %>%
+  semi_join(G100, by = "tailnum")
+```
+
+
+### 14.4.5 
+### 1.Replace all forward slashes in a string with backslashes.
+```{r}
+str = "iamgood/prettygood/\\/reallygood"
+writeLines(str)
+writeLines(str_replace_all(str, "/", "\\\\"))
+```
+just change forward slashes to backslashes, and I need to double it.
+
+### 15.5.1 Exercises
+### 2???How could you collapse rincome into a small set of categories?
+```{r}
+gss_cat %>%
+  mutate(rincome =
+           fct_collapse(
+             rincome,
+             `Uknow` = c("No answer", "Don't know", "Refused", "Not applicable"),
+             `Lt $10000` = c("Lt $1000", str_c("$", c("1000", "3000", "4000","5000", "6000", "7000", "8000"),
+                                              " to ", c("2999", "3999", "4999","5999", "6999", "7999", "9999"))),
+             `$10000 to 20000` = str_c("$", c( "10000", "15000"),
+                                      " - ", c("14999", "19999"))
+              
+           )) %>%
+  ggplot(aes(x = rincome)) +
+  geom_bar() 
+```
+I decided to change rincome to four group or set, all the uknow rincome, lt than 10000, from 10000 to 20000 and large than 20000 I dont change, and use a geom_bar to show the relation.
+
+### 16.3.4 Exercises
+### 5.On what day of the week should you leave if you want to minimise the chance of a delay???
+```{r}
+flights_dt %>%
+  mutate(leave = wday(sched_dep_time)) %>%
+  group_by(leave) %>%
+  summarise(dep_delay = mean(dep_delay,na.rm=TRUE),
+            arr_delay = mean(arr_delay, na.rm = TRUE))
+```
+from the tb that we got, it is very easily to say tha if we want to leave we should choose sunday.
 
 ## Ryan
 
