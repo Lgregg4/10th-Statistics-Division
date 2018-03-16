@@ -167,11 +167,81 @@ from the tb that we got, it is very easily to say tha if we want to leave we sho
 ## Ryan
 
 ## Katie
+###13.5.1
+### 4. Find the 48 hours (over the course of the whole year) that have the worst delays. Cross-reference it with the weather data. Can you see any patterns?
+```{r}
+fn<- flights%>%group_by(month,day) %>% summarise(tot_delay = sum(arr_delay + dep_delay, na.rm = TRUE))%>% mutate(two_days_delay = tot_delay + lag(tot_delay))%>% arrange(desc(two_days_delay))
+wea<- weather %>%
+  group_by(month, day) %>%
+  summarize_at(vars(humid, precip, temp), mean, na.rm = TRUE)
+relation <- left_join(fn,wea,by = c("month", "day"))%>% arrange(fn$two_days_delay)
 
+ggplot(relation)+
+  geom_smooth(mapping = aes(y = temp, x = two_days_delay),method = "lm")
 
+```
+From the plot, we can see that the chances of delay in two days have some proportional relationship.
+### 14.4.2
+###1 For each of the following challenges, try solving it by using both a single regular expression, and a combination of multiple str_detect() calls.
+
+### 1)Find all words that start or end with x.
+
+### 2)Find all words that start with a vowel and end with a consonant.
+
+### 3)Are there any words that contain at least one of each different vowel?
+
+```{r}
+#regular expression
+start_x <-str_view(words,"^x")
+end_x <- str_view(words,"x$")
+start_vowels <- str_view(words,"^[aeiou]")
+end_consant <- str_view(words,"[^aeiou]$")
+atleat <- str_view(words,"aeiou",match = TRUE)
+atleat
+#mutiple calls
+words[str_detect(words,"^x|x$")]
+str_subset(words,"^[aeiou].*[^aeiou]$")
+words[str_detect(words, "a") &
+        str_detect(words, "e") &
+        str_detect(words, "i") &
+        str_detect(words, "o") &
+        str_detect(words, "u")]
+```
+
+### 15.4.1
+### 1. There are some suspiciously high numbers in tvhours. Is the mean a good summary?
+```{r}
+summary(gss_cat[["tvhours"]])
+gss_cat %>%
+  filter(!is.na(tvhours)) %>%
+  ggplot(aes(x = tvhours)) +
+  geom_histogram(binwidth = 1)
+```
+To see whether it is a good summary, it depends on what you are using for. The mean values
+show most numbers of preference people have.
+
+### 16.4.5
+### 4. Write a function that given your birthday (as a date), returns how old you are in years.
+```{r}
+library(lubridate)
+ddays(1)
+years(1)
+dyears(1)/ddays(1)
+next_year <- today() + years(1)
+today() %--% next_year
+(today() %--% next_year) / ddays(1)
+(ymd("1998-03-14") %--% today())%/%dyears(1)
+age<- function(birthday){
+  (birthday%--% today()) %/% years(1)
+}
+age(ymd("1998-02-10"))
+```
 
 
 # Who Did What
 
 ## Lauren
 I completed the assignment for this lab by solving four exercise problems: 13.4.6.2, 14.2.5.3, 15.5.1.1, and 16.2.4.3. For chapter 13, I implemented left_join() and rename(). Solving chapter 14's problem, I used str_length() and str_sub() as specified by the question. I used the most functions solving 15.5.1.1; mutate(), select(), count(), group_by(), and ggplot(). Finally, I completed 16.2.4.3 by simply using three different lubridate functions: mdy(d1), ymd(), and dmy().
+
+## Katie
+For this lab, I solved questions 13.5.1.4, 14.4.2.1, 15.4.1.1, 16.4.5.4. In chapter 13, I used group_by(), summaries(), and mutate() to find the total hours in two days delay. And in group_by the same key and summaries at the ¡°weather variables¡± in weather, then combined them up by using left_join(). The final plot showed there are proportional relationship between temperature and the delay. For chapter 14, I used two ways to find the specific words in words collection, one is by using regular expressions, and another is by using multiple calls. To show whether mean is a good summary for ¡°tvhour¡±, I did ggplot and histogram. The plot indicates that the higher mean values occur in early range of tvhours. It seems like most people¡¯s preference lie in this range. For the date and time function, I did the interval to find the interval between year that you was born and today.
