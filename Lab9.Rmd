@@ -193,6 +193,8 @@ flights_dt %>%
 from the tb that we got, it is very easily to say tha if we want to leave we should choose sunday.
 
 ## Ryan
+### Pi Day TAE Question 1 (bullet 2)
+####Determine Which Airplanes had the Highest Median Flight Arrival Delay
 ```{r}
 
 
@@ -224,8 +226,8 @@ cor(planes_joined$med,planes_joined$age)
 
 In the first problem, I found the ages of the planes with the top 20 median delay times. Surprisingly, the ages of the most delayed planes do not exclusivley have the highest ages in the dataset. In fact, cor(med,age) returns a rather weak negative correlation (-.15).
 
-
-
+###14.3.3.1.2
+####Does u Always Come after Q?
 ```{r}
 
 #Problem 2: Strings
@@ -244,7 +246,8 @@ qu
 
 It seems that 'u' does always come after q!
 
-
+###15.3.1.2
+####What is the Most Common Religion, and Party Identification in the Survey?
 ```{r}
 
 #Problem 3:factors
@@ -267,6 +270,8 @@ religion
 
 Here, the party identifications and religions are arranged in descending order. This shows the most to least common party identifications and religions.
 
+###16.3.4.1
+###How does the distribution of flight within a day times change over the course of the year?
 ```{r}
 
 #Problem 4: Date & Time
@@ -388,3 +393,6 @@ I completed the assignment for this lab by solving four exercise problems: 13.4.
 
 ## Katie
 For this lab, I solved questions 13.5.1.4, 14.4.2.1, 15.4.1.1, 16.4.5.4. In chapter 13, I used group_by(), summaries(), and mutate() to find the total hours in two days delay. And in group_by the same key and summaries at the ��weather variables�� in weather, then combined them up by using left_join(). The final plot showed there are proportional relationship between temperature and the delay. For chapter 14, I used two ways to find the specific words in words collection, one is by using regular expressions, and another is by using multiple calls. To show whether mean is a good summary for ��tvhour��, I did ggplot and histogram. The plot indicates that the higher mean values occur in early range of tvhours. It seems like most people��s preference lie in this range. For the date and time function, I did the interval to find the interval between year that you was born and today.
+
+## Ryan
+I solved a problem from the Pi Day Team Application exercise (question 1, bullet 2), using left_join() along with some clever filtering. Then I solved problem 14.5.1.2 on strings using str_detect(), and determined that every time there was a q in the dataset, it was followed by a u. Then I solved problem 15.3.1.2 from the factors section, determining the top religions and party identifications in the dataset (curiously, this didn't require the use of any factors functions). Then I solved problem 16.3.4.1 from the dates and times section using make_datetime(),and yday(), finding out more about the distribution of departure times through the year.
