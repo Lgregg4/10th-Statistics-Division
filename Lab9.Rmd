@@ -274,7 +274,7 @@ age(ymd("1998-02-10"))
 I completed the assignment for this lab by solving four exercise problems: 13.4.6.2, 14.2.5.3, 15.5.1.1, and 16.2.4.3. For chapter 13, I implemented left_join() and rename(). Solving chapter 14's problem, I used str_length() and str_sub() as specified by the question. I used the most functions solving 15.5.1.1; mutate(), select(), count(), group_by(), and ggplot(). Finally, I completed 16.2.4.3 by simply using three different lubridate functions: mdy(d1), ymd(), and dmy().
 
 ## Katie
-For this lab, I solved questions 13.5.1.4, 14.4.2.1, 15.4.1.1, 16.4.5.4. In chapter 13, I used group_by(), summaries(), and mutate() to find the total hours in two days delay. And in group_by the same key and summaries at the ¡°weather variables¡± in weather, then combined them up by using left_join(). The final plot showed there are proportional relationship between temperature and the delay. For chapter 14, I used two ways to find the specific words in words collection, one is by using regular expressions, and another is by using multiple calls. To show whether mean is a good summary for ¡°tvhour¡±, I did ggplot and histogram. The plot indicates that the higher mean values occur in early range of tvhours. It seems like most people¡¯s preference lie in this range. For the date and time function, I did the interval to find the interval between year that you was born and today.
+For this lab, I solved questions 13.5.1.4, 14.4.2.1, 15.4.1.1, 16.4.5.4. In chapter 13, I used group_by(), summaries(), and mutate() to find the total hours in two days delay. And in group_by the same key and summaries at the ï¿½ï¿½weather variablesï¿½ï¿½ in weather, then combined them up by using left_join(). The final plot showed there are proportional relationship between temperature and the delay. For chapter 14, I used two ways to find the specific words in words collection, one is by using regular expressions, and another is by using multiple calls. To show whether mean is a good summary for ï¿½ï¿½tvhourï¿½ï¿½, I did ggplot and histogram. The plot indicates that the higher mean values occur in early range of tvhours. It seems like most peopleï¿½ï¿½s preference lie in this range. For the date and time function, I did the interval to find the interval between year that you was born and today.
 =======
 ---
 title: "Lab 9"
@@ -476,6 +476,121 @@ flights_dt %>%
 from the tb that we got, it is very easily to say tha if we want to leave we should choose sunday.
 
 ## Ryan
+```{r}
+
+
+#Problem 1: Joins
+##############################################################################################################33
+planes<-planes
+
+planes<-planes%>%mutate(age=2013-year)%>%filter(!is.na(year) & !is.na(tailnum))
+
+flights<-flights%>%filter(!is.na(arr_delay))
+
+planes_joined <- left_join(flights,planes,by = "tailnum")
+
+planes_joined<-planes_joined%>%select(c("tailnum","arr_delay","age"))%>%filter(!is.na(age))%>%group_by(tailnum)%>%summarise(med = median(arr_delay))
+
+planes_joined<-planes_joined%>%arrange(med)
+
+planes_joined <- left_join(planes_joined,planes,by = "tailnum")
+
+planes_joined<-planes_joined%>%select("tailnum","med","age")
+
+planes_joined<-planes_joined%>%slice(1:20)
+
+planes_joined
+
+cor(planes_joined$med,planes_joined$age)
+
+```
+
+In the first problem, I found the ages of the planes with the top 20 median delay times. Surprisingly, the ages of the most delayed planes do not exclusivley have the highest ages in the dataset. In fact, cor(med,age) returns a rather weak negative correlation (-.15).
+
+
+
+```{r}
+
+#Problem 2: Strings
+##############################################################################################################33
+#does u always come after q?
+library(stringr)
+
+words<-words
+
+allq = sum(str_detect(words,"q."))
+qu = sum(str_detect(words,"qu"))
+
+allq
+qu
+```
+
+It seems that 'u' does always come after q!
+
+
+```{r}
+
+#Problem 3:factors
+##############################################################################################################33
+#What is the most common relig in this survey
+#What is the most common party ID
+
+library(forcats)
+survey<-gss_cat
+
+partyID<-survey%>%count(partyid)%>%arrange(-n)
+religion<-survey%>%count(relig)%>%arrange(-n)
+
+
+partyID
+religion
+
+```
+
+
+Here, the party identifications and religions are arranged in descending order. This shows the most to least common party identifications and religions.
+
+```{r}
+
+#Problem 4: Date & Time
+###############################################################################################################
+#How does the distribution of flight within a day times change over the course of the year?
+
+library(lubridate)
+
+library(reshape2)
+
+make_datetime_100 <- function(year, month, day, time) {
+  make_datetime(year, month, day, time %/% 100, time %% 100)
+} #This function is from the book. It is used because the departure/arrival times are given in an odd form
+#This converts them to hours, minutes (time%/%100 gives the arr_time or dep_time divided by 100, ignore remainder,time%%100 is the remainder)
+
+flights_dt <- flights %>% filter(!is.na(dep_time) & !is.na(arr_time)) %>% mutate(dep_time = make_datetime_100(year, month, day, dep_time))
+#using that function to alter the dep_time variable
+
+
+flights_dt %>% 
+  ggplot(aes(dep_time)) + 
+  geom_freqpoly(binwidth = 86400)
+#this gives a more general sense of how the distribution of flight times changes through the year
+
+flights_dt<-flights_dt%>%mutate(yearday = yday(dep_time))
+
+flights_dt%>%ggplot(aes(x=yearday))+geom_bar()
+#this shows the variation in flights per day throughout the year
+
+flights_dt<-flights_dt%>%select("dep_time","yearday")
+
+flights_melt<-melt(flights_dt,id.vars = "dep_time")
+
+flights_dt%>%filter(yearday == 100)%>%
+  ggplot(aes(dep_time))+
+  geom_freqpoly()
+
+```
+
+Plotting the answer to this question proved to be rather difficult, if not impossible using just one plot. I used three here. The first shows the time distribution of departure times throughout the year. The second shows how many flights occured on each day throughout the year. The third is a sample of the distribution of departure times on the 100th day of the year.
+
 
 ## Katie
 
@@ -486,4 +601,7 @@ from the tb that we got, it is very easily to say tha if we want to leave we sho
 
 ## Lauren
 I completed the assignment for this lab by solving four exercise problems: 13.4.6.2, 14.2.5.3, 15.5.1.1, and 16.2.4.3. For chapter 13, I implemented left_join() and rename(). Solving chapter 14's problem, I used str_length() and str_sub() as specified by the question. I used the most functions solving 15.5.1.1; mutate(), select(), count(), group_by(), and ggplot(). Finally, I completed 16.2.4.3 by simply using three different lubridate functions: mdy(d1), ymd(), and dmy().
+
+##Ryan
+
 >>>>>>> master
