@@ -90,7 +90,26 @@ ggplot(data = answers)+
 
 Here, i wanted to know if there was a relationship between how many times the answerer used the work 'you' and their score. The distribution of yous vs. score looks approximatley the same as the distribution of words vs. score. This tells me that there is no significant relationship between the number of yous used and the score.
 ## Chris
+for this question files, I was consider in like two subject names in our question title and the answes body. So, I mutate the question "I" and the "you" in the answer.csv body.
 
+```{r}
+questions<-questions %>% mutate(I=str_count(questions$Title,"I"))
+ggplot(data=questions,aes(x=I,y=Score))+geom_point()
+ggplot(data=questions,aes(x=I,y=Score))+geom_point()+geom_boxplot()
+ggplot(data=questions,aes(x=I,y=Score))+geom_point()+geom_boxplot(aes(group=cut_width(I,0.25),color=Score))
+
+ggplot(data=questions,aes(x=I,y=Score,color=I))+geom_point()+facet_wrap(~I)
+```
+then I made the ggplot function for the question I was conisder like why the Geom_boxplot function doesnot show up in my expect way, so I use the group=cut_width but it seems not good, then I used the facet_wrap, when we saw the graph I could see that if a person use less "I" in their title they could get a relative high score in the end, but when we saw the boxplot function we could know there is no relation between this two variable cause the density was in the below.
+
+```{r}
+answers<-answers %>% mutate(you=str_count(answers$Body,"you"))
+ggplot(data=answers,mapping=aes(x=you,y=Score,color=you))+geom_point()+facet_wrap(~you)
+
+
+ggplot(data=answers,mapping=aes(x=you,y=Score,color=you))+geom_point()
+```
+then I was thinking if we answer one person question, the best way or the best suggestion is kind of this form : "you need/ you could/ you can", so I was mutate the number of "you" in our answer body. same stituation happened, the geom_boxplot function have some warning, and I dont know how to fixed it, so I just use facet_wrap and geom_point. It is easy to conclude that if you use less word like"you", it might receice a higher grades.
 
 
 # Summary of Who did What
@@ -105,4 +124,4 @@ Here, i wanted to know if there was a relationship between how many times the an
 I created the code for the team question on timliness vs. score. I also looked at the relationship between length of the title, and score, and the number of yous used in the answer and score. 
 
 ## Chris
-
+I did two of my own question is there any relationship when we used subject word like "I" and "you" in the question and answer, I the conclusion is that to receive higher score, everybody need to use less subject which means the sentence need be more simple and clear to understand, then you could receice a higher score.
