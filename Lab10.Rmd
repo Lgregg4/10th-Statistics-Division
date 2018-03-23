@@ -1,8 +1,8 @@
 
 ---
-title: "Lab3"
+title: "Lab10"
 author: "Lauren Gregg, Katie Jiang, Ryan Marizza, Chris He"
-date: "1/31/2018"
+date: "3/23/2018"
 output: html_document
 ---
 
@@ -17,6 +17,9 @@ questions<-read_csv("Questions_trunc.csv")
 
 
 ```
+# Team Main Questions
+What is the relationship between the timeliness of an answer and its score?
+And what kinds of features affect the good questions and answers most?
 
 # Team Work
 
@@ -46,10 +49,7 @@ ggplot(data = QnA_short_term)+
  
  
  
-## Conclusion
-
-
-## Recommendation for Action
+## Explanation of why these features affect most
 
 
 # Individual Work
@@ -57,8 +57,45 @@ ggplot(data = QnA_short_term)+
 ## Lauren
 
 ## Kaite
+For the questions and answers, I am interested in the high range score, which words have the high numbers of appearance. I created two features which are all about the highest frequency words showing in high score questions and answers. Because the good quality of answers and questions needs some words that make them popular in readers.
+```{r}
+Question<- questions %>% select(OwnerUserId,Score,Title)
+Answers<- answers %>% select(OwnerUserId,Score,Body)
+newQ<-tibble(id = Question$OwnerUserId, Score = Question$Score, Title = Question$Title)
+iduser <- as.integer(newQ$id)
+Score1 <- as.integer(newQ$Score)
+title1<- as.character(newQ$Title)
+newQ1 <- tibble(iduser = iduser,Score1 = Score1, title1 = title1)
+nQ <- newQ1 %>% arrange(desc(Score1))
+nQ <- nQ %>% filter(Score1 >= 1000 & Score1 <= 1040)
+python <- sum(str_count(nQ$title1,"p|Python+"))
+Function<- sum(str_count(nQ$title1,"function+"))
+HowandWhat <- sum(str_count(nQ$title1,"^H|how|W|what"))
+implement<- sum(str_count(nQ$title1,"I|implement(?=p|Python)"))
+String<- sum(str_count(nQ$title1,"p|python(?= function|string)"))
+plotQ<- tibble(Highfrequencynames = c("python","function","how and what","implement python","string"),frequency = c(python,Function,HowandWhat,implement,String))
 
+ggplot(plotQ)+
+  geom_col(mapping = aes(x= Highfrequencynames, y = frequency,fill = Highfrequencynames))+
+  labs(x = "High Frequency Words", y = "Frequency",title = "The highest freqency words appear in score range is between 1000 to 1040\n in good questions")
+```
+In question part, during the high range of scores, we can see the words python appearing lots of times, which means most readers like the python questions and they also have trouble in solving python questions.
+```{r}
+newA<- tibble(id = as.integer(answers$OwnerUserId), Score = as.integer(answers$Score), Body = as.character(answers$Body))
+nA<- newA %>% arrange(desc(Score))
+nA <- nA %>% filter(Score >= 1000 & Score <= 8384)
+Python1<- sum(str_count(nA$Body, "p|Python"))
+Could <- sum(str_count(nA$Body,"y|You(?= could|are)"))
+If_please <- sum(str_count(nA$Body,"^i|If|p|Please"))
+Suggest<- sum(str_count(nA$Body,"suggestion|suggest|p|Print"))
+comp<- sum(str_count(nA$Body,"M|mac|computer"))
+plotA<- tibble(Highfrequencynames = c("Python","Could","If_Please","suggest","computer"),Freq = c(Python1,Could,If_please,Suggest,comp))
+ggplot(plotA)+
+  geom_col(mapping = aes(x =Highfrequencynames, y = Freq,fill = Highfrequencynames ))+
+  labs(x = "High Frequency Words", y = "Frequency",title = "The higest freqency words appear in score range is between 1000 to 8384 \nin good answers")
 
+```
+In the answers part, I found the highest one is python, obviously. But then the second followed by "If.. please" and suggestions. So the good way to contribute answers is first including critical words, and using imperative mood to express their answers. In this way, readers will be more comfortable to take actions.
 
 ## Ryan
 
@@ -98,9 +135,8 @@ Here, i wanted to know if there was a relationship between how many times the an
 ## Lauren
 
 
-
 ## Kaite
- 
+I outlined the team questions and modified it. The features that I created are all about the high frequency words appearing in both questions and answers. I narrowed down the range of the scores, and looked for specific words showing in the body of each question and answer. I used str_count to find how many words that contain the same words, and plot them in the certain high range of scores.
 ## Ryan
 I created the code for the team question on timliness vs. score. I also looked at the relationship between length of the title, and score, and the number of yous used in the answer and score. 
 
