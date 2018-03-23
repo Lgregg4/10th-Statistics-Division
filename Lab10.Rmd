@@ -35,17 +35,24 @@ ggplot(data = QnA_rank)+
   geom_point(aes(x = rank,y = sc))+
   geom_smooth(aes(x = rank,y=sc),method = lm,se=FALSE)
 #Maybe this isnt the best way to judge timliness (seems more like relative timliness)
-
+```
+ 
+ 
+```{r}
 ggplot(data = QnA)+
   geom_point(aes(x = time_to_answer,y = Score.y))
+```
 
+
+
+```{r}
 QnA_short_term<-QnA%>%filter(time_to_answer < 60*500,Score.y<4000)
 
 ggplot(data = QnA_short_term)+
   geom_point(aes(x = time_to_answer,y = Score.y))
 
 ```
- 
+
  
  
 ## Explanation of why these features affect most
