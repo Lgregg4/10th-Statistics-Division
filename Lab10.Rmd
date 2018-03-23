@@ -1,0 +1,108 @@
+
+---
+title: "Lab3"
+author: "Lauren Gregg, Katie Jiang, Ryan Marizza, Chris He"
+date: "1/31/2018"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(stringr)
+
+rm(list=ls()) # clears your environment variables
+answers<-read_csv("Answers_trunc.csv")
+questions<-read_csv("Questions_trunc.csv")
+
+
+```
+
+# Team Work
+
+```{r}
+QnA<-left_join(questions,answers,by = c('Id'='ParentId'))
+
+QnA<-QnA%>%mutate(time_to_answer = as.numeric(difftime(CreationDate.y, CreationDate.x,units = "mins")))#this gives the time to answer in seconds
+
+QnA<-QnA%>%filter(CreationDate.x<CreationDate.y)%>%group_by(Id)%>%mutate(rank = row_number(time_to_answer))#here's where answers are ranked by their time to answer
+
+QnA_rank<-QnA%>%group_by(rank)%>%summarise(sc = mean(Score.y))
+
+ggplot(data = QnA_rank)+
+  geom_point(aes(x = rank,y = sc))+
+  geom_smooth(aes(x = rank,y=sc),method = lm,se=FALSE)
+#Maybe this isnt the best way to judge timliness (seems more like relative timliness)
+
+ggplot(data = QnA)+
+  geom_point(aes(x = time_to_answer,y = Score.y))
+
+QnA_short_term<-QnA%>%filter(time_to_answer < 60*500,Score.y<4000)
+
+ggplot(data = QnA_short_term)+
+  geom_point(aes(x = time_to_answer,y = Score.y))
+
+```
+ 
+ 
+ 
+## Conclusion
+
+
+## Recommendation for Action
+
+
+# Individual Work
+
+## Lauren
+
+## Kaite
+
+
+
+## Ryan
+
+```{r}
+#For Questions: I wanted to know if there was a relationship between the length of a question and its score
+
+questions<- questions%>%mutate(length = str_length(Title))
+
+ggplot(data = questions)+
+  geom_point(aes(x = length,y=Score))
+
+```
+In the questions data, I was interested in whether or not there was a relationship between the length of the title of someone's question, and the score that the question got. It seems like questions with a medium length (about 50 words) did better than short questions or long questions. This is as expected, because brevity is important for clarity in your question, but being too brief can lead to muddled understanding of what you want to know.
+
+```{r}
+answers<- answers%>%mutate(yous = str_count(Body,"you"))%>%mutate(length = str_length(Body))
+
+ggplot(data = answers)+
+  geom_point(aes(x = yous,y=Score))
+
+
+
+ggplot(data = answers)+
+  geom_point(aes(x = length,y=Score))
+
+
+
+```
+
+Here, i wanted to know if there was a relationship between how many times the answerer used the work 'you' and their score. The distribution of yous vs. score looks approximatley the same as the distribution of words vs. score. This tells me that there is no significant relationship between the number of yous used and the score.
+## Chris
+
+
+
+# Summary of Who did What
+
+## Lauren
+
+
+
+## Kaite
+ 
+## Ryan
+
+
+## Chris
+
