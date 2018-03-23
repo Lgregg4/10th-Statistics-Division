@@ -36,27 +36,51 @@ ggplot(data = QnA_rank)+
   geom_smooth(aes(x = rank,y=sc),method = lm,se=FALSE)
 #Maybe this isnt the best way to judge timliness (seems more like relative timliness)
 ```
- 
+ The plot above shows the relationship (or lack of relationship) between the timliness of a response, and its score. Timliness here is given as the order in which the answer appeared. That is: the chronologically first answer gets a rank of 1, the second 2, and so on. It seems, from this plot, that the rank, in this sense, of the answer has little to no effect on the score.
  
 ```{r}
 ggplot(data = QnA)+
   geom_point(aes(x = time_to_answer,y = Score.y))
 ```
 
-
-
 ```{r}
-QnA_short_term<-QnA%>%filter(time_to_answer < 60*500,Score.y<4000)
+QnA_short_term<-QnA%>%filter(time_to_answer < 60*5,Score.y<4000)
 
 ggplot(data = QnA_short_term)+
   geom_point(aes(x = time_to_answer,y = Score.y))
 
 ```
+These two plots show the relationship between score and time to answer. These plots show a different relationship between timliness and the score than the first plot. I would guess that this is because in the "ordered" ranking method of timliness, timliness is viewed as timliness compared to other answerers. This means that an answer with rank = 20 may have been submitted only 25 minutes after the question (given that 19 answers were submitted less than 25 minutes after the question). It seems that timliness does indeed have an effect on score, but the important thing is the literal time it took after the question before the answer was posted, and not the chronological rank of the answer's timliness.
+ 
+Another significant factor in a question/answer's score is the amount of words used.
+```{r}
 
- 
- 
+questions<- questions%>%mutate(length = str_length(Title))
+
+ggplot(data = questions)+
+  geom_point(aes(x = length,y=Score))
+
+```
+This plot shows the relationship between a question's score and the length of the title. It seems like the highest rated titles are not extremely long, and not extremely short, lying somewhere in the 40-60 character range.
+
+```{r}
+answers<- answers%>%mutate(yous = str_count(Body,"you"))%>%mutate(length = str_length(Body))%>%filter(length<5000)
+
+
+ggplot(data = answers)+
+  geom_point(aes(x = length,y=Score))
+
+
+
+```
+It seems again as if there is an optimal range for an answer's length. Upon inspection of the above plot, for the best score, an answer should be in the 500 character range. 
+
+
+
 ## Explanation of why these features affect most
+It seems from the above plots that literal timliness has a huge effect on score. This is likley because after a certain amount of time, the question is forgotten, answered, or solved by the questioner. Therefore, it makes sense that an answer posted soon after the question would recieve a higher score than one posted later. 
 
+The relationship between question/answer length and score is likley explained by the obvious merit of brevity. People don't want to read tons of writing before they can get their answer, or start to answer a question. Therefore, those questions/answers which get their point across in the fewest characters (while still getting their point across) are likley to get the best score.
 
 # Individual Work
 
@@ -160,10 +184,6 @@ In the questions data, I was interested in whether or not there was a relationsh
 ```{r}
 answers<- answers%>%mutate(yous = str_count(Body,"you"))%>%mutate(length = str_length(Body))
 
-ggplot(data = answers)+
-  geom_point(aes(x = yous,y=Score))
-
-
 
 ggplot(data = answers)+
   geom_point(aes(x = length,y=Score))
@@ -172,6 +192,16 @@ ggplot(data = answers)+
 
 ```
 
+```{r}
+answers<- answers%>%mutate(yous = str_count(Body,"you"))%>%mutate(length = str_length(Body))
+
+
+ggplot(data = answers)+
+  geom_point(aes(x = length,y=Score))
+
+
+
+```
 Here, i wanted to know if there was a relationship between how many times the answerer used the work 'you' and their score. The distribution of yous vs. score looks approximatley the same as the distribution of words vs. score. This tells me that there is no significant relationship between the number of yous used and the score.
 
 
@@ -209,7 +239,7 @@ I formatted our final lab document and explained our team results. I also answer
 I outlined the team questions and modified it. The features that I created are all about the high frequency words appearing in both questions and answers. I narrowed down the range of the scores, and looked for specific words showing in the body of each question and answer. I used str_count to find how many words that contain the same words, and plot them in the certain high range of scores.
 
 ## Ryan
-I created the code for the team question on timliness vs. score. I also looked at the relationship between length of the title, and score, and the number of yous used in the answer and score. 
+I created the code for the team question on timliness vs. score. I also looked at the relationship between length of the title, and score, and the number of yous used in the answer and score. I also wrote the explination section in the team portion.
 
 ## Chris
 I did two of my own question is there any relationship when we used subject word like "I"" in the question and answer, I the conclusion is that to receive higher score, everybody need to use less subject which means the sentence need be more simple and clear to understand, then you could receice a higher score.
