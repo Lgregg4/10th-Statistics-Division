@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 ---
 title: "Lab10"
 author: "Lauren Gregg, Katie Jiang, Ryan Marizza, Chris He"
@@ -56,6 +54,47 @@ ggplot(data = QnA_short_term)+
 # Individual Work
 
 ## Lauren
+
+As I have learned in my statistical collaboration course, building a relationship can help with successful collabortaion. I was interested if this translated similarly online. I thought politeness was a key factor in a strong relationship, so I was interested if manners impacted the score of questions. I identified manners as please or thank you.
+
+```{r}
+LGanswers <- answers %>% select(-X7)
+LGquestions <- questions %>% select(-X7)
+
+
+manners = c("thanks", "thx", "Thank you", "Thanks", "please", "Please", "pls", "plz", "Plz")
+
+LGquestions$Manners = str_detect(LGquestions$Body, manners)
+
+ggplot(LGquestions) + 
+  geom_boxplot(aes(Manners, Score))
+```
+
+As we can see from the above boxplots, saying please or thank you in an online platform is not correlated with a higher score. This does make sense because a question is probably upvoted for its content, not its politeness.
+
+Next, I considered the answer data. I figured, most of these posters are probably wanting to gather as much information as possible. I was interested to see if including a webpage reference in the answer would have a higher number of votes.
+
+```{r}
+LGanswers$Reference = str_detect(LGanswers$Body, "href")
+
+ggplot(LGanswers) +
+  geom_boxplot(aes(Reference, Score))
+
+```
+
+There is not a huge disparity between these two data. We see that the outlier with over 8000 votes did include a reference, but it is hard to tell if a true difference exists.
+
+```{r}
+
+trueData <- LGanswers %>% filter(LGanswers$Reference == TRUE) 
+falseData <- LGanswers %>% filter(LGanswers$Reference == FALSE)
+
+t.test(trueData$Score, falseData$Score)
+```
+
+
+When computing a quick t-test, we can see that there is a significant difference between the scores when a reference is used and when a references is not used. This leads me to believe that referencing a link with more information on the topic could result in a higher score.
+
 
 ## Kaite
 For the questions and answers, I am interested in the high range score, which words have the high numbers of appearance. I created two features which are all about the highest frequency words showing in high score questions and answers. Because the good quality of answers and questions needs some words that make them popular in readers.
@@ -127,6 +166,8 @@ ggplot(data = answers)+
 ```
 
 Here, i wanted to know if there was a relationship between how many times the answerer used the work 'you' and their score. The distribution of yous vs. score looks approximatley the same as the distribution of words vs. score. This tells me that there is no significant relationship between the number of yous used and the score.
+
+
 ## Chris
 for this question files, I was consider in like two subject names in our question title and the answes body. So, I mutate the question "I" in the answer.csv body.
 
@@ -154,10 +195,12 @@ then I was thinking if we answer one person question, the best way or the best s
 # Summary of Who did What
 
 ## Lauren
+I formatted our final lab document and explained our team results. I also answered questions regarding manners and references. Both required me to use str_detect() and to create a new variable in the data set. I chose to use boxplots for both the question and answer data set because we are concerned with earning a high score on the posts. I also ran a t-test on the answer data to determine if the difference between using a reference and not was significant
 
 
 ## Kaite
 I outlined the team questions and modified it. The features that I created are all about the high frequency words appearing in both questions and answers. I narrowed down the range of the scores, and looked for specific words showing in the body of each question and answer. I used str_count to find how many words that contain the same words, and plot them in the certain high range of scores.
+
 ## Ryan
 I created the code for the team question on timliness vs. score. I also looked at the relationship between length of the title, and score, and the number of yous used in the answer and score. 
 
