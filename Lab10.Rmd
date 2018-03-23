@@ -102,7 +102,7 @@ Here, i wanted to know if there was a relationship between how many times the an
 ## Kaite
  
 ## Ryan
-
+I created the code for the team question on timliness vs. score. I also looked at the relationship between length of the title, and score, and the number of yous used in the answer and score. 
 
 ## Chris
 
