@@ -375,10 +375,95 @@ chris_pct_change2$n
 The perecntile of change from birth year to 2015 and birth year to birth year - X were computed as well. It seems like the name "Chris" had by far the lowest percent change from birth year to 2015, where the name"Lauren" had the highest. The name "Ryan" had the lowest change from year X to birth year, and the name "Lauren" had the highes percent change from birth year to 2015.
  
 ## Chris
+
 ## First three letters of names
+```{r}
+Chris<-filter(babynames,str_detect(babynames$name,"^Chr"))
+chris<-filter(babynames, str_detect(babynames$name,"chr"))
+chrtotal<-sum(chris$n)
+Chrtotal<-sum(Chris$n)
+Chrcomparetototal<-Chrtotal/(chrtotal+Chrtotal)
+
+```
+
+
 ## Ariel and Rachel regexs
+```{r}
+Ariel<-filter(babynames, str_detect(babynames$name, "Ar[iy]+.le*[^a]?$"),sex=="F")
+V1973<-filter(Ariel, year==1973, sex=="F")
+V1988<-filter(Ariel, year==1988,sex=="F")
+V1990<-filter(Ariel, year==1990, sex=="F")
+V1973
+V1988
+V1990
+#1/5/5
+Rachel<-filter(babynames, str_detect(babynames$name, "Ra[ey]?chel"),sex=="F")
+v1973<-filter(Rachel, year==1973, sex=="F")
+v1988<-filter(Rachel, year==1988,sex=="F")
+v1990<-filter(Rachel, year==1990, sex=="F")
+v1973
+v1988
+v1990
+#10/13/12
+T1973<-filter(babynames,year==1973)
+T1973total<-sum(T1973$n)
+CA1973<-(sum(V1973$n)+sum(v1973$n))/T1973total
+CA1973
+#0.00240
+T1988<-filter(babynames,year==1988)
+T1988total<-sum(T1988$n)
+CA1988<-(sum(V1988$n)+sum(v1988$n))/T1988total
+CA1988
+#0.0047613
+
+T1990<-filter(babynames,year==1990)
+T1990total<-sum(T1990$n)
+CA1990<-(sum(V1990$n)+sum(v1990$n))/T1990total
+CA1990
+#0.00524115
+```
+
+
 ## The Little Mermaid Effect
+```{r}
+filter(babynames,str_detect(babynames$name,"Ar[iy]+.le*[^a]?$"),year==1988,sex=="F") %>% count(wt=prop) 
+filter(babynames,str_detect(babynames$name,"Ar[iy]+.le*[^a]?$"),year==1990,sex=="F") %>% count(wt=prop) 
+girls1 <- filter(babynames,str_detect(babynames$name,"^[AEIOU]"),year==1988,sex=="F")
+girls2 <- filter(babynames,str_detect(babynames$name,"^[AEIOU]"),year==1990,sex=="F")
+girls <- inner_join(girls1,girls2,by="name") %>% mutate(diff=prop.y-prop.x) %>% select(name,prop.x,prop.y,diff)
+Ariel.diff <- filter(babynames,str_detect(babynames$name,"Ar[iy]+.le*[^a]?$"),year==1990,sex=="F") %>% count(wt=prop) - filter(babynames,str_detect(babynames$name,"Ar[iy]+.le*[^a]?$"),year==1988,sex=="F") %>% count(wt=prop)
+
+```
+
+
+
 ## Your names
+```{r}
+totalname2015<-babynames %>% filter(year==2015)
+totalname1997<-babynames %>% filter(year==1997)
+totalname1979<-babynames %>% filter(year==1979)
+Chris2015<-totalname2015 %>% filter(str_detect(name, "^Chris?"))
+Chris1997<-totalname1997 %>% filter(str_detect(name, "^Chris?"))
+Chris1979<-totalname1979 %>% filter(str_detect(name, "^Chris?"))
+
+```
+
+```{r}
+SUM1<-sum(Chris1997$n)/sum(name1997$n)-(sum(Chris1979$n)/sum(name1979$n))
+SUM1
+SUM2<-sum(Chris2015$n)/sum(name2015$n)-(sum(Chris1997$n)/sum(name1997$n))
+SUM2
+```
+
+for the first question, at first I calculate the number of Chr and than I use str_detect chr in the file named babynames, after that I sum all this two and made a compare to the ratio. the ratio that my first letters occur when compare to the whole chance is nearly 100% where the exact number is 0.999424605.
+
+for the second questio, I calcualted the version for this two name first, where in 1973 the ariel have 1 version and have 5 version in both 1988 and 1990. 
+for Racheal this name have 10 version in 1973, 13 version in 1988 and 12 version in 1990. it is totally different when compare to the name Ariel. then I tried to calculate the ratio that those two names occur, and the answer is 0.0024 in 1973/ 0.0047613 in 1988 and 0.00524 in 1990.
+
+for the last part, I got stuck cause I am confuse what is the difference between the two percent change, so I calcualte the total name in each years first and find "Chris" shown number in exact years that we need, and I calculated it and I found, from 1979 to 1997 my name decrease like 1.1%
+and from I born to new era, 2015, my names occurs also decrease like 0.9%.
+
+
 
 
 # Summary of Who did What
@@ -391,9 +476,6 @@ I outlined the lab11 and divided each section for each teammates. In my individu
 ## Ryan
 I created code which solved each of the four data science problems in the lab report. I created metrics which I thought best answered each question, and then created plots to best display the data as the answers.
 
-
-
-
 ## Chris
-
+for all four question I used str_detect try to solve them, in my idividual part, I find the ratio and then I try to find the version and the chance that thoes two names occur in those years, 1973/1988/1990 and calculate the the ratio that we need. for the third question and the last question I got stuck at first,cause I thought made a graph is hard but when I asked and searching I did those two and find the relation that all we need.
                                                                         
