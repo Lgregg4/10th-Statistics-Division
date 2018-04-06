@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 ---
 title: "Lab11"
 author: "Lauren Gregg, Katie Jiang, Ryan Marizza, Chris He"
@@ -18,7 +16,70 @@ rm(list=ls()) # clears your environment variables
 #Analyzing Baby Names
 # Team Work
 
+<<<<<<< HEAD
  
+=======
+```{r}
+QnA<-left_join(questions,answers,by = c('Id'='ParentId'))
+
+QnA<-QnA%>%mutate(time_to_answer = as.numeric(difftime(CreationDate.y, CreationDate.x,units = "mins")))#this gives the time to answer in seconds
+
+QnA<-QnA%>%filter(CreationDate.x<CreationDate.y)%>%group_by(Id)%>%mutate(rank = row_number(time_to_answer))#here's where answers are ranked by their time to answer
+
+QnA_rank<-QnA%>%group_by(rank)%>%summarise(sc = mean(Score.y))
+
+ggplot(data = QnA_rank)+
+  geom_point(aes(x = rank,y = sc))+
+  geom_smooth(aes(x = rank,y=sc),method = lm,se=FALSE)
+#Maybe this isnt the best way to judge timliness (seems more like relative timliness)
+```
+ The plot above shows the relationship (or lack of relationship) between the timliness of a response, and its score. Timliness here is given as the order in which the answer appeared. That is: the chronologically first answer gets a rank of 1, the second 2, and so on. It seems, from this plot, that the rank, in this sense, of the answer has little to no effect on the score.
+ 
+```{r}
+ggplot(data = QnA)+
+  geom_point(aes(x = time_to_answer,y = Score.y))
+```
+
+```{r}
+QnA_short_term<-QnA%>%filter(time_to_answer < 60*5,Score.y<4000)
+
+ggplot(data = QnA_short_term)+
+  geom_point(aes(x = time_to_answer,y = Score.y))
+
+```
+These two plots show the relationship between score and time to answer. These plots show a different relationship between timliness and the score than the first plot. I would guess that this is because in the "ordered" ranking method of timliness, timliness is viewed as timliness compared to other answerers. This means that an answer with rank = 20 may have been submitted only 25 minutes after the question (given that 19 answers were submitted less than 25 minutes after the question). It seems that timliness does indeed have an effect on score, but the important thing is the literal time it took after the question before the answer was posted, and not the chronological rank of the answer's timliness.
+ 
+Another significant factor in a question/answer's score is the amount of words used.
+```{r}
+
+questions<- questions%>%mutate(length = str_length(Title))
+
+ggplot(data = questions)+
+  geom_point(aes(x = length,y=Score))
+
+```
+This plot shows the relationship between a question's score and the length of the title. It seems like the highest rated titles are not extremely long, and not extremely short, lying somewhere in the 40-60 character range.
+
+```{r}
+answers<- answers%>%mutate(yous = str_count(Body,"you"))%>%mutate(length = str_length(Body))%>%filter(length<5000)
+
+
+ggplot(data = answers)+
+  geom_point(aes(x = length,y=Score))
+
+
+
+```
+It seems again as if there is an optimal range for an answer's length. Upon inspection of the above plot, for the best score, an answer should be in the 500 character range. 
+
+
+
+## Explanation of why these features affect most
+It seems from the above plots that literal timliness has a huge effect on score. This is likley because after a certain amount of time, the question is forgotten, answered, or solved by the questioner. Therefore, it makes sense that an answer posted soon after the question would recieve a higher score than one posted later. 
+
+The relationship between question/answer length and score is likley explained by the obvious merit of brevity. People don't want to read tons of writing before they can get their answer, or start to answer a question. Therefore, those questions/answers which get their point across in the fewest characters (while still getting their point across) are likley to get the best score.
+
+>>>>>>> master
 # Individual Work
  
 
@@ -27,6 +88,47 @@ rm(list=ls()) # clears your environment variables
 ## Ariel and Rachel regexs
 ## The Little Mermaid Effect
 ## Your names
+
+
+As I have learned in my statistical collaboration course, building a relationship can help with successful collabortaion. I was interested if this translated similarly online. I thought politeness was a key factor in a strong relationship, so I was interested if manners impacted the score of questions. I identified manners as please or thank you.
+
+```{r}
+LGanswers <- answers %>% select(-X7)
+LGquestions <- questions %>% select(-X7)
+
+
+manners = c("thanks", "thx", "Thank you", "Thanks", "please", "Please", "pls", "plz", "Plz")
+
+LGquestions$Manners = str_detect(LGquestions$Body, manners)
+
+ggplot(LGquestions) + 
+  geom_boxplot(aes(Manners, Score))
+```
+
+As we can see from the above boxplots, saying please or thank you in an online platform is not correlated with a higher score. This does make sense because a question is probably upvoted for its content, not its politeness.
+
+Next, I considered the answer data. I figured, most of these posters are probably wanting to gather as much information as possible. I was interested to see if including a webpage reference in the answer would have a higher number of votes.
+
+```{r}
+LGanswers$Reference = str_detect(LGanswers$Body, "href")
+
+ggplot(LGanswers) +
+  geom_boxplot(aes(Reference, Score))
+
+```
+
+There is not a huge disparity between these two data. We see that the outlier with over 8000 votes did include a reference, but it is hard to tell if a true difference exists.
+
+```{r}
+
+trueData <- LGanswers %>% filter(LGanswers$Reference == TRUE) 
+falseData <- LGanswers %>% filter(LGanswers$Reference == FALSE)
+
+t.test(trueData$Score, falseData$Score)
+```
+
+
+When computing a quick t-test, we can see that there is a significant difference between the scores when a reference is used and when a references is not used. This leads me to believe that referencing a link with more information on the topic could result in a higher score.
 
 
 ## Kaite
@@ -70,11 +172,26 @@ The chances of girl bron in 1973 named Rachel or Ariel is 0.000816, in 1988 is 0
 ## The Little Mermaid Effect
 
 ```{r}
+<<<<<<< HEAD
 girl <- babynames%>%filter(sex == 'F')
 names<-girl%>%filter(str_detect(name,"^A"))%>%filter(year == 1988 | year == 1990)
 
 n1988<-names%>%filter(year == 1988)
 n1990<-names%>%filter(year == 1990)
+=======
+answers<- answers%>%mutate(yous = str_count(Body,"you"))%>%mutate(length = str_length(Body))
+
+
+ggplot(data = answers)+
+  geom_point(aes(x = length,y=Score))
+
+
+
+```
+
+```{r}
+answers<- answers%>%mutate(yous = str_count(Body,"you"))%>%mutate(length = str_length(Body))
+>>>>>>> master
 
 Adiff<-left_join(n1988,n1990,by = 'name')%>%mutate(diff = prop.x-prop.y)%>% select(name,prop.x,prop.y,diff)
 
@@ -90,8 +207,16 @@ ggplot(Adiff) +
   geom_vline(aes(xintercept=Ariel.diff),color="red",lwd=1) 
 
 ```
+<<<<<<< HEAD
 The percentile of changing to Ariel is 100%, because there is no other names with difference that is bigger than Ariel. The other girls' name has the distribution aroud 0, which means they have slightly changes. However, the difference for Ariel is far away on the right side of the plot, which means it has a great change. Thus, comparing to other girl's names, the Ariel have a bigger change over time.
 ## Your names
+=======
+Here, i wanted to know if there was a relationship between how many times the answerer used the work 'you' and their score. The distribution of yous vs. score looks approximatley the same as the distribution of words vs. score. This tells me that there is no significant relationship between the number of yous used and the score.
+
+
+## Chris
+for this question files, I was consider in like two subject names in our question title and the answes body. So, I mutate the question "I" in the answer.csv body.
+>>>>>>> master
 
 ```{r}
 my <- babynames %>% filter(sex == "F")
@@ -172,12 +297,20 @@ The actual change for Katie from 1981 to 1998 is 0.00177, and the relative chang
 # Summary of Who did What
 
 ## Lauren
+I formatted our final lab document and explained our team results. I also answered questions regarding manners and references. Both required me to use str_detect() and to create a new variable in the data set. I chose to use boxplots for both the question and answer data set because we are concerned with earning a high score on the posts. I also ran a t-test on the answer data to determine if the difference between using a reference and not was significant
 
 
 ## Kaite
+<<<<<<< HEAD
 I outlined the lab11 and divided each section for each teammates. In my individual part, I first found the ratio of first three letters of my name by using str_count. And I found the number of versions of Ariel and Rachel in 1973,1988 and 1990. The number of difference is increasing, which indicates that there is a effect to names based on The Little Mermaid. Then to prove it, I plot the change for Ariel from 1988 to 1990. Lastly, for my names, I plot two histograms to show the changes from the year that I was born to 2015 and from 17 years before I was born to the year I was born.
 ## Ryan
 
+=======
+I outlined the team questions and modified it. The features that I created are all about the high frequency words appearing in both questions and answers. I narrowed down the range of the scores, and looked for specific words showing in the body of each question and answer. I used str_count to find how many words that contain the same words, and plot them in the certain high range of scores.
+
+## Ryan
+I created the code for the team question on timliness vs. score. I also looked at the relationship between length of the title, and score, and the number of yous used in the answer and score. I also wrote the explination section in the team portion.
+>>>>>>> master
 
 ## Chris
 
