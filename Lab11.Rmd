@@ -10,6 +10,8 @@ output: html_document
 library(babynames)
 library(stringr)
 library(tidyverse)
+library(tidyr)
+library(ggplot2)
 rm(list=ls()) # clears your environment variables
 
 ```
@@ -35,21 +37,23 @@ chris<-filter(babynames, str_detect(babynames$name,"chr"))
 chrtotal<-sum(chris$n)
 Chrtotal<-sum(Chris$n)
 Chrcomparetototal<-Chrtotal/(chrtotal+Chrtotal)
+Chrcomparetototal
 ```
 
 ## Lauren 
 ```{r}
 countLG1 <- sum(str_count(babynames$name,"^Lau"))
 countLG2 <- sum(str_count(babynames$name,"lau"))
-ratioLG <- countLG2 / (countLG1 + countLG2)
+ratioLG <- countLG1 / (countLG1 + countLG2)
+ratioLG
 ```
 
 ## Plot
 ```{r}
-Ryan_ratio = sum(str_count(babynames$name,"Rya"))/(sum(str_count(babynames$name,"Rya"))+sum(str_count(babynames$name,"rya")))
-Lauren_ratio = sum(str_count(babynames$name,"Lau"))/(sum(str_count(babynames$name,"Lau"))+sum(str_count(babynames$name,"lau")))
-Katie_ratio = sum(str_count(babynames$name,"Kat"))/(sum(str_count(babynames$name,"Kat"))+sum(str_count(babynames$name,"kat")))
-Chris_ratio = sum(str_count(babynames$name,"Chr"))/(sum(str_count(babynames$name,"Chr"))+sum(str_count(babynames$name,"chr")))
+Ryan_ratio = sum(str_count(babynames$name,"^Rya"))/(sum(str_count(babynames$name,"^Rya"))+sum(str_count(babynames$name,"rya")))
+Lauren_ratio = sum(str_count(babynames$name,"^Lau"))/(sum(str_count(babynames$name,"^Lau"))+sum(str_count(babynames$name,"lau")))
+Katie_ratio = sum(str_count(babynames$name,"^Kat"))/(sum(str_count(babynames$name,"^Kat"))+sum(str_count(babynames$name,"kat")))
+Chris_ratio = sum(str_count(babynames$name,"^Chr"))/(sum(str_count(babynames$name,"^Chr"))+sum(str_count(babynames$name,"chr")))
 
 
 data_ryan <- babynames %>% group_by(year) %>% 
@@ -82,85 +86,101 @@ ggplot(data = data_chris,aes(x=year,y=prop_chr))+
   geom_line()
 ```
 
-#Analyzing Baby Names
-# Team Work
-
- 
-# Individual Work
- 
-
-## Lauren
-## First three letters of names
-## Ariel and Rachel regexs
-## The Little Mermaid Effect
-## Your names
 
 
-## Kaite
-## First three letters of names
-
+# Ariel and Rachel regexs
 ```{r}
-sum(str_count(babynames$name,"Kat"))
-sum(str_count(babynames$name,"kat"))
-```
-ratio of "Kat" = 0.96
-## Ariel and Rachel regexs
-
-```{r}
-Rach1973 <- filter(babynames,str_detect(babynames$name,"^Rach[:lower]*l"),year==1973,sex =="F")%>% count()
-Rach1988 <- filter(babynames,str_detect(babynames$name,"^Rach[:lower]*l"),year==1988,sex =="F")%>% count()
-Rach1990 <- filter(babynames,str_detect(babynames$name,"^Rach[:lower]*l"),year==1990,sex =="F")%>% count()
+Rach1973 <- filter(babynames,str_detect(babynames$name,"^Rach[:lower:]*l$|^Raych[:lower:]*l$"),year==1973,sex =="F")%>% count()
 Rach1973
+```
+```{r}
+Rach1988 <- filter(babynames,str_detect(babynames$name,"^Rach[:lower:]*l$|^Raych[:lower:]*l$"),year==1988,sex =="F")%>% count()
 Rach1988
+```
+```{r}
+Rach1990 <- filter(babynames,str_detect(babynames$name,"^Rach[:lower:]*l$|^Raych[:lower:]*l$"),year==1990,sex =="F")%>% count()
 Rach1990
+```
 
-Arie1973 <- filter(babynames,str_detect(babynames$name,"Ariel"),year==1973,sex =="F")%>%count()
-Ariel1988 <-  filter(babynames,str_detect(babynames$name,"Ariel"),year==1988,sex =="F")%>% count()
-Ariel1990 <-  filter(babynames,str_detect(babynames$name,"Ariel"),year==1990,sex =="F")%>% count()
-Arie1973
-Ariel1988
-Ariel1990
+```{r}
+A.count1973 <- filter(babynames,str_count(babynames$name,"Ar[iy]+.l+[^ayi]$|Arial|Ariale|Arialle"),year==1973,sex=="F") %>% count() #2
+A.count1973
+```
+```{r}
+A.count1988 <- filter(babynames,str_count(babynames$name,"Ar[iy]+.l+[^ayi]$|Arial|Ariale|Arialle"),year==1988,sex=="F") %>% count() #7
+A.count1988 
+```
+```{r}
+A.count1990 <- filter(babynames,str_detect(babynames$name,"Ar[iy]+.l+[^ayi]$|Arial|Ariale|Arialle"),year==1990,sex=="F") %>% count() #8
+A.count1990
+```
 
+
+```{r}
 g1973 <- filter(babynames,year == 1973, sex == "F") %>% count()
-chance1973 <- (Rach1973+Arie1973)/g1973
+chance1973 <- (Rach1973+A.count1973)/g1973
 chance1973
-g1988 <- filter(babynames,year == 1988,sex == "F") %>% count()
-chance1988 <- (Rach1988+Ariel1988)/g1988
-chance1988
+```
 
+```{r}
+g1988 <- filter(babynames,year == 1988,sex == "F") %>% count()
+chance1988 <- (Rach1988+A.count1988)/g1988
+chance1988
+```
+
+```{r}
 g1990 <- filter(babynames, year == 1990, sex == "F") %>% count()
-chance1990 <- (Rach1990+Ariel1990)/g1973
+chance1990 <- (Rach1990+A.count1990)/g1973
 chance1990
 ```
-The number of versions for Rachel in 1973 is 5, in 1988 is 7, and in 1990 is 5.
-The number of versions for Ariel in 1973 is 3, in 1988 is 6, and in 1990 is 6.
-The chances of girl bron in 1973 named Rachel or Ariel is 0.000816, in 1988 is 0.000937, and in 1990 is 0.00122
-## The Little Mermaid Effect
+
+
+The number of versions for Rachel in 1973 is 5, in 1988 is 7, and in 1990 is 6.
+The number of versions for Ariel in 1973 is 1, in 1988 is 5, and in 1990 is 6.
+The chances of girl bron in 1973 named Rachel or Ariel is 0.000816, in 1988 is 0.000864, and in 1990 is 0.00122.
+
+
+
+
+
+
+# *The Little Mermaid* Effect
+```{r}
+girl<-babynames%>% filter(sex == 'F')
+girls<-girl$name
+g1988<-girl%>%filter(year == 1988)
+g1990<-girl%>%filter(year == 1990)
+
+#Change in proportion of female Ariel names
+g_both <- left_join(g1988,g1990,'name')
+
+gen_change<- g_both%>%filter(str_detect(name,"[AEIOU]"))%>%mutate(change = (prop.y-prop.x)/((n.x+n.y)/2))
+ariels_change<- g_both%>%filter(str_detect(name,"Ar[iy]+.l+[^ayi]$|Arial|Ariale|Arialle"))%>%mutate(change = (prop.y-prop.x)/((n.x+n.y)/2))
+ariel_mean<-ariels_change%>%summarise(change = mean(change))
+ngen_change<-gen_change%>%count()
+nsmall_change<-gen_change%>%filter(change<ariel_mean$change)%>%count()
+
+ariel_change_percentile<-nsmall_change$n/ngen_change$n
+#81st percentile!
+ariel_change_percentile
+```
 
 ```{r}
-girl <- babynames%>%filter(sex == 'F')
-names<-girl%>%filter(str_detect(name,"^A"))%>%filter(year == 1988 | year == 1990)
-
-n1988<-names%>%filter(year == 1988)
-n1990<-names%>%filter(year == 1990)
-
-Adiff<-left_join(n1988,n1990,by = 'name')%>%mutate(diff = prop.x-prop.y)%>% select(name,prop.x,prop.y,diff)
-
-Ariel.diff <- filter(babynames,str_detect(babynames$name,"Ar[iy]+.l+[^a]?$"),year==1990,sex=="F") %>% count(wt=prop) - filter(babynames,str_detect(babynames$name,"Ar[iy]+.l+[^a]?$"),year==1988,sex=="F") %>% count(wt=prop)
-Ariel.diff
-# the percentile of Ariel changes
-filter(Adiff,diff<Ariel.diff) %>% arrange(desc(diff))
-filter(Adiff,diff<Ariel.diff) %>% count()/names %>% count()
-
-
-ggplot(Adiff) +
-  geom_histogram(aes(x=diff),bins=50) + xlim(-0.003,0.003)+
-  geom_vline(aes(xintercept=Ariel.diff),color="red",lwd=1) 
-
+#plot between changes in other female names and changes of ariel names
+ggplot()+
+  geom_point(data = gen_change, aes(x = name, y=change))+
+  geom_point(data = ariels_change, aes(x=name, y= change,color='red'))
 ```
-The percentile of changing to Ariel is 100%, because there is no other names with difference that is bigger than Ariel. The other girls' name has the distribution aroud 0, which means they have slightly changes. However, the difference for Ariel is far away on the right side of the plot, which means it has a great change. Thus, comparing to other girl's names, the Ariel have a bigger change over time.
-## Your names
 
+The analysis showed that Ariel names changes more than 81% of all names. That is, Ariel names were in the 81st percentile of change from 1988 to 1990.
+
+This plot shows the change in the proportion of various names from 1988 to 1990. Names below the zero line decreased in relative popularity, while names above the zero line increased in relative popularity. The points on this plot (near the middle) which are red represent the change in popularity of different variations of the name "Ariel". The important thing to note from this plot is that the Ariel names increased in popularity more than most other names.
+
+The change in proportion of names was normalized by the count to avoid biasing such that more popular names (which will obviously have a higher raw change than less popular names) are not at an unfair advantage.
+
+# Your Names
+
+## Katie
 ```{r}
 my <- babynames %>% filter(sex == "F")
 ka <- my %>% filter(str_detect(name,"^Katie")) %>% filter(year == 1998 | year == 2015)
@@ -179,195 +199,14 @@ all15<- filter(babynames,year == 2015)
 ```
 My name Katie have the difference 0.00138 from 1998 to 2015, and have 0.00177 from 1981 to 1998.
 
-```{r}
-#actucal change in propotion
-Katie.diff <- filter(babynames,str_detect(babynames$name,"^Katie"),year==1998,sex=="F") %>% count(wt=prop) - filter(babynames,str_detect(babynames$name,"^Katie"),year==2015,sex=="F") %>% count(wt=prop)
-Katie.diff
-#relative change in precentile
-Kgirl <- filter(babynames,str_detect(babynames$name , "^K"),year == 1998|year == 2015)
-n1998 <- Kgirl %>% filter(year == 1998)
-n2015 <- Kgirl %>% filter(year == 2015)
-
-Kdiff<-left_join(n1998,n2015,by = 'name')%>%mutate(diff = prop.x-prop.y)%>% select(name,prop.x,prop.y,diff)
-
-filter(Kdiff,diff<Katie.diff) %>% arrange(desc(diff))
-filter(Kdiff,diff<Katie.diff) %>% count() 
-
-#plot shows the difference
-inner_join(all98,all15,by = "name") %>% mutate(df = prop.x-prop.y)%>%
-  select(name,prop.x,prop.y,df)%>%
-  ggplot()+geom_histogram(mapping = aes(x = df),bins = 40)+xlim(-0.003,0.003)+
-  geom_vline(aes(xintercept = changeka),color = "red",lwd =1)+
-  labs(x = "Difference", y ="Count", title = "The changes of Katie between 1998 and 2015")
-
-```
-The actucal change for Katie is 0.00138, and the relative change is 100% from 1998 to 2015, which is the percentile. Because there is no other names have the bigger changes than mine, which we could also see from the plot.
-
-```{r}
-#actucal change in propotion
-Katie.diff1 <- filter(babynames,str_detect(babynames$name,"^Katie"),year==1981,sex=="F") %>% count(wt=prop) - filter(babynames,str_detect(babynames$name,"^Katie"),year==1998,sex=="F") %>% count(wt=prop)
-Katie.diff1
-#relative change in precentile
-Kgirl1 <- filter(babynames,str_detect(babynames$name , "^K"),year == 1998|year == 1981)
-n1998 <- Kgirl %>% filter(year == 1998)
-n1981 <- Kgirl %>% filter(year == 2015)
-
-Kdiff1<-left_join(n1998,n1981,by = 'name')%>%mutate(diff = prop.x-prop.y)%>% select(name,prop.x,prop.y,diff)
-Kdiff1
-filter(Kdiff1,diff< Katie.diff1) 
-filter(Kdiff1,diff<Katie.diff1) %>% count() /Kgirl1 %>% count()
-
-#plot shows the change
-all81 <- filter(babynames,year == 1981)
-inner_join(all81,all98, by = "name")%>%
-  mutate(df = prop.x-prop.y)%>%
-  select(name,prop.x,prop.y,df)%>%
-  ggplot()+geom_histogram(mapping = aes(x = df),bins = 30)+xlim(-0.01,0.01)+
-  geom_vline(aes(xintercept = changeka2),color = "red",lwd=1)+
-  labs(x = "Difference", y ="Count", title = "The changes of Katie between 1981 and 1998")
-```
-The actual change for Katie from 1981 to 1998 is 0.00177, and the relative change in percentile is 100%. And we can see from the plot that my name become more popular comparing to others
-
-
-
 ## Ryan
-```{r}
-data<-babynames
-names<-data$name
-```
-## First three letters of names
-```{r}
-Ryan_ratio = sum(str_count(babynames$name,"Rya"))/(sum(str_count(babynames$name,"Rya"))+sum(str_count(babynames$name,"rya")))
-Lauren_ratio = sum(str_count(babynames$name,"Lau"))/(sum(str_count(babynames$name,"Lau"))+sum(str_count(babynames$name,"lau")))
-Katie_ratio = sum(str_count(babynames$name,"Kat"))/(sum(str_count(babynames$name,"Kat"))+sum(str_count(babynames$name,"kat")))
-Chris_ratio = sum(str_count(babynames$name,"Chr"))/(sum(str_count(babynames$name,"Chr"))+sum(str_count(babynames$name,"chr")))
-
-
-data_ryan <- babynames %>% group_by(year) %>% 
-  summarise(prop_rya = sum(str_count(name,"Rya"))/sum(str_count(name,"")))
-data_lauren <- babynames %>% group_by(year) %>% 
-  summarise(prop_lau = sum(str_count(name,"Lau"))/sum(str_count(name,"")))
-data_katie <- babynames %>% group_by(year) %>% 
-  summarise(prop_kat = sum(str_count(name,"Kat"))/sum(str_count(name,"")))
-data_chris <- babynames %>% group_by(year) %>% 
-  summarise(prop_chr = sum(str_count(name,"Chr"))/sum(str_count(name,"")))
-
-
-Ryan_ratio
-Lauren_ratio
-Katie_ratio
-Chris_ratio
-```
-These show the total ratios of each team members first three letters of their name to the total times those three letters were seen in names.
-
-The following plots display how the relative frequency of each persons' name's first three letters changes through time.
-
-
-```{r}
-ggplot(data = data_ryan,aes(x=year,y=prop_rya))+
-  geom_line()
-```
-
-The relative frequency of the use of my name spikes in the 1980's, and continues to be high through 2015. This makes sense, since I was born in 1996.
-
-
-```{r}
-ggplot(data = data_lauren,aes(x=year,y=prop_lau))+
-  geom_line()
-
-
-```
-
-```{r}
-ggplot(data = data_katie,aes(x=year,y=prop_kat))+
-  geom_line()
-
-
-```
-
-```{r}
-ggplot(data = data_chris,aes(x=year,y=prop_chr))+
-  geom_line()
-```
-
-
-## Ariel and Rachel regexs
-```{r}
-#Ariel/Rachel
-girl<-data%>%filter(sex == 'F')
-girls<-girl$name
-
-g1973<-girl%>%filter(year == 1973)
-count1973<-g1973%>%count()
-sum(str_count(g1973$name,"^Rach[:lower:]*l$|^Raych[:lower:]*l$"))
-sum(str_count(g1973$name,"Ar[iy]+.l+[^ayi]$|Arial|Ariale|Arialle"))
-
-g1973_rach <- g1973%>%filter(str_detect(name,"^Rach[:lower:]*l$|^Raych[:lower:]*l$"))%>%summarise(p_rach = sum(prop))
-g1973_ari <- g1973%>%filter(str_detect(name,"Ar[iy]+.l+[^ayi]$|Arial|Ariale|Arialle"))%>%summarise(p_ari = sum(prop))
-
-
-
-g1988<-girl%>%filter(year == 1988)
-count1988<-g1988%>%count()
-sum(str_count(g1988$name,"^Rach[:lower:]*l$|^Raych[:lower:]*l$"))
-sum(str_count(g1988$name,"Ar[iy]+.l+[^ayi]$|Arial|Ariale|Arialle"))
-
-g1988_rach <- g1988%>%filter(str_detect(name,"^Rach[:lower:]*l$|^Raych[:lower:]*l$"))%>%summarise(p_rach = sum(prop))
-g1988_ari <- g1988%>%filter(str_detect(name,"Ar[iy]+.l+[^ayi]$|Arial|Ariale|Arialle"))%>%summarise(p_ari = sum(prop))
-
-
-g1990<-girl%>%filter(year == 1990)
-count1990<-g1990%>%count()
-sum(str_count(g1990$name,"^Rach[:lower:]*l$|^Raych[:lower:]*l$"))
-sum(str_count(g1990$name,"Ar[iy]+.l+[^ayi]$|Arial|Ariale|Arialle"))
-
-g1990_rach <- g1990%>%filter(str_detect(name,"^Rach[:lower:]*l$|^Raych[:lower:]*l$"))%>%summarise(p_rach = sum(prop))
-g1990_ari <- g1990%>%filter(str_detect(name,"Ar[iy]+.l+[^ayi]$|Arial|Ariale|Arialle"))%>%summarise(p_ari = sum(prop))
-
-
-```
-It is interesting to note that the number of variations of the name "Ariel" increases from 1973 to 1988 and again to 1990.
-
-## The Little Mermaid Effect
-```{r}
-#Change in proportion of female Ariel names
-g_both <- left_join(g1988,g1990,'name')
-
-gen_change<- g_both%>%filter(str_detect(name,"[AEIOU]"))%>%mutate(change = (prop.y-prop.x)/((n.x+n.y)/2))
-ariels_change<- g_both%>%filter(str_detect(name,"Ar[iy]+.l+[^ayi]$|Arial|Ariale|Arialle"))%>%mutate(change = (prop.y-prop.x)/((n.x+n.y)/2))
-ariel_mean<-ariels_change%>%summarise(change = mean(change))
-ngen_change<-gen_change%>%count()
-nsmall_change<-gen_change%>%filter(change<ariel_mean$change)%>%count()
-
-ariel_change_percentile<-nsmall_change$n/ngen_change$n
-#81st percentile!
-
-#plot between changes in other female names and changes of ariel names
-ggplot()+
-  geom_point(data = gen_change, aes(x = name, y=change))+
-  geom_point(data = ariels_change, aes(x=name, y= change,color='red'))
-
-
-
-```
-The analysis showed that Ariel names changes more than 81% of all names. That is, Ariel names were in the 81st percentile of change from 1988 to 1990.
-
-This plot shows the change in the proportion of various names from 1988 to 1990. Names below the zero line decreased in relative popularity, while names above the zero line increased in relative popularity. The points on this plot (near the middle) which are red represent the change in popularity of different variations of the name "Ariel". The important thing to note from this plot is that the Ariel names increased in popularity more than most other names.
-
-The change in proportion of names was normalized by the count to avoid biasing such that more popular names (which will obviously have a higher raw change than less popular names) are not at an unfair advantage.
-
-## Your names
-
-
-
 For this analysis, year/gender was delt with by writing a conditional filter which filtered for the team member's gender and birth year as it was filtering for his/her name. This was impossible to do for the whole data set, so the median year, 1997, was chosen as the representative.
 
 The change in proportion of names was normalized here in a similar fashion as above. 
 ```{r}
-rel_data_BY = data%>%filter(year == 1997)
-rel_data_15 = data%>%filter(year == 2015)
-rel_data_X = data%>%filter(year == 1979)
-
+rel_data_BY = babynames%>%filter(year == 1997)
+rel_data_15 = babynames%>%filter(year == 2015)
+rel_data_X = babynames%>%filter(year == 1979)
 
 rel_data_change1 = left_join(rel_data_BY,rel_data_15,by = 'name')%>%filter(!is.na(year.y))%>%mutate(change = abs(prop.y-prop.x)/(n.x+n.y))
 rel_data_change2 = left_join(rel_data_BY,rel_data_X,by = 'name')%>%filter(!is.na(year.y))%>%mutate(change = abs(prop.y-prop.x)/(n.x+n.y))
@@ -375,11 +214,11 @@ rel_data_change2 = left_join(rel_data_BY,rel_data_X,by = 'name')%>%filter(!is.na
 
 
 
-birth_year<-data%>%filter((str_detect(name,"R[yi][ae]n$") & year == 1997)& sex == 'M' |(str_detect(name,"Laur[ea]n+$") & year == 1996)& sex == 'F' | (str_detect(name,"[CK]atie$|[CK]aty$") & year == 1998)& sex == 'F'|(str_detect(name,"Chris$|Kris$|Cris$") & year == 1998)& sex == 'M'   )
+birth_year<-babynames%>%filter((str_detect(name,"R[yi][ae]n$") & year == 1997)& sex == 'M' |(str_detect(name,"Laur[ea]n+$") & year == 1996)& sex == 'F' | (str_detect(name,"[CK]atie$|[CK]aty$") & year == 1998)& sex == 'F'|(str_detect(name,"Chris$|Kris$|Cris$") & year == 1998)& sex == 'M'   )
 
-year_2015<-data%>%filter((str_detect(name,"R[yi][ae]n$") & year == 2015)& sex == 'M' |(str_detect(name,"Laur[ea]n+$") & year == 2015)& sex == 'F' | (str_detect(name,"[CK]atie$|[CK]aty$") & year == 2015)& sex == 'F'|(str_detect(name,"Chris$|Kris$|Cris$") & year == 2015)& sex == 'M'   )
+year_2015<-babynames%>%filter((str_detect(name,"R[yi][ae]n$") & year == 2015)& sex == 'M' |(str_detect(name,"Laur[ea]n+$") & year == 2015)& sex == 'F' | (str_detect(name,"[CK]atie$|[CK]aty$") & year == 2015)& sex == 'F'|(str_detect(name,"Chris$|Kris$|Cris$") & year == 2015)& sex == 'M'   )
 
-year_X<-data%>%filter((str_detect(name,"R[yi][ae]n$") & year == 1979)& sex == 'M' |(str_detect(name,"Laur[ea]n+$") & year == 1978)& sex == 'F' | (str_detect(name,"[CK]atie$|[CK]aty$") & year == 1980)& sex == 'F'|(str_detect(name,"Chris$|Kris$|Cris$") & year == 1980)& sex == 'M'   )
+year_X<-babynames%>%filter((str_detect(name,"R[yi][ae]n$") & year == 1979)& sex == 'M' |(str_detect(name,"Laur[ea]n+$") & year == 1978)& sex == 'F' | (str_detect(name,"[CK]atie$|[CK]aty$") & year == 1980)& sex == 'F'|(str_detect(name,"Chris$|Kris$|Cris$") & year == 1980)& sex == 'M'   )
 
 
 
@@ -444,71 +283,8 @@ chris_pct_change2$n
 ```
 
 The perecntile of change from birth year to 2015 and birth year to birth year - X were computed as well. It seems like the name "Chris" had by far the lowest percent change from birth year to 2015, where the name"Lauren" had the highest. The name "Ryan" had the lowest change from year X to birth year, and the name "Lauren" had the highes percent change from birth year to 2015.
- 
+
 ## Chris
-
-## First three letters of names
-```{r}
-Chris<-filter(babynames,str_detect(babynames$name,"^Chr"))
-chris<-filter(babynames, str_detect(babynames$name,"chr"))
-chrtotal<-sum(chris$n)
-Chrtotal<-sum(Chris$n)
-Chrcomparetototal<-Chrtotal/(chrtotal+Chrtotal)
-
-```
-
-
-## Ariel and Rachel regexs
-```{r}
-Ariel<-filter(babynames, str_detect(babynames$name, "Ar[iy]+.le*[^a]?$"),sex=="F")
-V1973<-filter(Ariel, year==1973, sex=="F")
-V1988<-filter(Ariel, year==1988,sex=="F")
-V1990<-filter(Ariel, year==1990, sex=="F")
-V1973
-V1988
-V1990
-#1/5/5
-Rachel<-filter(babynames, str_detect(babynames$name, "Ra[ey]?chel"),sex=="F")
-v1973<-filter(Rachel, year==1973, sex=="F")
-v1988<-filter(Rachel, year==1988,sex=="F")
-v1990<-filter(Rachel, year==1990, sex=="F")
-v1973
-v1988
-v1990
-#10/13/12
-T1973<-filter(babynames,year==1973)
-T1973total<-sum(T1973$n)
-CA1973<-(sum(V1973$n)+sum(v1973$n))/T1973total
-CA1973
-#0.00240
-T1988<-filter(babynames,year==1988)
-T1988total<-sum(T1988$n)
-CA1988<-(sum(V1988$n)+sum(v1988$n))/T1988total
-CA1988
-#0.0047613
-
-T1990<-filter(babynames,year==1990)
-T1990total<-sum(T1990$n)
-CA1990<-(sum(V1990$n)+sum(v1990$n))/T1990total
-CA1990
-#0.00524115
-```
-
-
-## The Little Mermaid Effect
-```{r}
-filter(babynames,str_detect(babynames$name,"Ar[iy]+.le*[^a]?$"),year==1988,sex=="F") %>% count(wt=prop) 
-filter(babynames,str_detect(babynames$name,"Ar[iy]+.le*[^a]?$"),year==1990,sex=="F") %>% count(wt=prop) 
-girls1 <- filter(babynames,str_detect(babynames$name,"^[AEIOU]"),year==1988,sex=="F")
-girls2 <- filter(babynames,str_detect(babynames$name,"^[AEIOU]"),year==1990,sex=="F")
-girls <- inner_join(girls1,girls2,by="name") %>% mutate(diff=prop.y-prop.x) %>% select(name,prop.x,prop.y,diff)
-Ariel.diff <- filter(babynames,str_detect(babynames$name,"Ar[iy]+.le*[^a]?$"),year==1990,sex=="F") %>% count(wt=prop) - filter(babynames,str_detect(babynames$name,"Ar[iy]+.le*[^a]?$"),year==1988,sex=="F") %>% count(wt=prop)
-
-```
-
-
-
-## Your names
 ```{r}
 totalname2015<-babynames %>% filter(year==2015)
 totalname1997<-babynames %>% filter(year==1997)
@@ -520,33 +296,36 @@ Chris1979<-totalname1979 %>% filter(str_detect(name, "^Chris?"))
 ```
 
 ```{r}
-SUM1<-sum(Chris1997$n)/sum(name1997$n)-(sum(Chris1979$n)/sum(name1979$n))
+SUM1<-sum(Chris1997$n)/sum(totalname1997$n)-(sum(Chris1979$n)/sum(totalname1979$n))
 SUM1
-SUM2<-sum(Chris2015$n)/sum(name2015$n)-(sum(Chris1997$n)/sum(name1997$n))
+SUM2<-sum(Chris2015$n)/sum(totalname2015$n)-(sum(Chris1997$n)/sum(totalname1997$n))
 SUM2
 ```
-
-for the first question, at first I calculate the number of Chr and than I use str_detect chr in the file named babynames, after that I sum all this two and made a compare to the ratio. the ratio that my first letters occur when compare to the whole chance is nearly 100% where the exact number is 0.999424605.
-
-for the second questio, I calcualted the version for this two name first, where in 1973 the ariel have 1 version and have 5 version in both 1988 and 1990. 
-for Racheal this name have 10 version in 1973, 13 version in 1988 and 12 version in 1990. it is totally different when compare to the name Ariel. then I tried to calculate the ratio that those two names occur, and the answer is 0.0024 in 1973/ 0.0047613 in 1988 and 0.00524 in 1990.
-
-for the last part, I got stuck cause I am confuse what is the difference between the two percent change, so I calcualte the total name in each years first and find "Chris" shown number in exact years that we need, and I calculated it and I found, from 1979 to 1997 my name decrease like 1.1%
+I got stuck cause I am confuse what is the difference between the two percent change, so I calcualte the total name in each years first and find "Chris" shown number in exact years that we need, and I calculated it and I found, from 1979 to 1997 my name decrease like 1.1%
 and from I born to new era, 2015, my names occurs also decrease like 0.9%.
 
+## Lauren
+```{r}
+LaurenProp1996 <- babynames %>% filter(str_detect(name, "Laur[ea]n$|Lor[eya]n$"), year==1996, sex=="F") %>% count(wt=prop)
+LaurenProp2015 <- babynames %>% filter(str_detect(name, "Laur[ea]n$|Lor[eya]n$"), year==2015, sex=="F") %>% count(wt=prop)
+ChangeInProp <- LaurenProp2015 - LaurenProp1996
+ChangeInProp
+```
 
+The proportion of my name in 1996 was 0.00677 and in 2015 was 0.00146. The proportion of females named a version of Lauren decreased by 0.00531 from 1996 to 2015.
 
 
 # Summary of Who did What
 
 ## Lauren
+I completed each question described in the lab report. I relied heavily on str_detect() and count(). I also formatted the lab report in a way that combines each of our code for each question.
 
-
-## Kaite
+## Katie
 I outlined the lab11 and divided each section for each teammates. In my individual part, I first found the ratio of first three letters of my name by using str_count. And I found the number of versions of Ariel and Rachel in 1973,1988 and 1990. The number of difference is increasing, which indicates that there is a effect to names based on The Little Mermaid. Then to prove it, I plot the change for Ariel from 1988 to 1990. Lastly, for my names, I plot two histograms to show the changes from the year that I was born to 2015 and from 17 years before I was born to the year I was born.
+
 ## Ryan
 I created code which solved each of the four data science problems in the lab report. I created metrics which I thought best answered each question, and then created plots to best display the data as the answers.
 
 ## Chris
 for all four question I used str_detect try to solve them, in my idividual part, I find the ratio and then I try to find the version and the chance that thoes two names occur in those years, 1973/1988/1990 and calculate the the ratio that we need. for the third question and the last question I got stuck at first,cause I thought made a graph is hard but when I asked and searching I did those two and find the relation that all we need.
-                                                                        
+
