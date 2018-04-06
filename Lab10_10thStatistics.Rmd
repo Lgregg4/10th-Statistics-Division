@@ -33,7 +33,8 @@ ggplot(data = QnA_rank)+
   geom_smooth(aes(x = rank,y=sc),method = lm,se=FALSE)
 #Maybe this isnt the best way to judge timliness (seems more like relative timliness)
 ```
- The plot above shows the relationship (or lack of relationship) between the timliness of a response, and its score. Timliness here is given as the order in which the answer appeared. That is: the chronologically first answer gets a rank of 1, the second 2, and so on. It seems, from this plot, that the rank, in this sense, of the answer has little to no effect on the score.
+
+The plot above shows the relationship (or lack of relationship) between the timliness of a response, and its score. Timliness here is given as the order in which the answer appeared. That is: the chronologically first answer gets a rank of 1, the second 2, and so on. It seems, from this plot, that the rank, in this sense, of the answer has little to no effect on the score.
  
 ```{r}
 ggplot(data = QnA)+
@@ -47,6 +48,7 @@ ggplot(data = QnA_short_term)+
   geom_point(aes(x = time_to_answer,y = Score.y))
 
 ```
+
 These two plots show the relationship between score and time to answer. These plots show a different relationship between timliness and the score than the first plot. I would guess that this is because in the "ordered" ranking method of timliness, timliness is viewed as timliness compared to other answerers. This means that an answer with rank = 20 may have been submitted only 25 minutes after the question (given that 19 answers were submitted less than 25 minutes after the question). It seems that timliness does indeed have an effect on score, but the important thing is the literal time it took after the question before the answer was posted, and not the chronological rank of the answer's timliness.
  
 Another significant factor in a question/answer's score is the amount of words used.
@@ -58,6 +60,7 @@ ggplot(data = questions)+
   geom_point(aes(x = length,y=Score))
 
 ```
+
 This plot shows the relationship between a question's score and the length of the title. It seems like the highest rated titles are not extremely long, and not extremely short, lying somewhere in the 40-60 character range.
 
 ```{r}
@@ -70,6 +73,7 @@ ggplot(data = answers)+
 
 
 ```
+
 It seems again as if there is an optimal range for an answer's length. Upon inspection of the above plot, for the best score, an answer should be in the 500 character range. 
 
 
@@ -127,12 +131,57 @@ falseData <- LGanswers %>% filter(LGanswers$Reference == FALSE)
 t.test(trueData$Score, falseData$Score)
 ```
 
-
 When computing a quick t-test, we can see that there is a significant difference between the scores when a reference is used and when a references is not used. This leads me to believe that referencing a link with more information on the topic could result in a higher score.
 
 
 ## Kaite
+<<<<<<< HEAD:Lab10.Rmd
 ## First three letters of names
+=======
+For the questions and answers, I am interested in the high range score, which words have the high numbers of appearance. I created two features which are all about the highest frequency words showing in high score questions and answers. Because the good quality of answers and questions needs some words that make them popular in readers.
+```{r}
+Question<- questions %>% select(OwnerUserId,Score,Title)
+Answers<- answers %>% select(OwnerUserId,Score,Body)
+newQ<-tibble(id = Question$OwnerUserId, Score = Question$Score, Title = Question$Title)
+iduser <- as.integer(newQ$id)
+Score1 <- as.integer(newQ$Score)
+title1<- as.character(newQ$Title)
+newQ1 <- tibble(iduser = iduser,Score1 = Score1, title1 = title1)
+nQ <- newQ1 %>% arrange(desc(Score1))
+nQ <- nQ %>% filter(Score1 >= 1000 & Score1 <= 1040)
+python <- sum(str_count(nQ$title1,"p|Python+"))
+Function<- sum(str_count(nQ$title1,"function+"))
+HowandWhat <- sum(str_count(nQ$title1,"^H|how|W|what"))
+implement<- sum(str_count(nQ$title1,"I|implement(?=p|Python)"))
+String<- sum(str_count(nQ$title1,"p|python(?= function|string)"))
+plotQ<- tibble(Highfrequencynames = c("python","function","how and what","implement python","string"),frequency = c(python,Function,HowandWhat,implement,String))
+
+ggplot(plotQ)+
+  geom_col(mapping = aes(x= Highfrequencynames, y = frequency,fill = Highfrequencynames))+
+  labs(x = "High Frequency Words", y = "Frequency",title = "The highest freqency words appear in score range is between 1000 to 1040\n in good questions")
+```
+
+In question part, during the high range of scores, we can see the words python appearing lots of times, which means most readers like the python questions and they also have trouble in solving python questions.
+```{r}
+newA<- tibble(id = as.integer(answers$OwnerUserId), Score = as.integer(answers$Score), Body = as.character(answers$Body))
+nA<- newA %>% arrange(desc(Score))
+nA <- nA %>% filter(Score >= 1000 & Score <= 8384)
+Python1<- sum(str_count(nA$Body, "p|Python"))
+Could <- sum(str_count(nA$Body,"y|You(?= could|are)"))
+If_please <- sum(str_count(nA$Body,"^i|If|p|Please"))
+Suggest<- sum(str_count(nA$Body,"suggestion|suggest|p|Print"))
+comp<- sum(str_count(nA$Body,"M|mac|computer"))
+plotA<- tibble(Highfrequencynames = c("Python","Could","If_Please","suggest","computer"),Freq = c(Python1,Could,If_please,Suggest,comp))
+ggplot(plotA)+
+  geom_col(mapping = aes(x =Highfrequencynames, y = Freq,fill = Highfrequencynames ))+
+  labs(x = "High Frequency Words", y = "Frequency",title = "The higest freqency words appear in score range is between 1000 to 8384 \nin good answers")
+
+```
+
+In the answers part, I found the highest one is python, obviously. But then the second followed by "If.. please" and suggestions. So the good way to contribute answers is first including critical words, and using imperative mood to express their answers. In this way, readers will be more comfortable to take actions.
+
+## Ryan
+>>>>>>> master:Lab10_10thStatistics.Rmd
 
 ```{r}
 sum(str_count(babynames$name,"Kat"))
@@ -166,10 +215,15 @@ g1990 <- filter(babynames, year == 1990, sex == "F") %>% count()
 chance1990 <- (Rach1990+Ariel1990)/g1973
 chance1990
 ```
+<<<<<<< HEAD:Lab10.Rmd
 The number of versions for Rachel in 1973 is 5, in 1988 is 7, and in 1990 is 5.
 The number of versions for Ariel in 1973 is 3, in 1988 is 6, and in 1990 is 6.
 The chances of girl bron in 1973 named Rachel or Ariel is 0.000816, in 1988 is 0.000937, and in 1990 is 0.00122
 ## The Little Mermaid Effect
+=======
+
+In the questions data, I was interested in whether or not there was a relationship between the length of the title of someone's question, and the score that the question got. It seems like questions with a medium length (about 50 words) did better than short questions or long questions. This is as expected, because brevity is important for clarity in your question, but being too brief can lead to muddled understanding of what you want to know.
+>>>>>>> master:Lab10_10thStatistics.Rmd
 
 ```{r}
 <<<<<<< HEAD
@@ -207,10 +261,14 @@ ggplot(Adiff) +
   geom_vline(aes(xintercept=Ariel.diff),color="red",lwd=1) 
 
 ```
+<<<<<<< HEAD:Lab10.Rmd
 <<<<<<< HEAD
 The percentile of changing to Ariel is 100%, because there is no other names with difference that is bigger than Ariel. The other girls' name has the distribution aroud 0, which means they have slightly changes. However, the difference for Ariel is far away on the right side of the plot, which means it has a great change. Thus, comparing to other girl's names, the Ariel have a bigger change over time.
 ## Your names
 =======
+=======
+
+>>>>>>> master:Lab10_10thStatistics.Rmd
 Here, i wanted to know if there was a relationship between how many times the answerer used the work 'you' and their score. The distribution of yous vs. score looks approximatley the same as the distribution of words vs. score. This tells me that there is no significant relationship between the number of yous used and the score.
 
 
@@ -233,7 +291,13 @@ changeka2
 all98<- filter(babynames,year == 1998)
 all15<- filter(babynames,year == 2015)
 ```
+<<<<<<< HEAD:Lab10.Rmd
 My name Katie have the difference 0.00138 from 1998 to 2015, and have 0.00177 from 1981 to 1998.
+=======
+
+then I made the ggplot function for the question I was conisder like why the Geom_boxplot function doesnot show up in my expect way, so I use the group=cut_width but it seems not good, then I used the facet_wrap, when we saw the graph I could see that if a person use less "I" in their title they could get a relative high score in the end, but when we saw the boxplot function we could know there is no relation between this two variable cause the density was in the below.
+
+>>>>>>> master:Lab10_10thStatistics.Rmd
 ```{r}
 #actucal change in propotion
 Katie.diff <- filter(babynames,str_detect(babynames$name,"^Katie"),year==1998,sex=="F") %>% count(wt=prop) - filter(babynames,str_detect(babynames$name,"^Katie"),year==2015,sex=="F") %>% count(wt=prop)
@@ -256,6 +320,7 @@ inner_join(all98,all15,by = "name") %>% mutate(df = prop.x-prop.y)%>%
   labs(x = "Difference", y ="Count", title = "The changes of Katie between 1998 and 2015")
 
 ```
+<<<<<<< HEAD:Lab10.Rmd
 The actucal change for Katie is 0.00138, and the relative change is 100% from 1998 to 2015, which is the percentile. Because there is no other names have the bigger changes than mine, which we could also see from the plot.
 ```{r}
 #actucal change in propotion
@@ -292,6 +357,11 @@ The actual change for Katie from 1981 to 1998 is 0.00177, and the relative chang
 ## Ariel and Rachel regexs
 ## The Little Mermaid Effect
 ## Your names
+=======
+
+then I was thinking if we answer one person question, the best way or the best suggestion is kind of this form : "I need/I could/ I can", so I was mutate the number of "I" in our answer body. same stituation happened, the geom_boxplot function have some warning, and I dont know how to fixed it, so I just use facet_wrap and geom_point. facet_wrap have really high range so I just consider the geom_point plot. It is easy to conclude that if you use less word like"I", it might receice a higher grades.
+
+>>>>>>> master:Lab10_10thStatistics.Rmd
 
 
 # Summary of Who did What
