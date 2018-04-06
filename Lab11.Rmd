@@ -60,6 +60,7 @@ chance1973
 g1988 <- filter(babynames,year == 1988,sex == "F") %>% count()
 chance1988 <- (Rach1988+Ariel1988)/g1988
 chance1988
+
 g1990 <- filter(babynames, year == 1990, sex == "F") %>% count()
 chance1990 <- (Rach1990+Ariel1990)/g1973
 chance1990
@@ -105,10 +106,12 @@ ka1981 <- my %>%filter(str_detect(name,"^Katie")) %>% filter(year == 1981 | year
 n1981 <- ka1981 %>% filter(year == 1981)
 changeka2 <- left_join(n1981,n1998, by = "name") %>% mutate(diff = prop.x - prop.y) %>% count(wt = diff)
 changeka2
+
 all98<- filter(babynames,year == 1998)
 all15<- filter(babynames,year == 2015)
 ```
 My name Katie have the difference 0.00138 from 1998 to 2015, and have 0.00177 from 1981 to 1998.
+
 ```{r}
 #actucal change in propotion
 Katie.diff <- filter(babynames,str_detect(babynames$name,"^Katie"),year==1998,sex=="F") %>% count(wt=prop) - filter(babynames,str_detect(babynames$name,"^Katie"),year==2015,sex=="F") %>% count(wt=prop)
@@ -132,6 +135,7 @@ inner_join(all98,all15,by = "name") %>% mutate(df = prop.x-prop.y)%>%
 
 ```
 The actucal change for Katie is 0.00138, and the relative change is 100% from 1998 to 2015, which is the percentile. Because there is no other names have the bigger changes than mine, which we could also see from the plot.
+
 ```{r}
 #actucal change in propotion
 Katie.diff1 <- filter(babynames,str_detect(babynames$name,"^Katie"),year==1981,sex=="F") %>% count(wt=prop) - filter(babynames,str_detect(babynames$name,"^Katie"),year==1998,sex=="F") %>% count(wt=prop)
@@ -156,6 +160,9 @@ inner_join(all81,all98, by = "name")%>%
   labs(x = "Difference", y ="Count", title = "The changes of Katie between 1981 and 1998")
 ```
 The actual change for Katie from 1981 to 1998 is 0.00177, and the relative change in percentile is 100%. And we can see from the plot that my name become more popular comparing to others
+
+
+
 ## Ryan
 ## First three letters of names
 ## Ariel and Rachel regexs
