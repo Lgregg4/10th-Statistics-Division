@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 ---
 title: "Lab11"
 author: "Lauren Gregg, Katie Jiang, Ryan Marizza, Chris He"
@@ -15,6 +13,75 @@ library(tidyverse)
 rm(list=ls()) # clears your environment variables
 
 ```
+
+# First Three Letters of Names
+## Katie
+```{r}
+sum(str_count(babynames$name,"Kat"))
+sum(str_count(babynames$name,"kat"))
+```
+ratio of "Kat" = 0.96
+
+## Ryan
+```{r}
+Ryan_ratio = sum(str_count(babynames$name,"Rya"))/(sum(str_count(babynames$name,"Rya"))+sum(str_count(babynames$name,"rya")))
+Ryan_ratio
+```
+
+## Chris
+```{r}
+Chris<-filter(babynames,str_detect(babynames$name,"^Chr"))
+chris<-filter(babynames, str_detect(babynames$name,"chr"))
+chrtotal<-sum(chris$n)
+Chrtotal<-sum(Chris$n)
+Chrcomparetototal<-Chrtotal/(chrtotal+Chrtotal)
+```
+
+## Lauren 
+```{r}
+countLG1 <- sum(str_count(babynames$name,"^Lau"))
+countLG2 <- sum(str_count(babynames$name,"lau"))
+ratioLG <- countLG2 / (countLG1 + countLG2)
+```
+
+## Plot
+```{r}
+Ryan_ratio = sum(str_count(babynames$name,"Rya"))/(sum(str_count(babynames$name,"Rya"))+sum(str_count(babynames$name,"rya")))
+Lauren_ratio = sum(str_count(babynames$name,"Lau"))/(sum(str_count(babynames$name,"Lau"))+sum(str_count(babynames$name,"lau")))
+Katie_ratio = sum(str_count(babynames$name,"Kat"))/(sum(str_count(babynames$name,"Kat"))+sum(str_count(babynames$name,"kat")))
+Chris_ratio = sum(str_count(babynames$name,"Chr"))/(sum(str_count(babynames$name,"Chr"))+sum(str_count(babynames$name,"chr")))
+
+
+data_ryan <- babynames %>% group_by(year) %>% 
+  summarise(prop_rya = sum(str_count(name,"Rya"))/sum(str_count(name,"")))
+data_lauren <- babynames %>% group_by(year) %>% 
+  summarise(prop_lau = sum(str_count(name,"Lau"))/sum(str_count(name,"")))
+data_katie <- babynames %>% group_by(year) %>% 
+  summarise(prop_kat = sum(str_count(name,"Kat"))/sum(str_count(name,"")))
+data_chris <- babynames %>% group_by(year) %>% 
+  summarise(prop_chr = sum(str_count(name,"Chr"))/sum(str_count(name,"")))
+```
+
+```{r, ryan_plot}
+ggplot(data = data_ryan,aes(x=year,y=prop_rya))+
+  geom_line()
+```
+
+```{r, lauren_plot}
+ggplot(data = data_lauren,aes(x=year,y=prop_lau))+
+  geom_line()
+```
+
+```{r, katie_plot}
+ggplot(data = data_katie,aes(x=year,y=prop_kat))+
+  geom_line()
+```
+
+```{r, chris_plot}
+ggplot(data = data_chris,aes(x=year,y=prop_chr))+
+  geom_line()
+```
+
 #Analyzing Baby Names
 # Team Work
 
@@ -170,16 +237,20 @@ names<-data$name
 ```
 ## First three letters of names
 ```{r}
-Ryan_ratio = sum(str_count(names,"Rya"))/(sum(str_count(names,"Rya"))+sum(str_count(names,"rya")))
-Lauren_ratio = sum(str_count(names,"Lau"))/(sum(str_count(names,"Lau"))+sum(str_count(names,"lau")))
-Katie_ratio = sum(str_count(names,"Kat"))/(sum(str_count(names,"Kat"))+sum(str_count(names,"kat")))
-Chris_ratio = sum(str_count(names,"Chr"))/(sum(str_count(names,"Chr"))+sum(str_count(names,"chr")))
+Ryan_ratio = sum(str_count(babynames$name,"Rya"))/(sum(str_count(babynames$name,"Rya"))+sum(str_count(babynames$name,"rya")))
+Lauren_ratio = sum(str_count(babynames$name,"Lau"))/(sum(str_count(babynames$name,"Lau"))+sum(str_count(babynames$name,"lau")))
+Katie_ratio = sum(str_count(babynames$name,"Kat"))/(sum(str_count(babynames$name,"Kat"))+sum(str_count(babynames$name,"kat")))
+Chris_ratio = sum(str_count(babynames$name,"Chr"))/(sum(str_count(babynames$name,"Chr"))+sum(str_count(babynames$name,"chr")))
 
 
-data_ryan <- data%>%group_by(year)%>%summarise(prop_rya = sum(str_count(name,"Rya"))/sum(str_count(name,"")))
-data_lauren <- data%>%group_by(year)%>%summarise(prop_lau = sum(str_count(name,"Lau"))/sum(str_count(name,"")))
-data_katie <- data%>%group_by(year)%>%summarise(prop_kat = sum(str_count(name,"Kat"))/sum(str_count(name,"")))
-data_chris <- data%>%group_by(year)%>%summarise(prop_chr = sum(str_count(name,"Chr"))/sum(str_count(name,"")))
+data_ryan <- babynames %>% group_by(year) %>% 
+  summarise(prop_rya = sum(str_count(name,"Rya"))/sum(str_count(name,"")))
+data_lauren <- babynames %>% group_by(year) %>% 
+  summarise(prop_lau = sum(str_count(name,"Lau"))/sum(str_count(name,"")))
+data_katie <- babynames %>% group_by(year) %>% 
+  summarise(prop_kat = sum(str_count(name,"Kat"))/sum(str_count(name,"")))
+data_chris <- babynames %>% group_by(year) %>% 
+  summarise(prop_chr = sum(str_count(name,"Chr"))/sum(str_count(name,"")))
 
 
 Ryan_ratio
