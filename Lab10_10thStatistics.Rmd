@@ -36,7 +36,8 @@ ggplot(data = QnA_rank)+
   geom_smooth(aes(x = rank,y=sc),method = lm,se=FALSE)
 #Maybe this isnt the best way to judge timliness (seems more like relative timliness)
 ```
- The plot above shows the relationship (or lack of relationship) between the timliness of a response, and its score. Timliness here is given as the order in which the answer appeared. That is: the chronologically first answer gets a rank of 1, the second 2, and so on. It seems, from this plot, that the rank, in this sense, of the answer has little to no effect on the score.
+
+The plot above shows the relationship (or lack of relationship) between the timliness of a response, and its score. Timliness here is given as the order in which the answer appeared. That is: the chronologically first answer gets a rank of 1, the second 2, and so on. It seems, from this plot, that the rank, in this sense, of the answer has little to no effect on the score.
  
 ```{r}
 ggplot(data = QnA)+
@@ -50,6 +51,7 @@ ggplot(data = QnA_short_term)+
   geom_point(aes(x = time_to_answer,y = Score.y))
 
 ```
+
 These two plots show the relationship between score and time to answer. These plots show a different relationship between timliness and the score than the first plot. I would guess that this is because in the "ordered" ranking method of timliness, timliness is viewed as timliness compared to other answerers. This means that an answer with rank = 20 may have been submitted only 25 minutes after the question (given that 19 answers were submitted less than 25 minutes after the question). It seems that timliness does indeed have an effect on score, but the important thing is the literal time it took after the question before the answer was posted, and not the chronological rank of the answer's timliness.
  
 Another significant factor in a question/answer's score is the amount of words used.
@@ -61,6 +63,7 @@ ggplot(data = questions)+
   geom_point(aes(x = length,y=Score))
 
 ```
+
 This plot shows the relationship between a question's score and the length of the title. It seems like the highest rated titles are not extremely long, and not extremely short, lying somewhere in the 40-60 character range.
 
 ```{r}
@@ -73,6 +76,7 @@ ggplot(data = answers)+
 
 
 ```
+
 It seems again as if there is an optimal range for an answer's length. Upon inspection of the above plot, for the best score, an answer should be in the 500 character range. 
 
 
@@ -123,7 +127,6 @@ falseData <- LGanswers %>% filter(LGanswers$Reference == FALSE)
 t.test(trueData$Score, falseData$Score)
 ```
 
-
 When computing a quick t-test, we can see that there is a significant difference between the scores when a reference is used and when a references is not used. This leads me to believe that referencing a link with more information on the topic could result in a higher score.
 
 
@@ -150,6 +153,7 @@ ggplot(plotQ)+
   geom_col(mapping = aes(x= Highfrequencynames, y = frequency,fill = Highfrequencynames))+
   labs(x = "High Frequency Words", y = "Frequency",title = "The highest freqency words appear in score range is between 1000 to 1040\n in good questions")
 ```
+
 In question part, during the high range of scores, we can see the words python appearing lots of times, which means most readers like the python questions and they also have trouble in solving python questions.
 ```{r}
 newA<- tibble(id = as.integer(answers$OwnerUserId), Score = as.integer(answers$Score), Body = as.character(answers$Body))
@@ -166,6 +170,7 @@ ggplot(plotA)+
   labs(x = "High Frequency Words", y = "Frequency",title = "The higest freqency words appear in score range is between 1000 to 8384 \nin good answers")
 
 ```
+
 In the answers part, I found the highest one is python, obviously. But then the second followed by "If.. please" and suggestions. So the good way to contribute answers is first including critical words, and using imperative mood to express their answers. In this way, readers will be more comfortable to take actions.
 
 ## Ryan
@@ -179,6 +184,7 @@ ggplot(data = questions)+
   geom_point(aes(x = length,y=Score))
 
 ```
+
 In the questions data, I was interested in whether or not there was a relationship between the length of the title of someone's question, and the score that the question got. It seems like questions with a medium length (about 50 words) did better than short questions or long questions. This is as expected, because brevity is important for clarity in your question, but being too brief can lead to muddled understanding of what you want to know.
 
 ```{r}
@@ -202,6 +208,7 @@ ggplot(data = answers)+
 
 
 ```
+
 Here, i wanted to know if there was a relationship between how many times the answerer used the work 'you' and their score. The distribution of yous vs. score looks approximatley the same as the distribution of words vs. score. This tells me that there is no significant relationship between the number of yous used and the score.
 
 
@@ -216,6 +223,7 @@ ggplot(data=questions,aes(x=I,y=Score))+geom_point()+geom_boxplot(aes(group=cut_
 
 ggplot(data=questions,aes(x=I,y=Score,color=I))+geom_point()+facet_wrap(~I)
 ```
+
 then I made the ggplot function for the question I was conisder like why the Geom_boxplot function doesnot show up in my expect way, so I use the group=cut_width but it seems not good, then I used the facet_wrap, when we saw the graph I could see that if a person use less "I" in their title they could get a relative high score in the end, but when we saw the boxplot function we could know there is no relation between this two variable cause the density was in the below.
 
 ```{r}
@@ -225,6 +233,7 @@ ggplot(data=answers,mapping=aes(x=I2,y=Score,color=I2))+geom_point()+facet_wrap(
 
 ggplot(data=answers,mapping=aes(x=I2,y=Score,color=I2))+geom_point()
 ```
+
 then I was thinking if we answer one person question, the best way or the best suggestion is kind of this form : "I need/I could/ I can", so I was mutate the number of "I" in our answer body. same stituation happened, the geom_boxplot function have some warning, and I dont know how to fixed it, so I just use facet_wrap and geom_point. facet_wrap have really high range so I just consider the geom_point plot. It is easy to conclude that if you use less word like"I", it might receice a higher grades.
 
 
