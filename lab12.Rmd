@@ -1,6 +1,6 @@
 ---
 title: "Untitled"
-author: "Chris"
+author: "Chris","Katie","Lauren","Ryan"
 date: "2018/4/11"
 output: html_document
 ---
@@ -35,7 +35,7 @@ library(gapminder)
 
 
 ## Kaite
-
+I used several functions to form two tables, one is for the changes of life expectancy by continents by decade, and another is the changes of GDP per capita by continent by decades. And those two tables illustrated 5 statsitics for each decade and continent. We could see the increaseing tendency of changing of life expectancy from those continents, especially Asia. And the great increasing in GDP in Asia too.
 
 ## Ryan
 
@@ -62,17 +62,73 @@ I tried to analysis the 5 decades the life expectancy and the gdp per capita, fi
 ## Kaite
 ### How does life expectancy vary by continent and by decade? 
 ```{r}
+data_by_decade<- function(dataset){
+  dataset$decade <- cut(dataset$year, seq(1950,2010,10),labels = as.character(seq(1950,2000,10)))
+  return(dataset)
+}
 
+fun_continents <- function(continent, decade) {
+ 
+  a <- gapminder[which(gapminder$continent == continent & gapminder$decade == decade),]
+  
+  stats <- c(min = min(a$lifeExp), max =max( a$lifeExp),
+                  mean =  mean(a$lifeExp), median = median(a$lifeExp),
+                   IQR = quantile(a$lifeExp, 0.75) - quantile(a$lifeExp, 0.25))
+  return(stats)
+}
+fun_continents( "Africa", 1950)
+gapminder <- data_by_decade(gapminder)
+
+continentdata <- c()
+sta <- c()
+
+for(continent in levels(gapminder$continent)) {
+  for(decade in levels(gapminder$decade)) {
+    continentdata <- rbind(continentdata, c(continent, decade))
+    sta <- rbind(sta, fun_continents(continent, decade ))
+  }
+}
+continentdata
+sta
+s <- data.frame(continentdata, sta )
+names(s)[1] <- "continent"
+names(s)[2] <- "decade"
+s
 ```
-
+From the table, we can see the life expectancy is increasing by decades for each continent. But the IQR for developing countries, like in Asia increase first and then decrease a littel bit. And for Europe and Americas, the IQR doesn't change a lot, it's steady.
 
 
 ### How does GDP per capita vary by continent and by decade? 
 
 ```{r}
+fun_gdp <- function(continent, decade) {
+  
+  a <- gapminder[which(gapminder$continent == continent & gapminder$decade == decade),]
+  
+  stats2 <- c(min = min(a$gdpPercap), max =max( a$gdpPercap),
+             mean =  mean(a$gdpPercap), median = median(a$gdpPercap),
+             IQR = quantile(a$gdpPercap, 0.75) - quantile(a$gdpPercap, 0.25))
+  return(stats2)
+}
+fun_gdp("Africa",1950)
+gap <- data_by_decade(gapminder)
 
+continentgdp <- c()
+sta2<- c()
+for(continent in levels(gap$continent)) {
+  for(decade in levels(gap$decade)) {
+    continentgdp <- rbind(continentgdp, c(continent, decade))
+    sta2 <- rbind(sta2, fun_gdp(continent, decade ))
+  }
+}
+continentgdp
+sta2
+s2 <- data.frame(continentgdp,sta2)
+names(s2)[1] <- "continent"
+names(s2)[2] <- "decade"
+s2
 ```
-
+The highest GDP per capita lies in developed countries, and their changes a smaller than Asia. But Asia has a great increase by decades.
 
 ## Ryan
 ### How does life expectancy vary by continent and by decade? 
