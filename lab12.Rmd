@@ -1,0 +1,318 @@
+---
+title: "Untitled"
+author: "Chris"
+date: "2018/4/11"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+
+library(gapminder)
+```
+
+# Analyzing life expectancy vary and GDP per capita by decades
+
+# Team Work
+### How does life expectancy vary by continent and by decade? 
+```{r}
+
+```
+
+
+
+### How does GDP per capita vary by continent and by decade? 
+```{r}
+
+```
+
+
+ 
+# Summary of Who did What
+
+## Lauren
+
+
+## Kaite
+
+
+## Ryan
+
+
+## Chris
+I tried to analysis the 5 decades the life expectancy and the gdp per capita, first time I just used subset to five indiviual continent and use the aggregate function tried to calculate the answer, but the only things that i can find is the averge answer durning the whole time and I stuck in every decades, so I used another way tried to find the relation durning the plots. for each question I created 5*5 plots. 5 contients and 5 decedes, and from the graphs that I got, it is really easy to conclude that the life expectancy and the cgp per capita increase when the years increase.
+
+
+# Individual Work
+
+## Lauren
+### How does life expectancy vary by continent and by decade? 
+```{r}
+
+```
+
+### How does GDP per capita vary by continent and by decade? 
+```{r}
+
+```
+
+
+
+## Kaite
+### How does life expectancy vary by continent and by decade? 
+```{r}
+
+```
+
+
+
+### How does GDP per capita vary by continent and by decade? 
+
+```{r}
+
+```
+
+
+## Ryan
+### How does life expectancy vary by continent and by decade? 
+```{r}
+
+```
+
+
+### How does GDP per capita vary by continent and by decade? 
+```{r}
+
+```
+
+
+
+## Chris
+### How does life expectancy vary by continent and by decade?
+
+```{r}
+Europe <- subset(gapminder, continent == "Europe")
+Africa <- subset(gapminder, continent == "Africa")
+Asia <- subset(gapminder, continent == "Asia")
+Americas <- subset(gapminder, continent == "Americas")
+Oceania <- subset(gapminder, continent == "Oceania")
+aggregate(lifeExp~continent, gapminder, min)
+aggregate(lifeExp~continent, gapminder, max)
+aggregate(lifeExp~continent, gapminder, mean)
+aggregate(lifeExp~continent, gapminder, median)
+aggregate(lifeExp~continent, gapminder, IQR)
+
+
+```
+
+
+```{r}
+filter(gapminder,(continent=="Europe" & year<1970 & year >= 1960)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+filter(gapminder,(continent=="Europe" & year<1980 & year >= 1970)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+filter(gapminder,(continent=="Europe" & year<1990 & year >= 1980)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+
+filter(gapminder,(continent=="Europe" & year<2000 & year >= 1990)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+filter(gapminder,(continent=="Europe" & year<2010 & year >= 2000)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+
+```
+
+```{r}
+filter(gapminder,(continent=="Africa" & year<1970 & year >= 1960)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+filter(gapminder,(continent=="Africa" & year<1980 & year >= 1970)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+filter(gapminder,(continent=="Africa" & year<1990 & year >= 1980)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+
+filter(gapminder,(continent=="Africa" & year<2000 & year >= 1990)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+filter(gapminder,(continent=="Africa" & year<2010 & year >= 2000)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+
+```
+
+
+```{r}
+filter(gapminder,(continent=="Asia" & year<1970 & year >= 1960)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+filter(gapminder,(continent=="Asia" & year<1980 & year >= 1970)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+filter(gapminder,(continent=="Asia" & year<1990 & year >= 1980)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+
+filter(gapminder,(continent=="Asia" & year<2000 & year >= 1990)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+filter(gapminder,(continent=="Asia" & year<2010 & year >= 2000)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+```
+
+```{r}
+filter(gapminder,(continent=="Americas" & year<1970 & year >= 1960)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+filter(gapminder,(continent=="Americas" & year<1980 & year >= 1970)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+filter(gapminder,(continent=="Americas" & year<1990 & year >= 1980)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+
+filter(gapminder,(continent=="Americas" & year<2000 & year >= 1990)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+filter(gapminder,(continent=="Americas" & year<2010 & year >= 2000)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+
+```
+
+```{r}
+filter(gapminder,(continent=="Oceania" & year<1970 & year >= 1960)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+filter(gapminder,(continent=="Oceania" & year<1980 & year >= 1970)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+filter(gapminder,(continent=="Oceania" & year<1990 & year >= 1980)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+
+filter(gapminder,(continent=="Oceania" & year<2000 & year >= 1990)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+filter(gapminder,(continent=="Oceania" & year<2010 & year >= 2000)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=lifeExp),binwidth=1)
+
+```
+
+
+### How does GDP per capita vary by continent and by decade? 
+
+```{r}
+europe <- subset(gapminder, continent == "Europe")
+africa <- subset(gapminder, continent == "Africa")
+asia <- subset(gapminder, continent == "Asia")
+americas <- subset(gapminder, continent == "Americas")
+oceania <- subset(gapminder, continent == "Oceania")
+aggregate(gdpPercap~continent, gapminder, min)
+aggregate(gdpPercap~continent, gapminder, max)
+aggregate(gdpPercap~continent, gapminder, mean)
+aggregate(gdpPercap~continent, gapminder, median)
+aggregate(gdpPercap~continent, gapminder, IQR)
+```
+
+```{r}
+filter(gapminder,(continent=="Europe" & year<1970 & year >= 1960)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+filter(gapminder,(continent=="Europe" & year<1980 & year >= 1970)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+filter(gapminder,(continent=="Europe" & year<1990 & year >= 1980)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+filter(gapminder,(continent=="Europe" & year<2000 & year >= 1990)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+filter(gapminder,(continent=="Europe" & year<2010 & year >= 2000)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+```
+
+```{r}
+filter(gapminder,(continent=="Africa" & year<1970 & year >= 1960)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+filter(gapminder,(continent=="Africa" & year<1980 & year >= 1970)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+filter(gapminder,(continent=="Africa" & year<1990 & year >= 1980)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+filter(gapminder,(continent=="Africa" & year<2000 & year >= 1990)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+filter(gapminder,(continent=="Africa" & year<2010 & year >= 2000)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+```
+
+```{r}
+filter(gapminder,(continent=="Asia" & year<1970 & year >= 1960)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+filter(gapminder,(continent=="Asia" & year<1980 & year >= 1970)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+filter(gapminder,(continent=="Asia" & year<1990 & year >= 1980)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+filter(gapminder,(continent=="Asia" & year<2000 & year >= 1990)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+filter(gapminder,(continent=="Asia" & year<2010 & year >= 2000)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+```
+
+```{r}
+filter(gapminder,(continent=="Americas" & year<1970 & year >= 1960)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+filter(gapminder,(continent=="Americas" & year<1980 & year >= 1970)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+filter(gapminder,(continent=="Americas" & year<1990 & year >= 1980)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+filter(gapminder,(continent=="Americas" & year<2000 & year >= 1990)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+filter(gapminder,(continent=="Americas" & year<2010 & year >= 2000)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+```
+
+
+```{r}
+filter(gapminder,(continent=="Oceania" & year<1970 & year >= 1960)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+filter(gapminder,(continent=="Oceania" & year<1980 & year >= 1970)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+filter(gapminder,(continent=="Oceania" & year<1990 & year >= 1980)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+filter(gapminder,(continent=="Oceania" & year<2000 & year >= 1990)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+filter(gapminder,(continent=="Oceania" & year<2010 & year >= 2000)) %>%
+  ggplot() +
+  geom_freqpoly(aes(x=gdpPercap),binwidth=1)
+```
+
+
+
