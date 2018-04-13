@@ -346,7 +346,7 @@ The highest GDP per capita lies in developed countries, and their changes a smal
 # Summary of Who did What
 
 ## Lauren
-
+I answered the two subquestions by looping through a function I created to calculate min, max, mean, median, and IQR. Within my loop, I iterated through the different continents and within each iteration I called my function. I also wrote the code to answer our overall question. In this function, I iterated through several random samples of the data and created a data frame. Had I allocated the memory for the dataframe outside of the loop the code would be faster, but in this situation it does not make a huge difference.
 
 ## Kaite
 I used several functions to form two tables, one is for the changes of life expectancy by continents by decade, and another is the changes of GDP per capita by continent by decades. And those two tables illustrated 5 statsitics for each decade and continent. We could see the increaseing tendency of changing of life expectancy from those continents, especially Asia. And the great increasing in GDP in Asia too.
