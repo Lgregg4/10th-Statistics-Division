@@ -12,7 +12,7 @@ library(gapminder)
 ```
 
 # Overall Question
-## How does life expectancy in Africa differe from life expectancy in Asia?
+## How does life expectancy in Africa differ from life expectancy in Asia?
 ```{r}
 loop  <- function(data1, data2, df){
     dx <- data.frame(mean(data1), mean(data2))
@@ -41,8 +41,9 @@ head(diff)
 ggplot(diff, aes(x=x)) +
   geom_histogram()
 ```
+From the plot, it is apparant that there is a difference between the life expectancy in Africa from the life expectancy in Asia. The life expectancy in Asia seems to be on average much higher, with very few extreme outlier-type data points to contradict. The mean seems to be centered between 12 and 17, implying that on average, there is approximatley a 12 to 15 year difference in life expectancy from countries in Asia to those in Africa. 
 
-
+This knowledge is important because it is the first step in learning about how healthcare type aid should be properly distributed. From this data, we recommend that more healthcare aid should be focused on African countries than Asian countries, as it is likley to make more of an extreme difference there. Furthermore, we reommend that deeper analysis be done to observe the distribution of life expectancies by country in Africa and Asia to further inform and improve the distribution of aid. 
 
 
 # Subquestions
@@ -352,7 +353,7 @@ I answered the two subquestions by looping through a function I created to calcu
 I used several functions to form two tables, one is for the changes of life expectancy by continents by decade, and another is the changes of GDP per capita by continent by decades. And those two tables illustrated 5 statsitics for each decade and continent. We could see the increaseing tendency of changing of life expectancy from those continents, especially Asia. And the great increasing in GDP in Asia too.
 
 ## Ryan
-
+I helped implement the function which was implemented to answer the team's main question, leading to the choice to plot a histogram of the difference in life expectancy, rather than to compare two histograms qualitativley, and draw conclusions from that. I wrote the conclusion for the team's main question, and created a recommendataion based on that conclusion. I was initially unsuccesful at undestanding the loop calculation of min, max, mean, median and IQR. However after recieving some help from my teammates, and observing their implementation, had more success. 
 
 ## Chris
 I tried to analysis the 5 decades the life expectancy and the gdp per capita, first time I just used subset to five indiviual continent and use the aggregate function tried to calculate the answer, but the only things that i can find is the averge answer durning the whole time and I stuck in every decades, so I used another way tried to find the relation durning the plots. for each question I created 5*5 plots. 5 contients and 5 decedes, and from the graphs that I got, it is really easy to conclude that the life expectancy and the cgp per capita increase when the years increase.
