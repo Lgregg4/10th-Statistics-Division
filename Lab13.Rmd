@@ -1,0 +1,96 @@
+---
+title: "Lab 13"
+author: "Lauren, Ryan, Katie, Chris"
+date: "4/19/2018"
+output: html_document
+---
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(gapminder)
+BMI_F <- read.csv("Indicator_BMI female.csv")
+BMI_M <- read.csv("Indicator_BMI male.csv")
+```
+
+# Overall Question
+Is the mean difference of gender in BMI index for all countries between 1980 and 2008 statistically different from the null hypothesis?
+
+# Why it is interesting/important?
+Because BMI index is a good measurement for people to know their health, and it could show the life quailty of a counry, which indicates the development of a country in a certain time interval.We can see the variation of quailty of health between 1980 and 2008 by anaylzing these two datasets, and estimate the development of people's life quailty.
+
+# Explanation of our dataset
+
+# NUll hypothesis
+The differences are just random. There is no systematic difference in BMI index for gener between 1980 and 2008 for allcountries. These differences should be centered around 0, so the mean difference will be 0.¡±
+
+# What is the distribution of this statistic according to the null hypothesis?
+```{r}
+BMI_F<- data.frame(BMI_F)
+BMI_M <- data.frame(BMI_M)
+colnames(BMI_F)<-c("Country",1980:2008)
+colnames(BMI_M)<-c("Country",1980:2008)
+BM <- BMI_F %>% select(Country,`1980`,`2008`)
+BM2 <- BMI_M %>% select(Country,`1980`,`2008`)
+B1<- BM %>% gather(`1980`,`2008`,key = "year",value = "BMI")
+B2 <- BM2 %>% gather(`1980`,`2008`,key = "year",value = "BMI")
+mixed_BMI <- function(country,years = c(1980,2008)){
+  mixed_diff<- filter(B1,Country == country,year == years[2]) %>% select(BMI)-
+    filter(B1, Country == country, year == years[1])%>% select(BMI)
+ mixed_diff <- as.numeric(mixed_diff)
+ 
+}
+mixed_BMI2 <- function(country,years = c(1980,2008)){
+  mixed_diff<- filter(B2,Country == country,year == years[2]) %>% select(BMI)-
+    filter(B2, Country == country, year == years[1])%>% select(BMI)
+  mixed_diff <- as.numeric(mixed_diff)
+  
+}
+```
+
+```{r}
+countries <- tibble(country = B1$Country,mixed_diff_female=0)
+for (i in seq_along(countries$country)) {
+  countries[i,2] <- mixed_BMI(countries$country[i])
+}
+
+mixed_BMI2 <- function(country,years = c(1980,2008)){
+  mixed_diff<- filter(B2,Country == country,year == years[2]) %>% select(BMI)-
+    filter(B2, Country == country, year == years[1])%>% select(BMI)
+  mixed_diff <- as.numeric(mixed_diff)
+  
+}
+
+countries2 <- tibble(country = B2$Country,mixed_diff_male=0)
+for (i in seq_along(countries2$country)) {
+  countries2[i,2] <- mixed_BMI2(countries2$country[i])
+}
+
+mixed_label <- vector("double",length = length(countries$country))
+for (n in seq_along(mixed_label)) {
+  temp <- sample(countries$mixed_diff_female,20)-sample(countries2$mixed_diff_male,20)
+  mixed_label[n] <- mean(temp)
+}
+
+```
+The distribution of the datasets based on null hypothesis
+```{r}
+ggplot() +
+  geom_histogram(aes(x=mixed_label),binwidth=0.05)
+
+```
+
+## Histogram of this distribution
+
+# How does the real data summary statistic compare to the distribution generated in null hypothesis?
+
+# Conclusion 
+
+# Summary of who did what
+## Lauren
+
+## Katie
+
+## Ryan
+
+## Chirs
