@@ -13,6 +13,7 @@ BMI_F <- read.csv("Indicator_BMI female.csv")
 BMI_M <- read.csv("Indicator_BMI male.csv")
 ```
 
+
 # Overall Question
 Is the mean difference of gender in BMI index for all countries between 1980 and 2008 statistically different from the null hypothesis?
 
@@ -21,8 +22,8 @@ Because BMI index is a good measurement for people to know their health, and it 
 
 # Explanation of our dataset
 
-# NUll hypothesis
-The differences are just random. There is no systematic difference in BMI index for gener between 1980 and 2008 for allcountries. These differences should be centered around 0, so the mean difference will be 0.¡±
+# Null hypothesis and test statistic
+The differences are just random. There is no systematic difference in BMI index for gener between 1980 and 2008 for all countries. These differences should be centered around 0, so the mean difference will be 0. The test statistic we will be using is the mean of the differences. 
 
 # What is the distribution of this statistic according to the null hypothesis?
 ```{r}
@@ -47,6 +48,15 @@ mixed_BMI2 <- function(country,years = c(1980,2008)){
   
 }
 ```
+
+```{r, LG}
+BMI_female <- B1
+BMI_male <- B2
+
+diff_real <- BMI_female$BMI - BMI_male$BMI
+diff_real_mean <- mean(diff_real)
+```
+
 
 ```{r}
 countries <- tibble(country = B1$Country,mixed_diff_female=0)
@@ -76,18 +86,29 @@ for (n in seq_along(mixed_label)) {
 The distribution of the datasets based on null hypothesis
 ```{r}
 ggplot() +
-  geom_histogram(aes(x=mixed_label),binwidth=0.05)
+  geom_histogram(aes(x=mixed_label, color=mixed_label),binwidth=0.05) +
+  geom_vline(xintercept=diff_real_mean, col="red")
 
 ```
 
-## Histogram of this distribution
+
+The distribution of the mixed-up label data appears to be normal centered around 0.38. The red line on the above histogram is the average of the real data which is at 0.611.
 
 # How does the real data summary statistic compare to the distribution generated in null hypothesis?
+The real mean of the differences between male's and female's BMI is 0.611. This is within one standard deviation (0.426) of the mean (0.384) of the mixed-label data. This is also within the IQR (0.1048 - 0.384) of the mixed-label data.
+
+```{r}
+sum(mixed_label<diff_real_mean)/1000
+```
+
+Additionally, the percentile was 28% which means 28% of the fake means were less than the mean of the real data.
 
 # Conclusion 
+The real mean appears to follow the distribution of the null hypothesis. Therefore, we fail to reject the null hypothesis. There does not appear to be evidence of a difference in BMI between males and females. 
 
 # Summary of who did what
 ## Lauren
+I edited the histogram plot to include the red line representing our real data. I also discussed the comparison of the mixed-label data and the real data. To do this, I calculated the IQR of the mixed-label data, standard deviation of the mixed-label data, and percentile of the real data relative to the mixed-label data. I typed up our results in the conclusion.
 
 ## Katie
 
