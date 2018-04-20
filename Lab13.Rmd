@@ -112,7 +112,12 @@ The real mean appears to follow the distribution of the null hypothesis. Therefo
 I edited the histogram plot to include the red line representing our real data. I also discussed the comparison of the mixed-label data and the real data. To do this, I calculated the IQR of the mixed-label data, standard deviation of the mixed-label data, and percentile of the real data relative to the mixed-label data. I typed up our results in the conclusion.
 
 ## Katie
+I outlined the lab 13 and contributed the main idea of our overall questions as well as the null hypothesis. I answered the why this question is interesting and important for us to analyze. After that, I mixed up the year labels for the difference between 1980 and 2008, based on the gender. By using left_join(), I combined those two sets that varied in gender into one data frame. My distribution data of null hypothesis is randomly chose from difference of the mixed label data for each gende
 
 ## Ryan
+wrote the team conclusion part and the recommendation parts, also wrote the data set explation parts.  Also provide us some baisc idea about the steps to test the hypothesis. tried to tell us how this work for the null hypothese and apply to the real data.
 
 ## Chirs
+do the combine steps and organziation part for the whole lab, combine the conclusion and the explation part as much as i can. then fixed and revise the problem that we made for the whole report, some mistake in the code and the lab formula.Submit the team lab.
+
+
