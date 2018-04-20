@@ -22,6 +22,15 @@ Because BMI index is a good measurement for people to know their health, and it 
 
 # Explanation of our dataset
 we have two dataset one was record all male data and another one was record female's data. In each dataset that we have, it recorded 200 countries all over the world. and list the mean value of BMI indicator from 1980 to 2008. by the way BMI counted in kilogram per square meter.
+ It has a strong positive correlation with obesity, and a strong negative correlation with famine.
+
+A BMI below 18.5 is underweight.
+18.5-24.9 is normal.
+25.0-29.9 is overweight.
+Over 30 is obese.
+
+It should be noted that there are limitations for BMI. For example, it would be incorrect to call a world class bodybuilder (like Arnold Schwarzenegger) unhealthy, even though his BMI indicates that he is obese.  BMI should be thought of as a guideline for health. It is accurate in a more general sense in that it is useful for giving insight in the realm of health and nutrition.
+
 
 # Null hypothesis and test statistic
 The differences are just random. There is no systematic difference in BMI index for gener between 1980 and 2008 for all countries. These differences should be centered around 0, so the mean difference will be 0. The test statistic we will be using is the mean of the differences. 
@@ -105,7 +114,9 @@ sum(mixed_label<diff_real_mean)/1000
 Additionally, the percentile was 28% which means 28% of the fake means were less than the mean of the real data.
 
 # Conclusion 
-The real mean appears to follow the distribution of the null hypothesis. Therefore, we fail to reject the null hypothesis. There does not appear to be evidence of a difference in BMI between males and females. 
+The real mean appears to follow the distribution of the null hypothesis. Therefore, we fail to reject the null hypothesis. There does not appear to be evidence of a difference in BMI between males and females. This conclusion seems surprising because it is suspected (and other research shows) that females have a higher BMI than males. This may indicate a deficiency in the test. It is possible that by individual country, females have a higher BMI than males, and the difference is muddled by looking across 200 countries.  Nonetheless, if there is a difference in BMI from males to females, on the large scale, it is probably small.
+
+This observation suggests that when giving nutritional aid (education or food) to a country in need, it does not need to be given any differently to males than females.
 
 # Summary of who did what
 ## Lauren
@@ -115,7 +126,7 @@ I edited the histogram plot to include the red line representing our real data. 
 I outlined the lab 13 and contributed the main idea of our overall questions as well as the null hypothesis. I answered the why this question is interesting and important for us to analyze. After that, I mixed up the year labels for the difference between 1980 and 2008, based on the gender. By using left_join(), I combined those two sets that varied in gender into one data frame. My distribution data of null hypothesis is randomly chose from difference of the mixed label data for each gende
 
 ## Ryan
-wrote the team conclusion part and the recommendation parts, also wrote the data set explation parts.  Also provide us some baisc idea about the steps to test the hypothesis. tried to tell us how this work for the null hypothese and apply to the real data.
+Wrote the section on the explanation of our dataset, wrote much of the conclusion. Wrote the team suggestion. Researched BMI, and discussed it???s limitations in terms of health measurements.
 
 ## Chirs
 do the combine steps and organziation part for the whole lab, combine the conclusion and the explation part as much as i can. then fixed and revise the problem that we made for the whole report, some mistake in the code and the lab formula.Submit the team lab.
