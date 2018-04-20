@@ -21,6 +21,7 @@ Is the mean difference of gender in BMI index for all countries between 1980 and
 Because BMI index is a good measurement for people to know their health, and it could show the life quailty of a counry, which indicates the development of a country in a certain time interval.We can see the variation of quailty of health between 1980 and 2008 by anaylzing these two datasets, and estimate the development of people's life quailty.
 
 # Explanation of our dataset
+we have two dataset one was record all male data and another one was record female's data. In each dataset that we have, it recorded 200 countries all over the world. and list the mean value of BMI indicator from 1980 to 2008. by the way BMI counted in kilogram per square meter.
 
 # Null hypothesis and test statistic
 The differences are just random. There is no systematic difference in BMI index for gener between 1980 and 2008 for all countries. These differences should be centered around 0, so the mean difference will be 0. The test statistic we will be using is the mean of the differences. 
