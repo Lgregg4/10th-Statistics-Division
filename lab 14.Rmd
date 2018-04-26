@@ -36,9 +36,57 @@ babies1 <- na.omit(babies)
 
 ## Katie
 ### Subquestion
-Does smoking make short gestation days,which causes light babies weight?
+Does short gestation days causes light babies weight based on smoking and nonsmoking?
+#### why it is important?
+Because the short gestation days may lead light babies weight directly, and I think it is an important part for answering our overall questions.And generally speaking, we all think it will cause light weight, but is there a real relationship between them ? I want to explore it more deeply.
+
+#### New tool I used
+In order to find the relationship between gestation days and the babies weight, I build a new model which is linear relationship of log gestation days with log weight. Because taking log will make our data more clear and easier to see the tendency. And I add predictions and residuals to see the difference between model and the real data.
+```{r}
+babies1 <- babies1 %>% filter(gestation <= 270) %>% 
+  mutate(lweight = log(bwtoz),lges= log(gestation)) %>% select(gestation,bwtoz,lweight,lges,number,smoke) 
+
+ggplot(babies1,aes(lges,lweight))+
+  geom_hex(bins = 50)+
+  geom_smooth(method = "loess")+
+  facet_wrap(~smoke)+
+  ggtitle("Tendency of gestation days with weight")
+
+model_babies1 <-lm(lweight~lges,data = babies1)
+```
+I use data_grid to create a model data for gestation days and babies weight, and put the estimated one with the real data together.
+
+```{r}
+grid <- babies1 %>% 
+  data_grid(gestation = seq_range(gestation,270))%>%
+  mutate(lges = log2(gestation))%>%
+  add_predictions(model_babies1,"lweight")%>%
+  mutate(bwtoz = 2^lweight)
 
 
+ggplot(babies1, aes(gestation,bwtoz )) + 
+  geom_hex(bins = 50) + 
+  geom_line(data = grid, colour = "red", size = 1)+
+  facet_wrap(~smoke)+
+  ggtitle("Linear model with real data")
+
+```
+We can see from the plot above, there are lots of babies weight above the linear model for nonsmoking one, and more points are below for smoking group. And the majority of points are lying much more above in nonsmoking than smoking group.
+
+```{r}
+babies1 <- babies1 %>%
+  add_residuals(model_babies1,"lreids")
+ggplot(babies1,aes(lweight,lreids))+
+  geom_hex(bins = 50)+
+  geom_smooth(method = "loess")+
+  ggtitle("residuals with lweight data")
+ggplot(babies1, aes(as.character(gestation), lreids)) + geom_boxplot()+
+  coord_flip()+
+  facet_wrap(~smoke)+
+  ggtitle("Smoke vs. Nonsmoke the residuals of gestation days")
+```
+Because there are many points above the linear model, so I looked at the residuals for the weight. In the first graph, there is a tendency of residuals along with weight. After that, I plot the blox plot of residuals and gestation days. The residuals for nonsmoking are larger than the smoking one, and that is what we are expected.
+Thus the final answer is that the short gestation days affect babies weight, especially for smoking mothers. And it is an important part of our overall question, because smoking may affect the gestation days, which will cause permature, and that have the relation with babies weight.
 
 ## Ryan
 ### Subquestion
@@ -46,3 +94,17 @@ Does smoking make short gestation days,which causes light babies weight?
 
 ## Chris
 ### Subquestion
+
+
+## Contributions
+### Lauren 
+
+
+### Katie
+I outlined the lab14, and put overall questions and the importance part.Then I modified my original individual question and answered it by creating model of gestation days with babies weight.In the model, I created a data_grid to simulate the real data and put them together to observe the residuals and the predictions.
+
+
+### Chris
+
+
+### Ryan
