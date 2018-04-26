@@ -1,0 +1,48 @@
+---
+title: "Lab 14"
+author: "Lauren, Ryan, Katie, Chris"
+date: "4/26/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(modelr)
+library(purrr)
+babies <- read_csv("https://raw.githubusercontent.com/ervance1/Sp2018-Data-Science-repo/master/babies2a.dat")
+babies <- rename(babies, bwtoz = `bwt/oz`) #renaming `bwt/oz` because the "/" sign requires special care
+
+babies1 <- na.omit(babies)
+```
+
+# Overall Question
+1. Does Smoking Lead to Babies Born Prematurely?
+2. Does Smoking lead to Babies with Low Birth Weight?
+
+## Why it is interesting?
+ Generally speaking, smoking is harmful to our body. But in society, a lot of people still smoke and the tendency for women to smoke during preagnancy is increasing, which may have some negative effect on next generation. Babies are significant in a family, and also important for our future, thus in order to figure out what kind of effect of smoking will lead to on both mothers and babies, we analyzed whether smoking leads to babies born prematurely and whether smoking lead to babies with low birth weight. These results will give us solid insight on smoking's effects on babies and mothers. 
+## What new tools that we applied?
+
+## The new answers comparing to previous lab
+
+# Conclusion
+
+# Individual Findings
+
+## Lauren 
+### Subquestion
+
+
+## Katie
+### Subquestion
+Does smoking make short gestation days,which causes light babies weight?
+
+
+
+## Ryan
+### Subquestion
+
+
+## Chris
+### Subquestion
