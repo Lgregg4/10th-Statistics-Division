@@ -23,9 +23,9 @@ babies1 <- na.omit(babies)
 ## Why it is interesting?
  Generally speaking, smoking is harmful to our body. But in society, a lot of people still smoke and the tendency for women to smoke during preagnancy is increasing, which may have some negative effect on next generation. Babies are significant in a family, and also important for our future, thus in order to figure out what kind of effect of smoking will lead to on both mothers and babies, we analyzed whether smoking leads to babies born prematurely and whether smoking lead to babies with low birth weight. These results will give us solid insight on smoking's effects on babies and mothers. 
 ## What new tools that we applied?
-
-## The new answers comparing to previous lab
-
+We applied modeling tools, loops, and dyplyr tools. These tools helped us dive mucdeeper into the dataset than origionally, when we only had the tools of ggplot at our disposal.
+## The new answers compared to previous lab
+with the new tools at our disposal, we were able to draw more solid conclusions about the dataset. Before, some of the results were ambiguous, but now, they seem much more solidified.
 # Conclusion
 
 # Individual Findings
@@ -97,8 +97,6 @@ This question is imporatnt because it gives some insight on whether a person's i
 #### New tool I used
 I used a while loop to manipulate a certain variable in my data frame. I also used fitting to explore trends in the data more deeply. Here, I observed the qualities of the fit, and used it to draw a conclusion about my dataset. I then observed the residuals of the fit, and attempted to justify whether or not the fit was any good. This was a very old lab, so I also implemented some dyplyr tools that were obviously useful here, which I am glad I know now, but wish I knew then. I also used the cor() function to get a preliminary idea of the relationship between income and smoking. 
 
-
-
 ```{r}
 ggplot(subset(babies,smoke!= "NA"),mapping = aes(x=inc))+
   geom_bar(aes(y=..prop..,fill=..x..))+scale_fill_gradient(low="gray",high="yellow")+
@@ -107,8 +105,6 @@ ggplot(subset(babies,smoke!= "NA"),mapping = aes(x=inc))+
 ```
 
 Here is shown the distribution of the proportion of people in each income group for smokers, and for non-smokers. It seems as if nonsmokers have a slightly greater density in the 4 lowest income groups than smokers. Also it seems as if smokers have a greater density in the middle income grops (3-5). To further explore this relationship, I will maniuplate the data in such a way that I can show the difference in 
-
-
 
 ```{r}
 count_inc<-babies%>%group_by(inc)%>%count()
@@ -128,13 +124,11 @@ ggplot(data = babies_psmoke, aes(x = inc,y = psmoke))+
   
 ```
 
-
 ```{r}
 cor(babies_psmoke$inc,babies_psmoke$psmoke)
 ```
 
 It seems like the proportion of those people who smoke is very weakly correlated with income. It also seems like there is a peak of smoking frequency for the "middle class" income groups.
-
 
 With some preliminary information about the relationship between income group and proportion of smokers, I will try to fit a low order polynomial to the data, and see if any more information about the trends can be gathered
 ```{r}
@@ -215,5 +209,5 @@ I did my individual part on time, and tried to analaysis the subquestion i made.
 
 ### Ryan
 
-
+I used a while loop and some modeling tools to further explore the relationshiop between income group, and whether or not a person is a smoker. 
 
