@@ -90,7 +90,72 @@ Thus the final answer is that the short gestation days affect babies weight, esp
 
 ## Ryan
 ### Subquestion
+What is the difference between the income distributions of smokers vs. nonsmokers?
+#### why it is important?
+This question is imporatnt because it gives some insight on whether a person's income has any relationship with the likleyhood that they will be a smoker. With this information, one could target specific income groups with information about the dangers of smoking, hopefully causing greater change.
 
+#### New tool I used
+I used a while loop to manipulate a certain variable in my data frame. I also used fitting to explore trends in the data more deeply. Here, I observed the qualities of the fit, and used it to draw a conclusion about my dataset. I then observed the residuals of the fit, and attempted to justify whether or not the fit was any good. This was a very old lab, so I also implemented some dyplyr tools that were obviously useful here, which I am glad I know now, but wish I knew then. I also used the cor() function to get a preliminary idea of the relationship between income and smoking. 
+
+
+
+```{r}
+ggplot(subset(babies,smoke!= "NA"),mapping = aes(x=inc))+
+  geom_bar(aes(y=..prop..,fill=..x..))+scale_fill_gradient(low="gray",high="yellow")+
+  facet_wrap(~smoke)+labs(x = "Income",y="Proportion",title = "Income Distributions of Smokers vs. Non-Smokers")
+  
+```
+
+Here is shown the distribution of the proportion of people in each income group for smokers, and for non-smokers. It seems as if nonsmokers have a slightly greater density in the 4 lowest income groups than smokers. Also it seems as if smokers have a greater density in the middle income grops (3-5). To further explore this relationship, I will maniuplate the data in such a way that I can show the difference in 
+
+
+
+```{r}
+count_inc<-babies%>%group_by(inc)%>%count()
+count_inc<-count_inc$n
+babies_psmoke<-babies%>%group_by(inc)%>%arrange(inc)%>%filter(!is.na(smoke))%>%filter(!is.na(inc))%>%summarise(psmoke = sum(smoke))
+
+i <-1
+while (i<=10) {
+  babies_psmoke[i,2] = babies_psmoke[i,2]/count_inc[i]
+  i<-i+1
+}
+
+
+ggplot(data = babies_psmoke, aes(x = inc,y = psmoke))+
+ geom_point()+
+  geom_smooth()
+  
+```
+
+
+```{r}
+cor(babies_psmoke$inc,babies_psmoke$psmoke)
+```
+
+It seems like the proportion of those people who smoke is very weakly correlated with income. It also seems like there is a peak of smoking frequency for the "middle class" income groups.
+
+
+With some preliminary information about the relationship between income group and proportion of smokers, I will try to fit a low order polynomial to the data, and see if any more information about the trends can be gathered
+```{r}
+model_psmoke <-lm(data = babies_psmoke,psmoke~poly(inc,2))
+
+babies_psmoke<-babies_psmoke%>%add_predictions(model_psmoke)%>%add_residuals(model_psmoke)
+
+ggplot(babies_psmoke,aes(x = inc))+
+  geom_point(aes(y = psmoke))+
+  geom_line(aes(y = pred),color = 'red')
+
+```
+
+The low degree polynomial fit (a degree 2 polynomial) seems to confirm the suspicion that middle income groups temd to be more likley to be smokers than either high or low income groups. It seems, however that the data fits fairly poorly, so it would be useful to look at the residuals, to gauge just how skeptical one should be about this conclusion.
+```{r}
+
+ggplot(babies_psmoke,aes(x = inc))+
+  geom_col(aes(y = abs(resid/psmoke)))
+
+```
+Here is plotted the "percent residual" for each of the data points, when using the degree two fit. This shows, that in general the model is closer than a 10% error, but has an error of above 15% in one case. This type of error would suggest to me a very poor fit of the data. The conclusion to be drawn from this is that there may be a higher liklihood for middle class income people to smoke, however more research is needed to solidify that conclusion.
 
 ## Chris
 ### Subquestion
