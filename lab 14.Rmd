@@ -158,8 +158,50 @@ ggplot(babies_psmoke,aes(x = inc))+
 Here is plotted the "percent residual" for each of the data points, when using the degree two fit. This shows, that in general the model is closer than a 10% error, but has an error of above 15% in one case. This type of error would suggest to me a very poor fit of the data. The conclusion to be drawn from this is that there may be a higher liklihood for middle class income people to smoke, however more research is needed to solidify that conclusion.
 
 ## Chris
-### Subquestion
 
+### Subquestion
+how is the relationship between gestation day the people who smoke? does smoke lead premature?
+
+#### why it is important?
+cause at right now, most of people thought that when u smoke durning ur pregancy period, u got more prob that premature, so i want to find this is true or not and the prob that i can calculate. 
+
+#### New tool I used
+at first i used the select function to mutate what variable that i need. "gestation " and "smoke" to be honest, it doesnt matter. than i used filter function to calculate and count the variable that i got. maybe the things that i learned from our lab 10 or lab11. than i just do the divide part to get a exact number to find my value.
+
+```{r}
+babies1<-select(babies, gestation, smoke)
+gg270<-babies1 %>% filter(gestation>=270)%>% count()
+gl270<-babies1 %>% filter(gestation<270)%>% count()
+
+gw<-babies1 %>% filter(smoke=="1")%>% count()
+gwo<-babies1 %>% filter(smoke=="0")%>% count()
+
+ggwo270<-babies1 %>% filter(gestation>=270 & smoke=="0")%>% count()
+glwo270<-babies1 %>% filter(gestation<270 & smoke=="0")%>% count()
+
+ggw270<-babies1 %>% filter(gestation>=270 & smoke=="1")%>% count()
+glw270<-babies1 %>% filter(gestation<270 & smoke=="1")%>% count()
+```
+this steps just kind of filter steps and than count the value that i need for the fulture.
+gg270 means gestation day>=270 days, gl270 means less, gw means the number of people who smoke, gwo means people who doesnot smoke, ggw270 means gestation day>=270 and smoke, glw270 means gestation<270 and smoke, ggwo270 means people who gestation day>=270 and doesnt smoke. on the contrary, glwo270 means gestation day<270 and dont smoke.
+
+```{r}
+#after 270 genestion
+ggw270/gg270 #who smoke gestation>=270 /gestation>270
+ggwo270/gg270  #who doesnt smoke gestatio>=270 /gestation>270
+
+
+#before 270 
+glw270/gl270  #who smoke gestation<270 /gestation<270
+glwo270/gl270  #who doesnt smoke gestation<270 /gestation<270
+
+```
+
+```{r}
+ggw270/gw #who smoke gestation>=270/people who smoke #0.7789
+glwo270/gwo #who doesnt smoke gestation>=270/people who doesnt smoke #0.1673
+```
+the next two steps i just do some calculate steps, in the end, i found that people who smoke have more prob that the gestation day greater or equal to the 270 days. but people who doesnt smoke have less prob that the gestation day greater or equal to the 270 days. it is wired and seems breaks our mind but that the things that i found.
 
 ## Contributions
 ### Lauren 
@@ -168,8 +210,10 @@ Here is plotted the "percent residual" for each of the data points, when using t
 ### Katie
 I outlined the lab14, and put overall questions and the importance part.Then I modified my original individual question and answered it by creating model of gestation days with babies weight.In the model, I created a data_grid to simulate the real data and put them together to observe the residuals and the predictions.
 
-
 ### Chris
-
+I did my individual part on time, and tried to analaysis the subquestion i made. whether the smoke or not will influence the pregency thing. I used some filter function and count the number that i got to. than i divide the two variable that i got tried to find the prob that i need. final, i found that the results looks the same as I did before in lab4, the smoke doesnt make any bay influence in geastation day.
 
 ### Ryan
+
+
+
