@@ -102,12 +102,17 @@ We can see after ploting several distributions,if the max of mixedcountry is les
 ## Chris
 ### Subquestion
 
+# Team goal reflections
 
 # Individual Reflections on goals
 ## Lauren
 
 ## katie
+Personally, I think I would not change my 6 month-goal after graduation as well as the 2-year-goal. Because I am still following my plan like that, and I feel that is what I want to do in future. But maybe I will modify some details about my goals as I go through the university. So I wouldn¡¯t change it so far.
 
+For the initial goals and hopes, I would say although I might not really achieve the master level of R coding, but at least I learned how to implement code in R to analyze a big data, I knew how to build a model based on the relationship of data, and I formed an idea to deal with untidy data. In my perspective, I reached my goals for this course, but I don¡¯t satisfy. Because I think I still need more practice to manipulate with other different types of data. 
+
+If I could give myself advice at the beginning of this course, I would say when you are doing readings and find something confusing, try to find some online tutorials for r and watch the videos, which helps a lot!  
 ## Chris
 
 ## Ryan
@@ -118,6 +123,7 @@ We can see after ploting several distributions,if the max of mixedcountry is les
 
 
 ### Katie
+I outlined the lab 15, and gave some suggestions about our data-set. Then I went through what we learned recently and found related sub-questions corresponding to our data set. I first created a state model which forms a linear relationship between average life expectancy and unhealthy days, and then applied it to each state. After getting the model for each state, I am interested in western states in the US(Because we are in western states), So I found the max slope of the western state by using str_detect, and then I mixed the states and randomly pick same number to see whether the highest slope in western state is coincidence.
 ### Chris
 
 
