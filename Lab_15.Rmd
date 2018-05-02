@@ -1,0 +1,124 @@
+---
+title: "Lab_15"
+author: "Lauren, Katie, Ryan,Chris"
+date: "5/1/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(modelr)
+library(stringr)
+options(na.action = na.warn)
+summaryhealth <- read.csv("Summaryhealth.csv")
+```
+
+# Overall Question
+
+## Description of the dataset
+
+## Why it is interesting/important
+
+## What new tools that we applied?
+
+
+# Conclusion
+
+# Recommendation
+
+# Individual Findings
+
+## Lauren 
+### Subquestion
+
+#### why it is important?
+
+
+## Katie
+### Subquestion
+How does the average life expectancy relate with unhealthy days for each state? And which western state has the highest slope? Is that a coincident?
+#### why it is important?
+Because one of the important element related to the life expectancy is unhealthy factors, so I want to explore the their relationship by creating models. And we are in Colorado which belongs western states in the US, so in the life expectancy model, I want to see which western state has the highest slope and compare it with mixed state random samples to see whether it is real highest.
+
+#### New tool I used
+I used many models and some map functions, which could apply the model to each state and generate the pattern. Also I implemented the new idea which is mixed label and then plot the distribution of the spread data. 
+
+```{r}
+summaryhealth[summaryhealth == -1111.1]<- NA
+summaryhealth <- na.omit(summaryhealth)
+data <- summaryhealth %>% select(c(CHSI_County_Name,CHSI_State_Name, CHSI_State_Abbr,ALE,All_Death,Health_Status,Unhealthy_Days))
+
+```
+I created the country model for each state and plot the residuals for each model in each state.
+We can see the boxplot below, nearly all the state are around the 0 residuals and some of the states have the large range of life expectancy with unhealthy days. But the tendency is decreasing as the life expectancy increases.
+```{r}
+country_model <- function(df){
+  lm(ALE ~ Unhealthy_Days,data = df)
+}
+models <- map(data1$data, country_model)
+dataWithModels <- data1 %>% mutate(models)
+dataWithModels <- dataWithModels %>% mutate(resid = map2(data,models,add_residuals))
+
+resids <- unnest(dataWithModels,resid)
+
+resids %>%
+  ggplot(aes(CHSI_State_Abbr,resid))+
+  geom_boxplot()+
+  ggtitle("Residuals vs. State")
+
+```
+I first filter the state names for western states, and took the descing of the data to find the max slope which lies in Wyoming. Then  I mixed the state and randomly chose 13 states to see the maximum and compared it with wyoming.
+
+```{r}
+get_slope <- function(model){
+  model$coefficients[[2]]
+}
+western <- dataWithSlope %>% filter(str_detect(CHSI_State_Name,"Montana|Colorado|Wyoming|New Mexico|Idaho|Utah|Arizona|Nevada|Washington|Oregon|California|Alaska|Hawaii"))
+western %>% arrange(desc(slopes))#Wyoming 
+#-0.0195119
+slopes <- map_dbl(dataWithModels$models, get_slope)
+
+dataWithSlope <- dataWithModels %>% mutate(slopes)
+
+
+mixedcountry <- vector("double",length = 13)
+for (i in seq_along(mixedcountry)) {
+  temp <- sample(dataWithSlope$slopes,1)
+  if(is.na(temp)){
+    temp <- sample(dataWithSlope$slopes,1)
+  }
+  mixedcountry[i] <- temp
+}
+ggplot()+
+  geom_histogram(aes(x = mixedcountry),bins = 20)
+max(mixedcountry)
+```
+We can see after ploting several distributions,if the max of mixedcountry is less than -0.0195119, the Wyoming is actually high slope based on all the states, and that is not coinsidence.
+## Ryan
+### Subquestion
+
+
+## Chris
+### Subquestion
+
+
+# Individual Reflections on goals
+## Lauren
+
+## katie
+
+## Chris
+
+## Ryan
+
+
+# Contributions
+### Lauren 
+
+
+### Katie
+### Chris
+
+
+### Ryan
