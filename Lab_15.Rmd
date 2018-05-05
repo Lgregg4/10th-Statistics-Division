@@ -116,7 +116,17 @@ If I could give myself advice at the beginning of this course, I would say when 
 ## Chris
 
 ## Ryan
+For my 6 month out goals, I'd say, I no longer feel like traveling about, discovering where I want to live. I'd like to travel, but more for the sake of traveling. Maybe I'll do some long backpacking adventure, like the Colorado Trail or the PCT. It is still important that the work I am doing is meaningful and challenging. 
 
+I set out in this course with the following goals:
+* To learn the basics of programming in R
+* To learn how to display data elequently 
+* To further my collaboration skills
+* To practice data analysis
+
+And I can say with confidence, that all of these goals were met! 
+
+If I could give myself advice at the beginning of the course, it would be to read the book more carefully!
 
 # Contributions
 ### Lauren 
