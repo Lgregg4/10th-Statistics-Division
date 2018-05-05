@@ -101,6 +101,53 @@ We can see after ploting several distributions,if the max of mixedcountry is les
 
 ## Chris
 ### Subquestion
+what is the relation between the casue of death and the self-rated health status? does the higher death casue will lead a relatively lower health status? 
+
+#### why it is important?
+the self-rated status is a most important question all over the world, as my concern, I was thinking about the influence of the cause of death. is a positive influence or negative? futhermore, we could make some conclusion that if we need to make people more self-rated health, should we tried to make the cause of death become less and less.  
+
+#### New tool I used
+select and gather function in one month ago, function, model ,testing h ,percentile, linear regression that I learned recently.
+
+```{r}
+H1 <- select( summaryhealth, All_Death, Health_Status)
+H1[H1== -1111.1] <- NA
+H1<-na.omit(H1)
+names(H1)[1]<-"Death"
+names(H1)[2]<-"Health"
+H2<-H1%>%gather("Death", "Health", key="variable",value="count")
+```
+at first, because I tried to analysis the relation between the Death and Health, I just need to filter the dataset that we choose. I select the two row that I need, omit the missing value and rename it to make the futher steps. I tried to gather the dataset to a new format but it doesnt help anything.
+
+```{r}
+D<-tibble(Death=numeric())
+for (i in 1:1000){
+  death<-sample(H1$Death, 10)
+  D[i,1]<-mean(death)
+}
+
+
+ggplot(data=D)+geom_histogram(aes(x=Death),bins=50)+ggtitle("Death Distribution")
+
+percentile(mean(H1$Death[1:10]))
+
+
+
+```
+than I tried to used the testing h0 to analysis the death infos but I am not familir with this part and I cant figure out how to plot the red line in 4/13 classnotes that shows the infos. So I just made percentile value to be numeric, it 0.998. Also, I made the graph of how death distribution situation.
+
+
+```{r}
+compare<-lm(Health~Death, data=H1)
+summary(compare)
+
+ggplot(H1, aes(Health, Death)) + ggtitle("the relation between health and death") + geom_smooth(method = "lm")+ geom_hex(bins=50)
+```
+than I used the linear regression model function to find some basic infos that I need to know. we could see it from above, and finally I plot both two variable to one graph, used the hexbin function and smooth line. 
+
+after all the graph and information that I made, I made the conclusion that , it seems when more cause of death happened, people would have relatively higher health status. although this conclsion seems uncorrect.
+
+
 
 # Team goal reflections
 
@@ -108,14 +155,33 @@ We can see after ploting several distributions,if the max of mixedcountry is les
 ## Lauren
 
 ## katie
-Personally, I think I would not change my 6 month-goal after graduation as well as the 2-year-goal. Because I am still following my plan like that, and I feel that is what I want to do in future. But maybe I will modify some details about my goals as I go through the university. So I wouldn¡¯t change it so far.
+Personally, I think I would not change my 6 month-goal after graduation as well as the 2-year-goal. Because I am still following my plan like that, and I feel that is what I want to do in future. But maybe I will modify some details about my goals as I go through the university. So I wouldn??t change it so far.
 
-For the initial goals and hopes, I would say although I might not really achieve the master level of R coding, but at least I learned how to implement code in R to analyze a big data, I knew how to build a model based on the relationship of data, and I formed an idea to deal with untidy data. In my perspective, I reached my goals for this course, but I don¡¯t satisfy. Because I think I still need more practice to manipulate with other different types of data. 
+For the initial goals and hopes, I would say although I might not really achieve the master level of R coding, but at least I learned how to implement code in R to analyze a big data, I knew how to build a model based on the relationship of data, and I formed an idea to deal with untidy data. In my perspective, I reached my goals for this course, but I don??t satisfy. Because I think I still need more practice to manipulate with other different types of data. 
 
 If I could give myself advice at the beginning of this course, I would say when you are doing readings and find something confusing, try to find some online tutorials for r and watch the videos, which helps a lot!  
+
 ## Chris
+I made 3 goals before this semester, two of them doesnt change but one of my goal change a little bit. the six-months and five yeas goal wont change! I faced my last year in collage, I am exciting and wonder know what could I do after I graduate. I still want to travel for some times and find a job that could make me happy. but I want to change my career goal, I want to add something new, i hope I could have some friends or family for my whole life. I hold this opinion and idea for rest of my life.
+
+for the goal I made for this course, I should say I finally achieve the things I made. But I should say it is not enough for me, I just said some basic and easy targets for this course. I did more than that. but I am happy that I made all target came true. maybe next time I need made some hard goal
+
+If I could tell myself something at the begining of the courese, I must tell myself to read the book more and do the exercise more. sometimes I knew the concepts that I faced, but I just not familiar. if I could spend more time to prepare, I could do better in this course. 
+
 
 ## Ryan
+For my 6 month out goals, I'd say, I no longer feel like traveling about, discovering where I want to live. I'd like to travel, but more for the sake of traveling. Maybe I'll do some long backpacking adventure, like the Colorado Trail or the PCT. It is still important that the work I am doing is meaningful and challenging.
+
+I set out in this course with the following goals:
+
+To learn the basics of programming in R
+To learn how to display data elequently
+To further my collaboration skills
+To practice data analysis
+And I can say with confidence, that all of these goals were met!
+
+If I could give myself advice at the beginning of the course, it would be to read the book more carefully!
+
 
 
 # Contributions
@@ -124,7 +190,11 @@ If I could give myself advice at the beginning of this course, I would say when 
 
 ### Katie
 I outlined the lab 15, and gave some suggestions about our data-set. Then I went through what we learned recently and found related sub-questions corresponding to our data set. I first created a state model which forms a linear relationship between average life expectancy and unhealthy days, and then applied it to each state. After getting the model for each state, I am interested in western states in the US(Because we are in western states), So I found the max slope of the western state by using str_detect, and then I mixed the states and randomly pick same number to see whether the highest slope in western state is coincidence.
-### Chris
 
+### Chris
+I tired to describle the dataset and fixed the format that our team final project. Then, I used some recent knowledge to analysis my own subquestion that I am interested in. the relation between "death" and "health", at first, I used some knowledege in select function to filter the dataset that I need which is easier to do the next steps. than i tried to find the mean value of two variable and the percentile value, finally I summary the value and made one graph. to get my conclusion.
 
 ### Ryan
+
+
+
