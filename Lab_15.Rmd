@@ -48,8 +48,8 @@ I used many models and some map functions, which could apply the model to each s
 ```{r}
 summaryhealth[summaryhealth == -1111.1]<- NA
 summaryhealth <- na.omit(summaryhealth)
-data <- summaryhealth %>% select(c(CHSI_County_Name,CHSI_State_Name, CHSI_State_Abbr,ALE,All_Death,Health_Status,Unhealthy_Days))
-
+data<- summaryhealth %>% select(c(CHSI_County_Name,CHSI_State_Name, CHSI_State_Abbr,ALE,All_Death,Health_Status,Unhealthy_Days))
+data1 <- data %>% group_by(CHSI_State_Name,CHSI_State_Abbr) %>% nest()
 ```
 I created the country model for each state and plot the residuals for each model in each state.
 We can see the boxplot below, nearly all the state are around the 0 residuals and some of the states have the large range of life expectancy with unhealthy days. But the tendency is decreasing as the life expectancy increases.
@@ -75,12 +75,12 @@ I first filter the state names for western states, and took the descing of the d
 get_slope <- function(model){
   model$coefficients[[2]]
 }
+slopes <- map_dbl(dataWithModels$models, get_slope)
+dataWithSlope <- dataWithModels %>% mutate(slopes)
 western <- dataWithSlope %>% filter(str_detect(CHSI_State_Name,"Montana|Colorado|Wyoming|New Mexico|Idaho|Utah|Arizona|Nevada|Washington|Oregon|California|Alaska|Hawaii"))
 western %>% arrange(desc(slopes))#Wyoming 
 #-0.0195119
 slopes <- map_dbl(dataWithModels$models, get_slope)
-
-dataWithSlope <- dataWithModels %>% mutate(slopes)
 
 
 mixedcountry <- vector("double",length = 13)
