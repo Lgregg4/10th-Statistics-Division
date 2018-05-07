@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 ---
 title: "Lab_15"
 author: "Lauren, Katie, Ryan,Chris"
@@ -31,9 +31,7 @@ summaryhealth <- read.csv("Summaryhealth.csv")
 # Individual Findings
 
 ## Lauren 
-### Subquestion
-
-#### why it is important?
+Unfortunately, I was unable to download the data properly so the code I wrote is not functional. If I add that code here, it would only result in the inability to knit for the entire team. I chose to take the loss, work on my other assignments, and only answer the qualitative questions.
 
 
 ## Katie
@@ -96,152 +94,12 @@ ggplot()+
 max(mixedcountry)
 ```
 We can see after ploting several distributions,if the max of mixedcountry is less than -0.0195119, the Wyoming is actually high slope based on all the states, and that is not coinsidence.
-## Ryan
-### Subquestion
-
-
-## Chris
-### Subquestion
-
-# Team goal reflections
-
-# Individual Reflections on goals
-## Lauren
-
-## katie
-Personally, I think I would not change my 6 month-goal after graduation as well as the 2-year-goal. Because I am still following my plan like that, and I feel that is what I want to do in future. But maybe I will modify some details about my goals as I go through the university. So I wouldn��t change it so far.
-
-For the initial goals and hopes, I would say although I might not really achieve the master level of R coding, but at least I learned how to implement code in R to analyze a big data, I knew how to build a model based on the relationship of data, and I formed an idea to deal with untidy data. In my perspective, I reached my goals for this course, but I don��t satisfy. Because I think I still need more practice to manipulate with other different types of data. 
-
-If I could give myself advice at the beginning of this course, I would say when you are doing readings and find something confusing, try to find some online tutorials for r and watch the videos, which helps a lot!  
-## Chris
-
-## Ryan
-For my 6 month out goals, I'd say, I no longer feel like traveling about, discovering where I want to live. I'd like to travel, but more for the sake of traveling. Maybe I'll do some long backpacking adventure, like the Colorado Trail or the PCT. It is still important that the work I am doing is meaningful and challenging. 
-
-I set out in this course with the following goals:
-* To learn the basics of programming in R
-* To learn how to display data elequently 
-* To further my collaboration skills
-* To practice data analysis
-
-And I can say with confidence, that all of these goals were met! 
-
-If I could give myself advice at the beginning of the course, it would be to read the book more carefully!
-
-# Contributions
-### Lauren 
-
-
-### Katie
-I outlined the lab 15, and gave some suggestions about our data-set. Then I went through what we learned recently and found related sub-questions corresponding to our data set. I first created a state model which forms a linear relationship between average life expectancy and unhealthy days, and then applied it to each state. After getting the model for each state, I am interested in western states in the US(Because we are in western states), So I found the max slope of the western state by using str_detect, and then I mixed the states and randomly pick same number to see whether the highest slope in western state is coincidence.
-### Chris
-
-
-### Ryan
-=======
----
-title: "Lab_15"
-author: "Lauren, Katie, Ryan,Chris"
-date: "5/1/2018"
-output: html_document
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-library(tidyverse)
-library(modelr)
-library(stringr)
-options(na.action = na.warn)
-summaryhealth <- read.csv("Summaryhealth.csv")
-```
-
-# Overall Question
-
-## Description of the dataset
-
-## Why it is interesting/important
-
-## What new tools that we applied?
-
-
-# Conclusion
-
-# Recommendation
-
-# Individual Findings
-
-## Lauren 
-### Subquestion
-
-#### why it is important?
-
-
-## Katie
-### Subquestion
-How does the average life expectancy relate with unhealthy days for each state? And which western state has the highest slope? Is that a coincident?
-#### why it is important?
-Because one of the important element related to the life expectancy is unhealthy factors, so I want to explore the their relationship by creating models. And we are in Colorado which belongs western states in the US, so in the life expectancy model, I want to see which western state has the highest slope and compare it with mixed state random samples to see whether it is real highest.
-
-#### New tool I used
-I used many models and some map functions, which could apply the model to each state and generate the pattern. Also I implemented the new idea which is mixed label and then plot the distribution of the spread data. 
-
-```{r}
-summaryhealth[summaryhealth == -1111.1]<- NA
-summaryhealth <- na.omit(summaryhealth)
-data <- summaryhealth %>% select(c(CHSI_County_Name,CHSI_State_Name, CHSI_State_Abbr,ALE,All_Death,Health_Status,Unhealthy_Days))
-
-```
-I created the country model for each state and plot the residuals for each model in each state.
-We can see the boxplot below, nearly all the state are around the 0 residuals and some of the states have the large range of life expectancy with unhealthy days. But the tendency is decreasing as the life expectancy increases.
-```{r}
-
-country_model <- function(df){
-  lm(ALE ~ Unhealthy_Days,data = df)
-}
-models <- map(data1$data, country_model)
-dataWithModels <- data1 %>% mutate(models)
-dataWithModels <- dataWithModels %>% mutate(resid = map2(data,models,add_residuals))
-
-resids <- unnest(dataWithModels,resid)
-
-resids %>%
-  ggplot(aes(CHSI_State_Abbr,resid))+
-  geom_boxplot()+
-  ggtitle("Residuals vs. State")
-
-```
-I first filter the state names for western states, and took the descing of the data to find the max slope which lies in Wyoming. Then  I mixed the state and randomly chose 13 states to see the maximum and compared it with wyoming.
-
-```{r}
-get_slope <- function(model){
-  model$coefficients[[2]]
-}
-western <- dataWithSlope %>% filter(str_detect(CHSI_State_Name,"Montana|Colorado|Wyoming|New Mexico|Idaho|Utah|Arizona|Nevada|Washington|Oregon|California|Alaska|Hawaii"))
-western %>% arrange(desc(slopes))#Wyoming 
-#-0.0195119
-slopes <- map_dbl(dataWithModels$models, get_slope)
-
-dataWithSlope <- dataWithModels %>% mutate(slopes)
-
-
-mixedcountry <- vector("double",length = 13)
-for (i in seq_along(mixedcountry)) {
-  temp <- sample(dataWithSlope$slopes,1)
-  if(is.na(temp)){
-    temp <- sample(dataWithSlope$slopes,1)
-  }
-  mixedcountry[i] <- temp
-}
-ggplot()+
-  geom_histogram(aes(x = mixedcountry),bins = 20)
-max(mixedcountry)
-```
-We can see after ploting several distributions,if the max of mixedcountry is less than -0.0195119, the Wyoming is actually high slope based on all the states, and that is not coinsidence.
 
 
 ## Ryan
 ### Subquestion
+
+
 
 
 ## Chris
@@ -295,14 +153,26 @@ after all the graph and information that I made, I made the conclusion that , it
 
 
 # Team goal reflections
+Our biggest goal was to be able to efficiently and effectively work together. Additionaly, we watned to become confident in data analysis using R.
+
+Based on our ability to code in all of the labs, we believe it is clear we have accomplished our secondary goal of being confiden tin data analysis. We now have a bag of skills that we can pull from to solve analytical questions in a variety of ways.
+
+We think we have done a decent job at working as a team. Some lab reports were better than others in regards to our level of support and communication. Overall, we were able to get teh work done.
 
 # Individual Reflections on goals
 ## Lauren
 
-## katie
-Personally, I think I would not change my 6 month-goal after graduation as well as the 2-year-goal. Because I am still following my plan like that, and I feel that is what I want to do in future. But maybe I will modify some details about my goals as I go through the university. So I wouldn??t change it so far.
+My 6-month-after-graduation goal has been altered slightly because I know have an acutal plan. I will not be in Colorado, but I should be in a data intensive environment. I will be part of a data team, but not a statistical collaboration team. My new 6-month-after-graduation goal is to prove myself within my team at Bloomberg. I also hope to make some new friends out east and explore places I have never been.
 
-For the initial goals and hopes, I would say although I might not really achieve the master level of R coding, but at least I learned how to implement code in R to analyze a big data, I knew how to build a model based on the relationship of data, and I formed an idea to deal with untidy data. In my perspective, I reached my goals for this course, but I don??t satisfy. Because I think I still need more practice to manipulate with other different types of data. 
+My 5-year-after-that goal reamins the same. The only thing I would add is that I plan to be back in Colorado after spending about 3 year maximum in Jersey. 
+
+I have learned several more skills in R, most notably, ggplot. These are skills I will continue to use in my future. My adivce at the beginning of the semester to myself would be to actually solve *all* of the exercises at the end of each reading section. I would recommend that I stop taking unnecessary notes about the topics I am already familiar with and the I continue to faciliate a friendly environment amongst my team.
+
+
+## katie
+Personally, I think I would not change my 6 month-goal after graduation as well as the 2-year-goal. Because I am still following my plan like that, and I feel that is what I want to do in future. But maybe I will modify some details about my goals as I go through the university. So I wouldn��t change it so far.
+
+For the initial goals and hopes, I would say although I might not really achieve the master level of R coding, but at least I learned how to implement code in R to analyze a big data, I knew how to build a model based on the relationship of data, and I formed an idea to deal with untidy data. In my perspective, I reached my goals for this course, but I don��t satisfy. Because I think I still need more practice to manipulate with other different types of data. 
 
 If I could give myself advice at the beginning of this course, I would say when you are doing readings and find something confusing, try to find some online tutorials for r and watch the videos, which helps a lot!  
 
@@ -313,24 +183,22 @@ for the goal I made for this course, I should say I finally achieve the things I
 
 If I could tell myself something at the begining of the courese, I must tell myself to read the book more and do the exercise more. sometimes I knew the concepts that I faced, but I just not familiar. if I could spend more time to prepare, I could do better in this course. 
 
-
 ## Ryan
-For my 6 month out goals, I'd say, I no longer feel like traveling about, discovering where I want to live. I'd like to travel, but more for the sake of traveling. Maybe I'll do some long backpacking adventure, like the Colorado Trail or the PCT. It is still important that the work I am doing is meaningful and challenging.
+For my 6 month out goals, I'd say, I no longer feel like traveling about, discovering where I want to live. I'd like to travel, but more for the sake of traveling. Maybe I'll do some long backpacking adventure, like the Colorado Trail or the PCT. It is still important that the work I am doing is meaningful and challenging. 
 
 I set out in this course with the following goals:
+* To learn the basics of programming in R
+* To learn how to display data elequently 
+* To further my collaboration skills
+* To practice data analysis
 
-To learn the basics of programming in R
-To learn how to display data elequently
-To further my collaboration skills
-To practice data analysis
-And I can say with confidence, that all of these goals were met!
+And I can say with confidence, that all of these goals were met! 
 
 If I could give myself advice at the beginning of the course, it would be to read the book more carefully!
 
-
-
 # Contributions
 ### Lauren 
+I discussed our team goal as well as my individual goals. I also attempted to clean our final lab report so that it would properly knit. I did write up some individual code, but, ultimately, it was not working the way I wanted it to. Upon prioritizing my responsibilities, I decided that this assignment is where I would have to take my loss. 
 
 
 ### Katie
@@ -339,8 +207,5 @@ I outlined the lab 15, and gave some suggestions about our data-set. Then I went
 ### Chris
 I tired to describle the dataset and fixed the format that our team final project. Then, I used some recent knowledge to analysis my own subquestion that I am interested in. the relation between "death" and "health", at first, I used some knowledege in select function to filter the dataset that I need which is easier to do the next steps. than i tried to find the mean value of two variable and the percentile value, finally I summary the value and made one graph. to get my conclusion.
 
+
 ### Ryan
-
-
-
->>>>>>> master
